@@ -19,3 +19,5 @@ Conclusion:Our study confirms that patch linkage detection is promising, with in
 The repository includes (a) 942 manually coded patch linkage with variousproperties (\Exploratory Study) and (b) experiment datasets and scripts that reproduce our detection model (\Empirical Evaluation, \Script).
 
 For each folder, it includes text file to describe the details of each file.
+
+Due to the limited size of raw data, it can be downloaded here: [Dropbox](https://www.dropbox.com/sh/o19sdx9p7t985pj/AAAzoWHO6eyWMNsk6tw5rhJua?dl=0)
