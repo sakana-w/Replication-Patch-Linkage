@@ -1,4 +1,4 @@
-# Automatic Patch Linkage Detection in Code Review UsingTextual Content and File Location Features
+# Automatic Patch Linkage Detection in Code Review Using Textual Content and File Location Features
 
 #### Dong Wang, Raula Gaikovina Kula, Takashi Ishio and Kenichi Matsumoto
 #### *Nara Institute of Science and Technology, Japan*
