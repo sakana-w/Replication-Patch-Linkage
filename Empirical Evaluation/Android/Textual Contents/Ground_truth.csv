@@ -1,0 +1,2668 @@
+Id,Title,Message,Time,Time_diff
+1,Add test-only proguard files. They can be used to suppress warnings.,"Add test-only proguard files. They can be used to suppress warnings.
+
+Bug: http://b.android.com/143583
+Bug: http://b.android.com/77475
+Bug: http://b.android.com/159831
+Change-Id: I3de7777433e1d9b999ded11f066edce1a9ac5d4d",2015/3/4 17:00,0
+2,Use NULL instead of 0 when invoking CallStaticVoidMethod,"Use NULL instead of 0 when invoking CallStaticVoidMethod
+
+static void CallStaticVoidMethod is variable argument function.
+if pass 0 to the function like: CallStaticVoidMethod(......, 0),
+0 will be treated as INT data type.but in the CallStaticVoidMethod
+implement 0 will be treated as pointer data type.Pointer in 64bit
+system occupied 8 bytes, but in 64bit system int occupied 4 bytes.
+if call function like: CallStaticVoidMethod(......, 0),
+only low 4 bytes will be assigned 0.Turned out it actually call
+function like this: CallStaticVoidMethod(......, 0xXXXXXXXX00000000).
+intent to pass NULL to function but passed non-NULL parameter to
+the function.this will cause GCDaemon crash.
+
+Change-Id: I9d700d3790a80dbee6826f64baf9ef5d81ca390f
+Reviewed-by: Liao, Bruce <bruce.liao@intel.com>
+Signed-off-by: Yong Yao <yong.yao@intel.com>
+",2015/1/6 7:31,0
+3,"Fix IntelliJ dependencies, to fix ""Make project"".","Fix IntelliJ dependencies, to fix ""Make project"".
+
+Change-Id: I19807e3af36ecd079427218f19533651e0473e1a
+",2014/12/16 8:55,0
+4,Fix printf flag for st_mtime on MIPS.,"Fix printf flag for st_mtime on MIPS.
+
+Build fix.
+
+Change-Id: I73b3c4e1b026a40a569874b4583f9b09aa7fd833
+",2014/11/8 20:15,0
+5,disable trace_dev for arm/mips.,"disable trace_dev for arm/mips.
+
+as trace was removed from Makefile.target in 4c3a1e1196503,
+this patch disables the invocation part, which breaks android-rebuild.sh
+
+Change-Id: I9638bc8cb9735554627d0098df91b829ac04c4f4
+Signed-off-by: Jason Hu <jia-cheng.hu@intel.com>
+",2014/7/4 9:20,0
+6,CatService: OPEN_CHANNEL p-cmd to send event confirmation and not T.R,"CatService: OPEN_CHANNEL p-cmd to send event confirmation and not T.R
+
+Upon handling OPEN_CHANNEL command, send User confirmation instead of
+terminal response as lower layers expect confirmation information.
+CRs-Fixed: 390425
+
+Change-Id: Ie9e162d87bae18c011edede238ded7eee65f8766
+",2012/12/14 18:33,0
+7,Add workarounds for apparent clang bugs,"Add workarounds for apparent clang bugs
+
+For reasons yet to be debugged, clang 3.4 can't resolve
+Arena::kDefaultSize and kIndexUnresolved in the 2 locations.
+
+The workaround is to copy in their values instead.
+This should be reverted once clang is fixed (or an
+issue in the code legitimately blocking clang from
+seeing the symbols has been found and fixed).
+
+Change-Id: Ic392de1829a44215299aee78dfe26378b0b3bef4
+Signed-off-by: Bernhard Rosenkränzer <Bernhard.Rosenkranzer@linaro.org>
+",2013/12/12 1:25,0
+8,Don't depend on frameworks/base from OkHttp.,"Don't depend on frameworks/base from OkHttp.
+
+Change-Id: I096292b554dbc4a5c72a8fd60baef85b25409501
+",2013/4/3 0:16,0
+9,Update ddmlib prebuilt.,"Update ddmlib prebuilt.
+
+Corresponds to tools/base 477b178c356229304b3d50f5f7c33d98c8a30e11
+with change id Ie120f978e5c5646e086ec999c9ef5027b724cc7a
+
+Change-Id: I1e328b0134bb9cbe18cda6e21cd07b282ef6cf5c
+",2013/2/8 17:02,0
+10,Fix potential NPE during layout XML completion,"Fix potential NPE during layout XML completion
+
+Change-Id: Iaf9b29b153c688638b65aa16338dd105c2c55309
+",2012/4/20 3:40,0
+11,Add support for building other architectures.,"Add support for building other architectures.
+
+Since we often make changes that might break on other architectures,
+let the buildbot deal with some of these for us. They can be invoked
+by `bionicbb:ARCH`, where `ARCH` is one of:
+
+ * arm
+ * aarch64
+ * mips
+ * mips64
+ * x86
+ * x86_64
+
+Specifying arm isn't particularly interesting (since the default
+target for the buildbot is hammerhead), but there are some differences
+in the math instructions available for the default ARM target, so it
+could be helpful for testing changes to the compiler-rt builtins.
+
+Change-Id: I94018fd3c30d26fcf405e747fc633cbdd08ff4e5
+",2015/1/10 6:45,0
+12,Add --no-clean to checker (keeps the generated files around),"Add --no-clean to checker (keeps the generated files around)
+
+Change-Id: Iefef18f3456f79684077912e1f8b614d56e13ca6
+",2015/1/16 11:58,0
+13,Remove test obsoleted by https://android-review.googlesource.com/#/c/115054/,"Remove test obsoleted by https://android-review.googlesource.com/#/c/115054/
+
+Change-Id: Ifdca0fd62778e1a8a1741f307abd602429b9f6d4",2014/11/19 0:26,0
+14,Fix typo comment by removing.,"Fix typo comment by removing.
+
+Change-Id: I09764f194317634164be9431328013205fba2910
+",2014/6/11 23:44,0
+15,[WIP] Inline codegen for long-to-double on ARM.,"[WIP] Inline codegen for long-to-double on ARM.
+
+Change-Id: I4fc443c1b942a2231d680fc2c7a1530c86104584
+",2013/12/20 1:59,0
+16,Fix SELinux security context computation for logwrapper.,"Fix SELinux security context computation for logwrapper.
+
+If executing logwrapper, adapt the SELinux security context
+computation to be based on the security context of the executable
+launched by logwrapper rather than logwrapper itself.  This ensures
+that sockets are correctly labeled when using logwrapper.
+
+Change-Id: I2a80bd0818a64ba347355b5ac8e3961a0c6c8822
+Signed-off-by: Stephen Smalley <sds@tycho.nsa.gov>
+",2013/5/9 14:30,0
+17,Use variable index size dictionaries to encode Dex register maps.,"Use variable index size dictionaries to encode Dex register maps.
+
+- For each CodeInfo object (i.e. for each method), compute a
+  dictionary of unique Dex register locations.  In Dex
+  register maps, instead of storing the actual location of a
+  (live) Dex register, store the index of the dictionary
+  entry containing that Dex register location.
+- Adjust art::StackMapStream,
+  art::CheckReferenceMapVisitor::CheckOptimizedMethod,
+  art::StackVisitor::GetVRegFromOptimizedCode, and
+  art::StackVisitor::SetVRegFromOptimizedCode.
+- Adjust art::DumpCodeInfo in oatdump/oatdump.cc.
+- Add AddUnique and Find methods to art::GrowableArray.
+- Add LoadBits and StoreBits methods to art::MemoryRegion
+  to load and store a block of adjacent bits in a memory
+  region.
+- Update compiler/optimizing/stack_map_test.cc.
+
+Change-Id: Id9e49d7756c253ce41c36630cd832208d06c2e28
+",2015/3/18 15:36,0
+18,Handle Density.ANYDPI,"Handle Density.ANYDPI
+
+The configuration matcher might still need tweaks to choose
+correctly among vector assets and bitmap assets.
+
+Change-Id: I854f3a297e1aef99afcbe3ab39f60520c7b1944f",2015/2/10 18:33,0
+19,74666: NPW should not install SDK components corresponding to the selected minSdkVersion level,"74666: NPW should not install SDK components corresponding to the selected minSdkVersion level
+
+Change-Id: Iae60786d3c4e19ccafe9350812314adb87d8c520
+",2014/8/8 20:19,0
+20,Removed obsolete symbol cmsg_nxthdr.,"Removed obsolete symbol cmsg_nxthdr.
+
+Bug: 15822452
+Change-Id: I5322fb29522fc58e9c3489ff86216e25a12ef970
+",2014/7/7 12:35,0
+21,Removes unused code BuildFileUpdater code that's causing NPE,"Removes unused code BuildFileUpdater code that's causing NPE
+
+Removes currently unused BuildFileUpdater code that's still running
+and throwing NullPointerExceptions. If we need this in the future
+we can reinstate it from git history and fix it.
+
+Bug: 66822
+Change-Id: If38f59b6811f2a8a66c31d5156bb34b5c50f7356
+",2014/3/7 20:37,0
+22,Add gradle build file.,"Add gradle build file.
+
+Change-Id: Ibcbd77ed52bb160e2406f31f184e85daa941595a
+",2013/1/8 17:52,0
+23,Change -mfpu= back to vfp now that clang and gcc are consistent,"Change -mfpu= back to vfp now that clang and gcc are consistent
+
+Now that -mfpu=vfp is consistent between clang and gcc (*1), change
+-mfpu=vfp for armeabi-v7a (back from vfpv3-d16)
+
+(*1) related CL: https://android-review.googlesource.com/#/c/44082
+
+Change-Id: I4f2df0f17de1fc6eadbc8b53d19e2e78620a2dc4
+https://android-review.googlesource.com/#/c/44082
+",2012/10/4 10:40,0
+24,AArch64: Port Dalvik to 64bit,"AArch64: Port Dalvik to 64bit
+
+Change Dalvik such that it compiles and runs as a 64bit program.
+Supports only the C interpreter and builds only on the 64bit host.
+The VM runs ordinary Dalvik bytecode. The interpreter has been changed to have
+64bit registers, but the Java types remain unchanged. The garbage collector,
+JNI and interpreter are functional.
+
+Change-Id: I8112930a95cb2f8285bb9d285ec102a24651cd1f
+Signed-off-by: Stuart Monteith <Stuart.Monteith@arm.com>
+Signed-off-by: Dave Butcher <dave.butcher@arm.com>
+Signed-off-by: Matteo Franchin <matteo.franchin@arm.com>
+Signed-off-by: Vassilis Laganakos<vasileios.laganakos@arm.com>
+",2014/1/31 16:29,0
+25,Add SOCK_CLOEXEC and SOCK_NONBLOCK socket flags.,"Add SOCK_CLOEXEC and SOCK_NONBLOCK socket flags.
+
+SOCK_CLOEXEC is used to atomically set close-on-exec flag for the new
+descriptor(s), and SOCK_NONBLOCK is used to mark descriptor(s) as
+non-blocking.
+
+Change-Id: I8ba6a70543d23759e3ddcc7ff9c21b567184d681
+",2013/10/17 20:32,1
+26,Fix build for clang.,"Fix build for clang.
+
+Add an explicit cast to FOURCC to prevent narrowing.
+Remove uses of the register keyword. It is deprecated, and in the
+words of Herb Sutter, is ""exactly as meaningful as whitespace"".
+
+Change-Id: If4fcdfb90a6fa6a7dc1b983797b64e8393d6f8ac
+",2014/11/28 22:34,1
+27,ndk: Fix platform headers for single inclusion.,"ndk: Fix platform headers for single inclusion.
+
+This ports the following Bionic patch to the NDK platform headers:
+    https://android-review.googlesource.com/#/c/114929/
+
+http://b.android.com/79841
+
+Change-Id: I03669d7c95ff1914809a59af0d2a84e697191f10
+",2014/11/18 11:43,1
+28,64bit compatible change for NinePatch,"64bit compatible change for NinePatch
+
+NinePatch has 32bit pointer embedded which can't work for 64bit
+system. We need to convert the 32bit style NinePatch data to 64bit.
+
+Change-Id: Ie62cf2355257ddd54a9211427a9333f9a245c263
+Signed-off-by: Fengwei Yin <fengwei.yin@intel.com>
+",2014/3/6 14:07,1
+29,Add testcase for issue 81440 about clang crash on non-ascii comments,"Add testcase for issue 81440 about clang crash on non-ascii comments
+
+See b.android.com/81440
+
+Change-Id: I1753662c9334c4d3d2df8737e7bfe1eb48ebd389
+",2014/12/22 2:42,1
+30,Handle constant conditions in code generators in opt. compiler.,"Handle constant conditions in code generators in opt. compiler.
+
+The constant folding pass of the optimizing compiler may
+replace the condition of a HIf instruction with a constant.
+Evaluate such a constant condition at compile-time and if it
+is true, generate a branch instructions to the corresponding
+block.
+
+Change-Id: I262e43ffe66d5c25dbbfa98092a41c8b3c4c75d6
+",2014/10/3 15:27,1
+31,Adding policies for KeyStore MAC.,"Adding policies for KeyStore MAC.
+
+WORK IN PROGRESS
+
+Add keystore_key class and an action for each action supported
+by keystore. Add policies that replicate the access control that
+already exists in keystore.
+
+Change-Id: Iddd8672b9e9b72b45ee208e6eda608cc9dc61edc
+",2014/6/19 21:28,1
+32,Add functionlity to the scripts to replace tokens in kernel headers based on architecture.,"Add functionlity to the scripts to replace tokens in kernel headers
+based on architecture.
+",2013/1/17 22:56,1
+33,NullPointerException invoking Field.getModifiers,"NullPointerException invoking Field.getModifiers
+
+Change-Id: I56c5908d16458d36098ffa7e2dc8c3518280f2e3
+",2012/7/28 4:24,1
+34,libc: Fix headers to allow direct inclusion.,"libc: Fix headers to allow direct inclusion.
+
+These headers are missing a few #includes to allow their direct
+inclusion from C
+
+http://b.android.com/79841
+
+Change-Id: Ifc712c17f4da70b26adb67d4d49ed659f53c3621
+",2014/11/18 11:38,1
+35,Frameworks/base: Unused parameters in hwui,"Frameworks/base: Unused parameters in hwui
+
+Remove Clang cutout for unused parameters. Fix warnings.
+
+Remove Clang cutout for deprecated Skia function usage. Has been
+fixed in the L push.
+
+Change-Id: I7ea073ff67127cc1e14e798b655e2c50615fe8e7
+",2014/11/21 17:51,1
+36,Install 64-bit libarttest to /data/art-test64.,"Install 64-bit libarttest to /data/art-test64.
+
+This fixed the build warning:
+build/core/base_rules.mk:545: warning: overriding commands for target
+`out/target/product/flounder/data/art-test/libarttest.so'
+
+Change-Id: If400407428225ea16eb742e3659df62e27013b9c
+",2014/3/29 0:43,2
+37,Signed-off-by: esther530 <esther530@gmail.com>,"Signed-off-by: esther530 <esther530@gmail.com>
+
+Modify test_longReadlink to only test up to a maximum of 159 characters for yaffs2
+",2012/5/6 15:13,2
+38,Fix sput-wide verification flag.,"Fix sput-wide verification flag.
+
+The vA register for sput-wide is a wide register.  Thus, the
+verification flag should be kVerifyRegAWide instead of
+kVerifyRegA.
+
+Without this change, the invalid Dex bytecode won't be
+rejected by VerifyInstruction().  As the result, the
+DCHECK_LT() in register_line-inl.h will abort the program.
+
+Change-Id: I24b746d8a85ddaf811d9aebed12a3dd9f97d755f
+",2014/9/11 11:27,2
+39,Use expanded pathnames for rfkill selinux policy.,"Use expanded pathnames for rfkill selinux policy.
+
+Prior attempt was to explicitly call restorecon
+on /sys/class/rfkill/rfkill and use the general
+policy file_contexts entries for rfkill. Since the
+general policy is dropping those rfkill entries
+from its file_contexts file we add them here
+but be explicit about their paths.
+
+Change-Id: Ic40a1d904bd8c77a32ea793e89b3306eaa2a9829
+",2013/11/21 12:53,2
+40,AArch64: LP64 fixes to libcore.,"AArch64: LP64 fixes to libcore.
+
+Make changes to native and Java code to support 64 bit or 32 bit native
+pointers held in Java longs.
+
+In particular, the MemoryTest class, in Java, used ints to do pointer
+calculations. This was inadequate and was crashing on 64bit platforms.
+The class was changed to use longs for pointer calculations.
+
+Also, the startElement methods in the ExpatParser and EntityParser classes
+was changed to use long rather than int for the attributePointer parameter.
+The attributePointer attribute of the ExpatParser class was also changed
+from int to long. The JNI use of the ExpatParser class's startElement
+method was changed accordingly.
+
+Change-Id: Idbc5b0d75fb1915e52f666f6078008d9e71f2c0b
+Signed-off-by: Stuart Monteith <Stuart.Monteith@arm.com>
+Signed-off-by: Marcus Oakland <marcus.oakland@arm.com>
+Signed-off-by: Matteo Franchin <matteo.franchin@arm.com>
+",2014/1/31 16:29,2
+41,Fix contiguos memory allocation overflow,"Fix contiguos memory allocation overflow
+
+Check if the address space is exhausted when allocating
+contiguous memory. The size of the allocated memory added
+to the base address should not be larger than the maximum
+address value.
+
+Change-Id: I90ec76ec187b4898777291c4bce0011de68978de
+Signed-off-by: Constantin Musca <constantin.musca@intel.com>
+",2014/4/25 8:20,3
+42,Fix the build,"Fix the build
+
+InputJackLibraries are created for a 'jack.library.import' property
+during Config construction but InputJackLibrary.check which is called
+from the constructor of InputJackLibrary is creating an unmodifiable
+collection using Jack.getUnmodifiableCollections().getUnmodifiableCollection
+which depends on Config being already created. Fortunately check method
+is protected and uses CommonJackLibrary.getFileTypes which calls
+Jack.getUnmodifiableCollections().getUnmodifiableCollection to protect
+CommonJackLibrary.fileTypes. We can use fileTypes directly in InputJackLibrary
+which inherits from CommonJackLibrary instead of calling getFileTypes.
+
+Change-Id: I9f6a5e2a4ebd91f491d5d7d998ae7e6db8230a49
+",2015/2/27 13:15,3
+43,Move tools to revision 22.,"Move tools to revision 22.
+
+Also makes them depend on platform-tools 16 officially.
+
+Change-Id: Iaaeb4ea5d5e04baeef4cb088bce35df4ac42e212
+",2012/11/29 20:35,3
+44,cpufreq: interactive: Initialise above_hispeed_delay_lock,"cpufreq: interactive: Initialise above_hispeed_delay_lock
+
+The above_hispeed_delay_lock isn't being initialized, causing:
+
+  BUG: spinlock bad magic on CPU#1, swapper/1/0
+   lock: above_hispeed_delay_lock+0x0/0x20, .magic: 00000000, .owner: <none>/-1, .owner_cpu: 0
+
+This patch resovles this simply by initializing the lock.
+
+Change-Id: If2a7e658ec4a02b71bbff582467168a8be1a90e2
+Signed-off-by: Jon Medhurst <tixy@linaro.org>
+[jstultz: Tweaked commit message]
+Signed-off-by: John Stultz <john.stultz@linaro.org>
+",2013/4/26 16:47,3
+45,cpufreq: governors: Move get_governor_parent_kobj() to cpufreq.c,"cpufreq: governors: Move get_governor_parent_kobj() to cpufreq.c
+
+get_governor_parent_kobj() can be used by any governor, generic
+cpufreq governors or platform specific ones and so must be present in
+cpufreq.c instead of cpufreq_governor.c.
+
+This patch moves it to cpufreq.c. This also adds
+EXPORT_SYMBOL_GPL(get_governor_parent_kobj) so that modules can use
+this function too.
+
+Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
+Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+",2014/2/11 10:03,3
+46,cpufreq: don't leave stale policy pointer in cdbs->cur_policy,"cpufreq: don't leave stale policy pointer in cdbs->cur_policy
+
+Clear ->cur_policy when stopping a governor, or the ->cur_policy
+pointer may be stale on systems with have_governor_per_policy when a
+new policy is allocated due to CPU hotplug offline/online.
+
+[rjw: Changelog]
+Suggested-by: Viresh Kumar <viresh.kumar@linaro.org>
+Signed-off-by: Jacob Shin <jacob.shin@amd.com>
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+",2014/2/11 10:03,3
+47,Add + code handling logic for SMS Global Roaming,"Add + code handling logic for SMS Global Roaming
+
+When sending SMS from international CDMA NANP country, outgoing SMS is failed due to + code converting.
+(Send a SMS text message: to an international phone number using the plus code (+)).
+
+In kitkat, when user send a sms with plus code, the ""+"" converted to 011(NANP_IDP_STRING). And it works well.
+However, in lollipop, the ""+"" converted to current IDP, not NANP_IDP_STRING. And it failed to send the SMS.
+
+I think, we need to seperate SMS and Call logic like cdmaCheckAndProcessPlusCodeForSms and cdmaCheckAndProcessPlusCode.
+sohryun.shin@lge.com
+
+Change-Id: Ie9d402cbeb4de4ac30299d5820b33909d0e40320
+",2015/1/12 5:11,4
+48,Merge remote-tracking branch 'origin/android-3.10' into android-goldfish-3.10,"Merge remote-tracking branch 'origin/android-3.10' into android-goldfish-3.10
+
+Mostly to fix a bug where the kernel would not report the stack pointer
+of 32-bit processes when running on an ARM64 kernel.
+
+Conflicts:
+	arch/arm64/Kconfig
+	arch/arm64/include/asm/ptrace.h
+	arch/arm64/kernel/fpsimd.c
+
+Signed-off-by: David 'Digit' Turner <digit@android.com>
+",2014/9/3 12:12,4
+49,xgcc compiles need to use the Android crt files,"xgcc compiles need to use the Android crt files
+
+Change-Id: I70eb6c6aa11b455533581a6f303a56f8aab34b7a
+Signed-off-by: Bruce Beare <bruce.j.beare@intel.com>
+",2011/3/23 15:18,4
+50,Fix ld.gold i586-mingw32msvc,"Fix ld.gold i586-mingw32msvc
+
+By adding cast where i586-mingw32msvc-gcc gives warnings later
+treated as errors
+
+Change-Id: I98325a9ffc90c151647439bcef343fac9e360770
+",2012/8/8 10:02,5
+51,Turn off optimizations due to undefined behavior in assembler-arm.cc:fits_shifter.,"Turn off optimizations due to undefined behavior in assembler-arm.cc:fits_shifter.
+
+Without this temporary fix, fits_shifter()'s undefined behavior results in broken
+code. This change disables optimization on the host for the ARM target, which just
+slows down host-side compilation. A future update to v8 removes the undefined
+behavior and can turn optimizations back on.
+
+Change-Id: Ib695f31354171b45ff6b8c52abacc2abde1856e4
+",2015/3/31 0:07,6
+52,Move unconfined domains out of permissive.,"Move unconfined domains out of permissive.
+
+This change removes the permissive line from unconfined
+domains. Unconfined domains can do (mostly) anything, so moving
+these domains into enforcing should be a no-op.
+
+See also: https://android-review.googlesource.com/68394
+
+Change-Id: I4c5321f517879d84b6c8ae13691521f484cbb2d2
+",2013/10/22 0:24,6
+53,Don't check if this == NULL.,"Don't check if this == NULL.
+
+Entering a method with this == NULL is undefined behavior, and will not
+happen in well formed code. Clang whines about this.
+
+Change-Id: I5a84ad3492305b2362f041db2bc3fa496098c435
+",2014/9/9 2:00,6
+54,Removed local gradle model jars from 'android' module.,"Removed local gradle model jars from 'android' module.
+
+These jars are not needed since we get the libraries from
+prebuilts.
+
+Change-Id: I839c45fb5ce759464cbc5a81c97089c33942cb23
+",2014/2/21 18:54,6
+55,javac 7 problem with class files creation,"javac 7 problem with class files creation
+
+  + [src/**/GSMPhone.java]
+      javac 7 create an empty class.
+      Use a constant or a ""final static"" variable is the same,
+      Because javac inlines ""final static"" variables into constant.
+      If the ""final"" keyword is removed, javac don't inlines it.
+      This bug was reported and fixed for javac 8
+      (http://bugs.sun.com/view_bug.do?bug_id=7199823)
+      and a backport was claimed
+      (http://mail.openjdk.java.net/pipermail/compiler-dev/2013-October/007860.html)
+
+Change-Id: I6edf383edae237b29f60b3c7a6a0d6e9fd33adb1
+Signed-off-by: Jerome Pilliet <pilliet@univ-mlv.fr>
+",2013/11/8 11:26,7
+56,[WIP] Enable optimizations for Arm64,"[WIP] Enable optimizations for Arm64
+
+This CL enables optimizations that I believe are safe to enable.
+
+The ones not enabled:
+
+kLoadHoisting requires rework of PC def/use.  In arm32 we used updates
+to the pc register to provide a barrier to hoisting loads above
+branches.
+
+kSuppressLoads requires kTrackLiveTemps, which is on hold while we
+are working through the RefReg consistency issues.
+
+kTrackLiveTemps needs debugging (likely problems around equality of
+32 and 64-bit views of core registers (in particularly, those used
+as references).
+
+kPromoteRegs needs CL 99080 debugged and submitted.
+
+kBBOpt may be ready, but will likely need debugging of the fused
+branches.
+
+Also, note that intrinsics and inlined methods are still turned off.
+
+Change-Id: I20e4765925bebc0ac3b3001d199d403ed5a85fa6
+",2014/6/27 22:28,8
+57,Move the pthread debugging flags to the right place.,"Move the pthread debugging flags to the right place.
+
+Change-Id: Ie805bd837d1f72cdf1818e056c0baeb0857e4e84
+",2013/10/31 21:10,9
+58,Fix a crash when creating an incognito tab on tablet,"Fix a crash when creating an incognito tab on tablet
+
+Incognito mode is no longer supported from KitKat.
+Opening an incognito tab leads to crash.
+So hide the menu item on table as well as phone.
+
+Change-Id: I70e6b1d70d0913fdddb66b200b0ce5f760e66189
+",2014/5/7 8:57,9
+59,"Revert ""Revert ""fs_mgr_verity: Add support for squashfs""""","Revert ""Revert ""fs_mgr_verity: Add support for squashfs""""
+
+This reverts commit 7b97c7a3fa0f1bdae5b45a70f625ff48f9dab0c1.
+
+Change-Id: Id47e70479fe9247b7936f2e54d4dbfbb4f63f635
+",2015/4/9 1:03,9
+60,Fix the media scanner infinite loop issue.,"Fix the media scanner infinite loop issue.
+
+Certain application might pass the path containing consecutive
+slashes to Download Manager. While scanning such paths, the media
+scanner would enter infinite loop, then the process
+android.process.media would cause 40-50% of CPU usage all the time even
+after rebooting. Fix the infinite loop issue to be tolerant of such
+invalid paths.
+
+Change-Id: I73c1456a6c77f7ba7c66a2b6371afcdd155d9fd2
+Signed-off-by: Harish Subramony<harish.subramony@intel.com>
+Signed-off-by: Mazhar <mazharx.sameullah@intel.com>
+",2014/4/30 8:13,12
+61,ART: Use StackReference in Quick Stack Frame,"ART: Use StackReference in Quick Stack Frame
+
+The method reference at the bottom of a quick frame is a stack
+reference and not a native pointer. This is important for 64b
+architectures, where the notions do not coincide.
+
+Change key methods to have StackReference<mirror::ArtMethod>*
+parameter instead of mirror::ArtMethod**. Make changes to
+invoke stubs for 64b archs, change the frame setup for JNI code
+(both generic JNI and compilers), tie up loose ends.
+
+Tested on x86 and x86-64 with host tests. On x86-64, tests succeed
+with jni compiler activated. x86-64 QCG was not tested.
+
+Tested on ARM32 with device tests.
+
+ARM64 tests in progress.
+
+Change-Id: I77931a0cbadd04d163b3eb8d6f6a6f8740578f13
+",2014/5/29 9:49,12
+62,"Revert ""Workaround for the LDRD/STRD abbreviated syntax.""","Revert ""Workaround for the LDRD/STRD abbreviated syntax.""
+
+This reverts commit 6ab74ffccd71a0a27b5dc05eccb98bed0bca3e94.
+
+In favor or upstream fix https://android-review.googlesource.com/#/c/62486/
+
+Change-Id: Ica2a02ab23b4fe75946f6e01dadcd080f93473c3
+",2013/7/30 4:38,12
+63,Add missing X11 extension headers.,"Add missing X11 extension headers.
+
+This patch modifies the set of packages used to build the toolchain
+sysroot to include libxext-dev, which is required to provide certain
+headers like <X11/extensions/XShm.h> required to build the emulator's
+SDL sources.
+
++ Ensure the environment is properly sanitized when building the
+  toolchain.
+
+Change-Id: I219d647bae8e71b353b5973261150f4bb6656501",2014/3/27 12:54,12
+64,drivers: tty: goldfish: support platform_device with id -1,"drivers: tty: goldfish: support platform_device with id -1
+
+When the platform bus sets the platform_device id to -1
+(PLATFORM_DEVID_NONE), use an incrementing counter for the TTY index
+instead
+
+Change-Id: Ie7f56064b164f8f05df098b253d3658541f4e9ab
+Signed-off-by: Greg Hackmann <ghackmann@google.com>",2014/12/16 20:14,13
+65,Add mips32r6 STL binaries,"Add mips32r6 STL binaries
+
+Change-Id: I90637b6f075b58d5e1325cb007c9e7f9294ad1e6
+",2014/12/9 8:56,13
+66,NetworkImage - fix nullPointerException.,"NetworkImage - fix nullPointerException.
+
+1. getLayoutParams() can be null.
+2. old version used LinearLayout.LayoutParams instead of ViewGroup.LayoutParams
+",2013/6/26 19:49,14
+67,Update counting VR for promotion,"Update counting VR for promotion
+
+For 64-bit it makes sense to compute VR uses together for
+int and long because core reg is shared.
+
+Change-Id: Ie8676ece12c928d090da2465dfb4de4e91411920
+Signed-off-by: Serguei Katkov <serguei.i.katkov@intel.com>
+",2014/7/7 5:01,14
+68,download-toolchain-sources.sh: speedup script,"download-toolchain-sources.sh: speedup script
+
+This patch makes the download script faster by avoiding checking out
+all the sources from all cloned git repositories, then removing those
+that we don't need.
+
+Instead, we clone, without checkout, the git repositories, then
+only checkout the directories that we need to build the NDK toolchain
+binaries.
+
+This is faster because it avoids checking out a lot of obsolete
+sources for old/unused versions of binutils / gcc.
+
+Local benchmark shows: before ~ 3 mins, after ~ 2 mins.
+
+Change-Id: I8411d5f4e60beb1c56c162bd07638c91275367a9
+",2012/4/20 23:54,14
+69,logd: selinux auditd initial commit,"logd: selinux auditd initial commit
+
+Initial commit for an audit daemon that writes kernel audit
+messages to the Android logger. The daemon searches dmesg
+for all lines that contain ""audit"" and writes them. Then
+receiving the messages from the netlink socket.
+
+It also formats the messages so they are compatable with
+ausearch (type=<t> <m> format)
+
+Modified: Mark Salyzyn <salyzyn@google.com>
+
+- do not start auditd
+- merge into logd, stripping unnecessary file logging.
+- Convert headers and code to support C++
+- Fix bugs in libaudit
+
+Change-Id: I421bcf33e7e670d596628b1b5c7c25536ce2d3fe
+",2014/4/1 22:05,14
+70,Correct __NR_perf_event_open,"Correct __NR_perf_event_open
+
+It seems that x86 version of __NR_perf_event_open is 336
+
+Change-Id: I10a7d4c2c454f99f0d07d70a033cb539758a76d5
+",2012/8/30 10:57,15
+71,Initial upload of llvm libc++abi (r192248).,"Initial upload of llvm libc++abi (r192248).
+
+Upload libc++abi sources for the unwind functions.
+
+No any NDK-related modification in this CL, the build script will come later.
+
+Change-Id: If43306d9fb19fcf53bc00855afab17e2480a1880
+",2013/11/7 2:46,15
+72,Downgrade a lot of clang Werrors to warnings.,"Downgrade a lot of clang Werrors to warnings.
+
+The project redefines typedefs, which is a C11 feature, so move from
+C99 to C11. Also fix format specifier error. Fix this one instead of
+suppressing it because it's a real bug.
+
+Change-Id: I714b22da1e111b6e588be4dccf05320ae0e9b9cb
+",2014/11/28 21:17,16
+73,Allow system_app to start bugreport and to create /data/anr/traces.txt.,"Allow system_app to start bugreport and to create /data/anr/traces.txt.
+
+Resolves denials such as:
+
+avc:  denied  { set } for property =ctl.bugreport scontext=u:r:system_app:s0 tcontext=u:object_r:ctl_default_prop:s0 tclass=property_service
+
+avc:  denied  { write } for  pid=4415 comm=5369676E616C2043617463686572 name=""anr"" dev=""dm-0"" ino=358337 scontext=u:r:system_app:s0 tcontext=u:object_r:anr_data_file:s0 tclass=dir
+
+avc:  denied  { add_name } for  pid=4415 comm=5369676E616C2043617463686572 name=""traces.txt"" scontext=u:r:system_app:s0 tcontext=u:object_r:anr_data_file:s0 tclass=dir
+
+avc:  denied  { create } for  pid=4415 comm=5369676E616C2043617463686572 name=""traces.txt"" scontext=u:r:system_app:s0 tcontext=u:object_r:anr_data_file:s0 tclass=file
+
+Change-Id: I71d0ede049136d72f28bdc85d52fcefa2f7d128f
+Signed-off-by: Stephen Smalley <sds@tycho.nsa.gov>
+",2014/3/6 19:49,16
+74,"Removing OTG USB stick, the media database dosen't update.","Removing OTG USB stick, the media database dosen't update.
+
+When otg usb disk is removed, the MediaScanner should rescan and update database.
+Or files in the usb disk are still seen in gallery and music application.
+
+Change-Id: Ib3df1b3c4044574e3fc35c1e470aef7059dffe9e
+Signed-off-by: Gao,KunX <kunx.gao@intel.com>
+",2014/4/22 8:44,17
+75,Add d_demangle_nalloc to prevent dynamic allocation,"Add d_demangle_nalloc to prevent dynamic allocation
+
+Implements an interface with no dynamic allocation
+to avoid deadlocks or issues when the system runs
+out of memory of when the interface is called from
+the allocator itself.
+
+Change-Id: I661d59f0b3b3d369ab16a0ac945172c7ad38cabc
+Signed-off-by: Jean-Christophe PINCE <jean-christophe.pince@intel.com>
+",2014/4/18 5:48,17
+76,MediaCodec: Fix reading the MediaImage struct on 64 bit ARM,"MediaCodec: Fix reading the MediaImage struct on 64 bit ARM
+
+In 64 bit processes on Nexus 9, sizeof(MediaImage) is 160, not 156.
+In these cases, there is 4 bytes padding between the type field
+and the next 64 bit field.
+
+This fixes using the getInputImage/getOutputImage methods in
+64 bit mode.
+
+Keep the existing behaviour for the case if sizeof(MediaImage)
+would be 156, if that is the case in other 64 bit ABIs (such
+as x86_64 and mips64).
+
+The alternative would be to change the type of the mType field
+in MediaImage to size_t, to reduce the risk of non-obvious
+alignment/padding between fields within the struct, clearly
+getting rid of the possibility of the struct being 156 bytes
+large in 64 bit environments.
+
+Bug: http://b.android.com/90870
+Change-Id: Ibe66ec7ac3bdd7e9e6adf5552c9620d34e1d8273
+",2014/12/28 14:08,23
+77,Create new empty Bundles when creating new Call,"Create new empty Bundles when creating new Call
+
+...instead of using Bundle.EMPTY.
+
+Bundle.EMPTY is a global static resource and will no
+longer be empty if one Call adds data to this Bundle.
+
+Change-Id: I58c5bdd46a7c3468a6a12f967469cd1280af36d6
+",2015/4/8 13:50,24
+78,[MIPS64] Do not build no-elf-hash-table-library.so,"[MIPS64] Do not build no-elf-hash-table-library.so
+
+MIPS does not support GNU hash style
+
+Change-Id: I4a22aab41539223868b58d05ee72745db344dd2c
+Signed-off-by: Chris Dearman <chris.dearman@imgtec.com>
+",2014/2/6 20:00,29
+79,ion: convert to new idr APIs,"ion: convert to new idr APIs
+
+Convert to the much saner new idr allocation interface. Also migrate
+away from other deprecated APIs (idr_remove_all).
+
+Change-Id: I4f7beaad7015c466fbdde66fbeca913ef1bcf770
+Signed-off-by: Mitchel Humpherys <mitchelh@codeaurora.org>
+",2013/12/7 2:49,29
+80,Initial support for multiple pdp and ipv6 in mobile data state tracker,"Initial support for multiple pdp and ipv6 in mobile data state tracker
+
+- interface changes in phone.java, phone notifier and telephony
+  registry. No support yet in data connection tracker.
+
+- Keep separate states, interface and apns for v4 and v6 in mobile network state
+  tracker. Connectivity service/network state tracker is unchanged and is not aware
+  of separate v4, v6 interfaces.
+
+- ACTION_ANY_DATA_CONNECTION_STATE_CHANGED intent is broadcasted whenever there
+  is a change in the state associated with <apn_type, ipversion>. A new extra field
+  'DATA_APN_TYPE_STATE_KEY' introduced and will reflect the state of 'apn_type' on
+  'ipversion'. Existing extra field 'STATE_KEY' will be set as 'CONNECTED' if atleast
+  one pdp is active on any ip version.
+
+- LISTEN_DATA_CONNECTION_STATE phone state listener call back is backward compatible as
+  state will be set as 'CONNECTED' if atleast one pdp on any ip version is active.
+
+- Backward compatibility is maintained as existing applications that use
+  ACTION_ANY_DATA_CONNECTION_STATE_CHANGED intent and LISTEN_DATA_CONNECTION_STATE
+  notifiers will remain unaffected.
+
+Change-Id: I4fa38451f4e60aedc6e4ecf600d65f5d7633f279
+",2010/8/1 0:19,31
+81,Support .asm being compiled by yasm targeted for x86_64.,"Support .asm being compiled by yasm targeted for x86_64.
+
+Change-Id: Ia6425c38dd2f7ad2dc697213cd61b7515b9e7aff
+Signed-off-by: Dan Liang <dan.liang@intel.com>
+",2015/3/6 7:53,32
+82,[MIPS64] Modify the defaults to MIPS64R6.,"[MIPS64] Modify the defaults to MIPS64R6.
+
+Remove mips64r6 as an unknown flag to clang. Clang is now updated.
+
+Change-Id: I94d3a02a119f9c9ffef04d6c186badc06a5e7da1
+",2014/9/2 22:03,32
+83,Modify the default MIPS64 build to MIPS64R6,"Modify the default MIPS64 build to MIPS64R6
+
+Change-Id: I797e4c2e5b69c6991545c26886b5b25e6f8c2a67
+",2014/9/2 19:32,32
+84,<utils/Errors.h>: Fix c++11 narrowing,"<utils/Errors.h>: Fix c++11 narrowing
+
+C style casting opposed to static casting was used here due to Errors.h being included by C as well.
+",2014/1/22 21:57,34
+85,Disable RunnableMethod reference counting for FlushSemaphore,"Disable RunnableMethod reference counting for FlushSemaphore
+
+The FlushSemaphore is a static instance created once and never
+deleted. Thus, there's no need to let RunnableMethod ref-count it.
+Since the RunnableMethods are created and deleted on different threads
+it can create a race condition which results in the FlushSemaphore
+being deleted.
+
+Change-Id: I7f67467eb31189310c779d89c5b0a1949b858694
+",2012/9/19 11:58,35
+86,Fix user dist builds.,"Fix user dist builds.
+
+Revert ""Use linenoise to add simple editing and history to the Android shell.""
+
+This reverts commit 7fe202f160ca1926bc0277e3c276ad7b3f9b9aeb.
+",2010/6/2 16:41,35
+87,goldfish: enable 64 bit goldfish mmc device,"goldfish: enable 64 bit goldfish mmc device
+
+Enable the 64 bit MMC device emulation in the goldfish platform.
+
+Change-Id: Ia841e2d9586c56dd6f8aca6ade26a153963014bb
+
+Signed-off-by: Jun Tian <jun.j.tian@intel.com>
+",2014/3/6 13:43,36
+88,goldfish: enable 64 bit goldfish NAND device,"goldfish: enable 64 bit goldfish NAND device
+
+Enable the 64 bit NAND device emulation in the goldfish platform.
+
+Change-Id: I9841512d9d13e133a2f7145fba836f7cdc928ccf
+
+Signed-off-by: Jun Tian <jun.j.tian@intel.com>
+",2014/3/6 14:18,36
+89,Fix the issue the progress bar cursor forward/backward abnormally during music seek,"Fix the issue the progress bar cursor forward/backward abnormally during music seek
+
+Need to change the seekto() method to be invoked on right time
+
+Change-Id: Ibebd2045a3f7315e21cc960e99bb3b32b5304024
+Author: b359 <b359@borqs.com>
+Signed-off-by: Xiaokang Qin <xiaokang.qin@intel.com>
+Signed-off-by: Bruce Beare <bruce.j.beare@intel.com>
+Signed-off-by: Jack Ren <jack.ren@intel.com>
+Author-tracking-BZ: 35232
+",2012/8/17 7:11,37
+90,Fix build.,"Fix build.
+
+Where by ""fix"" I mean ""stop building this"". The person who committed this has
+left the company, this project has only been touched by our cleanup crew in
+the years since, and upstream has advanced several versions including adding
+Android-specific support.
+
+My assumption is that this is dead code, so let's find out...
+
+Change-Id: Ib47b10fde8fbbc1bd36dcef42f0a098593cfd4ed
+",2014/11/8 18:59,42
+91,net: wireless: bcmdhd: unified driver for SDIO and PCIe,"net: wireless: bcmdhd: unified driver for SDIO and PCIe
+
+Signed-off-by: Ecco park <eccopark@broadcom.com>
+",2014/7/10 22:19,42
+92,ART: Add Mips64 resolution trampoline assembly,"ART: Add Mips64 resolution trampoline assembly
+
+Add the resolution trampoline assembly.
+
+Change-Id: I45306f5913c6f57f46b97cb87fa321ae16642292
+",2015/1/31 1:11,43
+93,javac 6 problem - fields accessibility of type variable,"javac 6 problem - fields accessibility of type variable
+
+  + [libart/**/Enum.java]
+  + [libdvm/**/Enum.java]
+      Problem with ""public final int compareTo(E o) { return ordinal - o.ordinal; }""
+      This code doesn't comply the specification.
+      ""o"" is a type variable and it should not have access to private field.
+      (http://docs.oracle.com/javase/specs/jls/se5.0/html/typesValues.html#4.4)
+      (http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.4)
+      javac 6 doesn't see this mistake.
+
+Change-Id: I6f7c2785696c221be901ea96aeebc44ba85edd83
+Signed-off-by: Jerome Pilliet <pilliet@univ-mlv.fr>
+",2013/11/8 11:26,48
+94,[MIPS] Enable SD-card functionality to work,"[MIPS] Enable SD-card functionality to work
+
+Change-Id: I21ef7dc3c033b66f7400238510f1127aebf570a3
+Signed-Off-By: Bhanu Chetlapalli <bhanu@mips.com>
+",2012/7/27 2:25,49
+95,USB: gadget: android: Integrate f_midi USB MIDI gadget driver part deux,"USB: gadget: android: Integrate f_midi USB MIDI gadget driver part deux
+
+free_ep_req and alloc_ep_req are static open coded and conflicting
+in f_midi.c. The exported versions are present in f_sourcesink.c.
+Changed names to protect the innocent.
+
+Change-Id: I4aee40054b5715d0532d433d23dea2bccff7ec30
+Signed-off-by: Mark Salyzyn <salyzyn@google.com>
+",2015/3/24 19:43,53
+96,Adding devices needed by NVIDIA Tegra Chipset,"Adding devices needed by NVIDIA Tegra Chipset
+
+NVIDIA Tegra comment on why these device are secure
+
+/dev/tegra-throughput accepts a frame rate target
+from onscreen EGL applications. The frame rate
+target is used in gpu frequency scaling. This feature
+applies only when running a single application. While
+multiple clients are connected, gpu scaling does not
+use the frame rate targets and falls back to load
+based scaling instead. Since EGL applications aren__
+required to have any special permissions, this node
+must be accessible to all clients. Abusing this
+interface would be difficult in that no frame rate
+information is available if no client is swapping
+buffers, so writing a value would have no effect; at
+most a malicious client could cause gpu frequency
+scaling to fall back to load based scaling when a
+single (legitimate) client is connected. Other than
+the file open/ close operation it supports a
+single ioctl. The ioctl parameter is cast to an
+unsigned integer, and no further data is read. No
+buffer overrun is possible.
+
+/dev/nvhost-gpu, /dev/nvhost-as-gpu,
+/dev/nvhost-ctrl-gpu are used by all GL applications
+for accessing GPU. All GPU contexts are protected
+from each other with GMMU (GPU Memory Management Unit)
+
+/dev/nvhost-vic Each program that draws on screen
+using acceleration sends the rendering commands to
+kernel directly to maximize efficiency. This is why
+access to nvhost-vic is required.
+
+/dev/nvhost-dbg-gpu is used by the CUDA driver and
+debugger for accessing registers on the GPU, changing
+powergating state and getting notified about traps
+on the GPU. The interface is secured by maintaining
+a whitelist of registers that are allowed to be
+accessed from usermode, maintaining a refcount so
+that power features are restored once the usermode
+process exits, and requiring the usermode process
+to bind the graphics channel fd to the interface
+via an ioctl.
+
+/dev/nvhost-prof-gpu is also used by the CUDA
+profiler for accessing registers on the GPU, changing
+powergating state and getting notified about traps
+on the GPU. The interface is secured by maintaining
+a whitelist of registers that are allowed to be
+accessed from usermode, maintaining a refcount so
+that power features are restored once the usermode
+process exits. This interface makes binding a channel
+fd optional. In the absence of a bound channel fd,
+userspace cannot access channel-specific contexts.
+",2013/12/5 3:19,54
+97,ART: Force clearing higher bits when converting long to int,"ART: Force clearing higher bits when converting long to int
+
+The following problem description is taken from
+https://android-review.googlesource.com/#/c/107261
+  If destination and source of long-to-int is the same physical
+  register on 64-bit then we do not emit any instructions but
+  consider that destination is a 32-bit view of source register.
+  As a result high part contains garbage. If the destination is
+  used later as index to array access then this garbage is used
+  in computation of address because address is 64-bit. For all
+  other cases garbage is just ignored.
+
+For 64-bit target this patch forces generating reg-to-reg copy
+even if the src and dest are the same physical registers. This
+makes the higher bits be zeroed.
+
+Mir2Lir::GenIntToLong is created solely to cope with the limited
+stack frame size of Mir2Lir::CompileDalvikInstruction.
+
+Change-Id: I49163a7ec1fd3c22a4747be89a32a18cea4dc9aa
+Signed-off-by: Serguei Katkov <serguei.i.katkov@intel.com>
+Signed-off-by: Yevgeny Rouban <yevgeny.y.rouban@intel.com>
+",2014/11/5 5:17,55
+98,Telephony: Support for 2 digit short codes.,"Telephony: Support for 2 digit short codes.
+
+Two digit short codes should be treated as USSD string
+except those that start with ""1"". At present only 2
+digit codes that end with ""#"" are treated as USSD
+string. Added support for other strings as well
+
+Change-Id: Id8977e7b05df51a35c035b640fb7f958ebd9f8c5
+",2012/10/18 7:38,57
+99,Fix flaky FinalizeTest,"Fix flaky FinalizeTest
+
+Chained finalizer starts when finalizer is run and the
+current induceFinalization does not sufficiently induce
+finalization.
+
+Add more gc() and sleep() calls to ensure chained
+finalizer is running to fix flaky
+testSystemRunFinalizationReturnsEvenIfQueueIsNonEmpty.
+
+Signed-off-by: Lawrence Mok <lawrencem@gmail.com>
+",2012/9/29 0:38,59
+100,Add Mips support to libcutils,"Add Mips support to libcutils
+
+Change-Id: I3ba3f3612d593d3c54ac307a7598052abc74517b
+",2012/7/27 2:25,62
+101,"Revert ""Revert ""Add Google login to the AS build.""""","Revert ""Revert ""Add Google login to the AS build.""""
+
+This reverts commit 12cadb61929cf9861f8976762afcd39fdc2970fa.
+
+Change-Id: I6f033f8beca294e6659ba4b8ff52d7381a413d11
+",2014/7/24 14:32,63
+102,Remove comparisons that can't be true,"Remove comparisons that can't be true
+
+keyBitmask and ledBitmask are arrays, ""!their address"" always evaluates to
+false. clang complains about this.
+
+Change-Id: I6aed45a203b0eeaad2093dbdebea03a2c2fc1a3d
+Signed-off-by: Bernhard Rosenkränzer <Bernhard.Rosenkranzer@linaro.org>
+",2014/11/17 20:11,68
+103,Update to OpenSSL 1.0.1g,"Update to OpenSSL 1.0.1g
+
+Upgrade to the new OpenSSL 1.0.1f release. SHA-1 hash of file:
+b28b3bcb1dc3ee7b55024c9f795be60eb3183e3c  openssl-1.0.1g.tar.gz
+
+Change-Id: Ie839cf2a4367afbd2919180ea4ce016b1c8d6668
+",2014/4/7 21:50,74
+104,test: Ensure that the policy remains boolean free,"test: Ensure that the policy remains boolean free
+
+This test ensures that the policy does not
+contain any SELinux booleans.
+
+Change-Id: Ie8af2aaa6065ea7c621619511ac41849c2f969e1
+",2014/1/30 4:30,75
+105,Allow larger stack frames,"Allow larger stack frames
+
+This fixes the build for arm64 with clang
+
+Change-Id: I195c096bb4191399054bb8cd3c42e969b705b5a0
+Signed-off-by: Bernhard Rosenkränzer <Bernhard.Rosenkranzer@linaro.org>
+",2014/11/30 9:59,80
+106,ARM: Inline some math methods,"ARM: Inline some math methods
+
+This CL adds inlining support for the following methods:
+* java.lang.Math.sin
+* java.lang.Math.cos
+* java.lang.Math.exp
+* java.lang.Math.log
+
+Change-Id: I34324eab323c85ba34b5b008b51300f35fc1530a
+",2014/9/30 10:01,81
+107,Added service_contexts to embedded.mk.,"Added service_contexts to embedded.mk.
+
+Added service_contexts to embedded.mk to support MAC checks in the
+service manager.
+
+Change-Id: I31f4f4e1acb2be8167f2f11f93c936c18303135a
+",2014/6/11 18:16,82
+108,[linux-x86] Refresh gcc-4.9 prebuilts for X86_64 gcc.4-9 source is from google/gcc-4_9 branch.,"[linux-x86] Refresh gcc-4.9 prebuilts for X86_64
+gcc.4-9 source is from google/gcc-4_9 branch.
+
+Change-Id: I310615253d4b359784a9d63622fddef47a71ea74
+",2014/9/5 21:25,84
+109,"The ""android.hardware.bluetooth_le"" feature is not supported in some device which not support bluetooth 4.0 specification.","The ""android.hardware.bluetooth_le"" feature is not supported in some device which not support bluetooth 4.0 specification.
+
+In CTS Verifier, ""BLE Client Test"" and ""BLE Server Test"", requires this feature ""android.hardware.bluetooth_le"",
+but this fearture is not supported in some device which not support bluetooth 4.0 specification,
+this change is showing the test items according to the ""android.hardware.bluetooth_le"" feature.
+",2014/11/3 2:10,90
+110,Reintroduced improved write perf of apkbuilder and signapk.,"Reintroduced improved write perf of apkbuilder and signapk.
+
+This change brings back 5bc84c0d799be18c85e30f52a6a289384e52103e which
+was accidentally clobbered by a7f789b644ff6d4603f06b19a4ed030a46168a53.
+
+Change-Id: I03146d90d0785715e22c5f363e06f5e03b216cb7",2013/11/1 19:41,91
+111,Media type detection should ignore surfix case.,"Media type detection should ignore surfix case.
+
+Change-Id: I4a76e78cba7b683c03de967da7a6d7bc2b88fd39
+",2010/6/27 6:11,99
+112,Remove curReceiver and use curApp instead,"Remove curReceiver and use curApp instead
+
+curReceiver of ProcessRecord is used by both foreground and background
+broadcasts. In special condition, it is overwritten by the other
+broadcast. It causes ANR.
+
+This change removes curReceiver of ProcessRecord. And use curApp of
+BroadcastRecord instead of curReceiver.
+
+Change-Id: I3320dbe5b4ffbf47477d0214fa32c984bba94070
+",2014/11/18 15:18,112
+113,[WIP] Improve math tests to allow a specific ulp bound.,"[WIP] Improve math tests to allow a specific ulp bound.
+
+Change-Id: I004e12970332e1d9531721361d6c34f908cfcecc
+",2014/11/4 1:04,115
+114,Out of memory using wallpaperPicker switching wallpapers,"Out of memory using wallpaperPicker switching wallpapers
+
+Out of memory issues arise when switching wallpapers using
+WallpaperPicker quickly, due to not releasing large Bitmaps
+before allocating space for new ones.
+
+Resolved by securing that wallpaper bitmaps are set to null
+in order to be garbage collected when switching wallpaper.
+
+Added stability correction making sure noone can retrieve
+bitmap once it has been recycled by first calling
+WallpaperManager.forgetLoadedWallpaper().
+
+Change-Id: I318ee46d8613bec15dd52dd7b61ae950e760e6f6
+",2014/7/8 9:56,118
+115,Out of memory using wallpaperPicker switching wallpapers,"Out of memory using wallpaperPicker switching wallpapers
+
+Out of memory issues arise when switching wallpapers using
+WallpaperPicker quickly, due to not releasing large Bitmaps
+before allocating space for new ones.
+
+Resolved by securing that wallpaper bitmaps are set to null
+in order to be garbage collected when switching wallpaper.
+
+Added stability correction making sure noone can retrieve
+bitmap once it has been recycled by first calling
+WallpaperManager.forgetLoadedWallpaper().
+
+Change-Id: I318ee46d8613bec15dd52dd7b61ae950e760e6f6
+",2014/7/8 9:56,118
+116,Restore untrusted glStencilMask value on resume after functor,"Restore untrusted glStencilMask value on resume after functor
+
+Fixes an issue where the stencil buffer is corrupted
+(used in overdraw debugging, path clipping) when used in
+conjunction with a HW accelerated WebView.
+
+bug:15023700
+bug:16465551
+
+Change-Id: I1808c3b513cbebc1848e0ad04ca676faafeebebf
+Signed-off-by: Digish Pandya <digishp@codeaurora.org>
+",2014/11/24 8:24,124
+117,Two CTS Accessibility test cases fail,"Two CTS Accessibility test cases fail
+
+The two test cases fails because of the font size is not taking
+into consideration, also the word wrapping in EditText is wrongly
+positioned.
+
+The solution is to specify the font size in the layout xml-file and
+adjust the EditText width to make sure the text is word wrapped
+at the desired location for devices with x-large mdpi/hdpi
+configuration.
+
+Failing CTS test cases.
+AccessibilityTextTraversalTest#
+   testActionNextAndPreviousAtGranularityLineOverText
+
+AccessibilityTextTraversalTest#
+   testActionNextAndPreviousAtGranularityPageOverText
+
+Change-Id: Ic522ca64d89f690364581c6d679f1039150b77bb
+",2013/5/21 10:46,125
+118,inital checkin: libpcre,"inital checkin: libpcre
+
+This the initial commit of libpcre, the Perl Compatible Regular
+Expression library (http://www.pcre.org/)
+
+The files in the dist/ directory correspond to pcre version
+8.36 and are unmodified.
+
+  $ sha256sum pcre-8.36.tar.bz2
+  ef833457de0c40e82f573e34528f43a751ff20257ad0e86d272ed5637eb845bb  pcre-8.36.tar.bz2
+
+The top level directory contains 3 symlinks pointing into dist,
+and one Android.mk file.
+
+The code compiles, and I've tested a small program to verify that
+the functionality is correct. However, no extensive testing has
+been done at this point.
+
+Change-Id: Ie304aaf09cc37eb8920b40c3a3f7db61a0fda205
+",2014/9/27 23:59,145
+119,ART: Calculate dataflow for all blocks,"ART: Calculate dataflow for all blocks
+
+Currently dataflow information is not calculated for catch blocks in order to
+reduce overhead. However, this makes assumption that the lack of this
+information is only preventing local optimizations to catch block. But in
+reality this problematic for global optimizations.
+
+Basically, when dataflow is not allocated for a block, then ssa is not computed
+for that block either. When ssa is not computed, other optimizations which
+need to know all uses of ssa register do not see it in the catch block.
+Complete information is required for correctness.
+
+Change-Id: I5c13344c18409bd172a5d9b07577b4a1353cc733
+Signed-off-by: Razvan A Lupusoru <razvan.a.lupusoru@intel.com>
+",2014/9/17 0:47,151
+120,Fix the wrong mount points of data and cache partitions on vbox,"Fix the wrong mount points of data and cache partitions on vbox
+
+This patch fixed the wrong mount points in the boot script in init.vbox_x86.rc
+when starting the vbox, the wrong mount points of data and cache partitions will cause the dvm crashes.
+
+Change-Id: I9ccb94357825fd6bfa671213ddefef5aa702acf1
+Signed-off-by: Panfeng Chang <panfengx.chang@intel.com>
+Signed-off-by: Jackie Wu <jackie.wu@intel.com>
+Signed-off-by: Jun Tian <jun.j.tian@intel.com>
+",2012/10/19 8:34,151
+121,Update the kernel headers to match external/kernel-headers.,"Update the kernel headers to match external/kernel-headers.
+
+Note that the Linux kernel handed over responsibility for most of the
+socket constants to glibc some time ago. Someone had updated our
+external/kernel-headers file but not regenerated the bionic headers,
+so this change copies the missing stuff from the old bionic <linux/socket.h>
+into <sys/socket.h>. This is what glibc does.
+
+I've hacked a few of the other files to #include <sys/socket.h> for
+backward compatibility, but even so this requires numerous other
+changes to switch people over from direct inclusion of <linux/...> headers.
+
+Change-Id: I0e4af64e631d3cef911a31d90f2f806e058278a0
+",2012/9/12 2:05,156
+122,[MIPS] Append private_ to AES_set_encrypt_key and AES_set_decrypt_key for MIPS. Update import script to generate o32 .s files for MIPS.,"[MIPS] Append private_ to AES_set_encrypt_key and AES_set_decrypt_key for MIPS.
+Update import script to generate o32 .s files for MIPS.
+
+Signed-off-by: Raghu Gandham <raghu@mips.com>
+",2012/8/2 0:01,166
+123,Update the kernel headers to match external/kernel-headers.,"Update the kernel headers to match external/kernel-headers.
+
+Note that the Linux kernel handed over responsibility for most of the
+socket constants to glibc some time ago. Someone had updated our
+external/kernel-headers file but not regenerated the bionic headers,
+so this change copies the missing stuff from the old bionic <linux/socket.h>
+into <sys/socket.h>. This is what glibc does.
+
+I've hacked a few of the other files to #include <sys/socket.h> for
+backward compatibility, but even so this requires numerous other
+changes to switch people over from direct inclusion of <linux/...> headers.
+
+Change-Id: I0e4af64e631d3cef911a31d90f2f806e058278a0
+",2012/9/12 2:05,171
+124,Use sigemptyset to initialise signal mask and don't reference sa_restorer,"Use sigemptyset to initialise signal mask and don't reference sa_restorer
+
+Change-Id: I1fb376084e52c7e570f7b68e408be67bea407e9f
+Signed-off-by: Chris Dearman <chris@mips.com>
+",2012/7/27 2:25,177
+125,"Runtime resource overlay, iteration 2","Runtime resource overlay, iteration 2
+
+Support any number of overlays. Support any target package.
+
+In runtime resource overlay, iteration 1, only a single overlay
+package was considered. Matching was based on file paths
+(/vendor/overlay/system/framework-res.apk corresponding to
+/system/framework-res.apk). Introduce a more flexible identification of
+overlay packages so that any package is an overlay package if if
+specifies the following manifest
+
+<manifest>
+    <overlay target=""T"" priority=""P""/>
+</manifest>
+
+where T is the package name of the target package, ie the package whose
+resources are to be overlaid, and P is an integer [0, 9999] described
+below.
+
+During resource lookup, packages are queried to provide a best match
+given a configuration. If any package can provide a better match than
+what has been found so far, the previous match is discarded. The
+priority value P provides the order in which to query overlay packages.
+Packages with higher priority value will be queried later. Target
+packages are always queried last.
+
+Two overlay packages with the same priority targeting the same target
+package leads to undefined behaviour.
+
+The idmap file format has been updated to include the paths to the
+corresponding target and overlay packages. This makes idmap files act
+both as translation data and as control files: if an idmap file is
+present, then and only then should its overlay be loaded. This makes
+it possible to enable and disable installed overlay packages. To cache
+idmap files, the asset manager considers symbolic links to idmap files
+rather than the files themselves.
+
+Idmap files are created by the 'idmap' binary; idmap files must be
+present when loading packages. For the Android system, Zygote calls
+'idmap' as part of the resource pre-loading. For application packages,
+'idmap' is invoked via 'installd' during package installation (similar
+to 'dexopt').
+
+For security and version matching reasons, apply a self-imposed
+restriction on overlay packages: only load overlays from
+/vendor/overlay. This restriction may be relaxed in a future iteration.
+
+Change-Id: If49c963149369b1957f7d2303b3dd27f669ed24e",2012/11/26 12:53,186
+126,restorecon /data/anr directory.,"restorecon /data/anr directory.
+
+Restore the security contexts of anr directory
+when initially created.
+
+Change-Id: Ia731414ccbcdc7369d24be6db0003c53abcf6ef4
+Signed-off-by: rpcraig <rpcraig@tycho.ncsc.mil>
+",2012/7/25 17:59,194
+127,Add a zipalign flag to page-align stored shared libraries,"Add a zipalign flag to page-align stored shared libraries
+
+Shared libraries can be loaded directly from within apk files, but
+only if they are page-aligned.  This change adds a '-p' command
+line flag to zipalign, telling it to page-align files whose names
+end in "".so"" and which are stored in the archive without compression.
+
+Change-Id: I6a798733e1f0626af6554d3bc674083c3d2b0564
+Signed-off-by: Simon Baldwin <simonb@google.com>
+",2015/2/16 17:11,209
+128,Fix HwRngTest.testConfigurationIfFilePresent CTS failure,"Fix HwRngTest.testConfigurationIfFilePresent CTS failure
+
+external/sepolicy commit 3a4eb96b2a462dd68636c749cec47723fd8dc51f moved
+the untrusted_app domain into enforcing. This started enforcing SELinux
+rules for untrusted_apps, including CTS tests.
+
+HwRngTest.testConfigurationIfFilePresent() attempts to access the
+the major/minor number of the HW random device, which is denied by
+SELinux policy. Modify the tests so that, if we detect an IOException,
+the device node is considered correct and the test passes.
+
+Addresses the following test failure:
+
+  android.security.cts.HwRngTest#testConfigurationIfFilePresent
+  java.io.IOException: Failed to stat /dev/hw_random: Permission denied
+  at android.security.cts.LinuxRngTest.getCharDeviceMajor(Native Method)
+  at android.security.cts.HwRngTest.testConfigurationIfFilePresent(HwRngTest.java:84)
+  at java.lang.reflect.Method.invoke(Native Method)
+
+Bug: 14575413
+Change-Id: Iacc512f1ddaac83f53de06b516bd1edb49df9b5a
+",2014/5/6 16:36,214
+129,"[MIPS,MIPS64] Cherry-pick asm/reg.h file from bionic","[MIPS,MIPS64] Cherry-pick asm/reg.h file from bionic
+
+Adding asm/reg.h into platform 21 for MIPS and MIPS64.
+
+Change-Id: If2ed77607a01463657d443c088728521483f3005
+",2015/4/17 11:40,224
+130,Address test failures,"Address test failures
+
+Address test failures in I858bba67957904c6c951dbc97b35036a7049e133.
+
+This CL addresses several issues caught in unit tests.
+- Equality is not always preserved when we InputMethodSubtype is
+  marshalled via Parcel if an InputMethodSubtype is initialized
+  without calling InputMethodSubtypeBuilder#setSubtypeLocale(String).
+  This is because the mashalled InputMethodSubtype has ""und"" in
+  #mSubtypeLocale while the original InputMethodSubtype object
+  can have null in #mSubtypeLocale.
+- InputMethodSubtype#hashCode() may be changed from existing platforms
+  when InputMethodSubtype is initialized with a deprecated language
+  code such as ""iw"".
+
+Note that you can run unit tests as follows.
+
+./frameworks/base/core/tests/inputmethodtests/run_core_inputmethod_test.sh \
+--rebuild
+
+BUG: 10090157
+Change-Id: I6a7666a4c2937775c4cca66e7b7e32621ed5b4c1
+",2015/2/14 21:55,224
+131,[PTHREAD] Avoid a deadlock during pthread_exit,"[PTHREAD] Avoid a deadlock during pthread_exit
+
+We encountered this deadlock with bootanimation:
+
+thread 1:
+
+exit()
+ _cxa_finalize()
+  (*fn.fn_ptr)(fn.fn_arg)
+   __atexit_handler_wrapper()
+    _eglAtExit()
+     _eglFiniTSD()
+      pthread_key_delete()
+       ScopedTlsMapAccess/Lock()
+        pthread_mutex_lock(&s_tls_map_lock_);
+       pthread_mutex_lock(&g_thread_list_lock);     <= held by Thread 3
+
+thread 3:
+
+pthread_exit ()
+  pthread_mutex_lock(&g_thread_list_lock);
+  _pthread_internal_remove_locked(thread);
+   free(thread);
+    je_free()
+     pthread_setspecific()
+      ScopedTlsMapAccess/Lock()
+       pthread_mutex_lock(&s_tls_map_lock_);          <= held by Thread 1
+
+Change-Id: I67ac1850c13f6d16822d9bbb7806806548bd4a12
+Signed-off-by: Emmanuel Berthier <emmanuel.berthier@intel.com>
+",2015/2/9 14:36,233
+132,[MIPS] Benchmark program for libagl MIPS optimizations,"[MIPS] Benchmark program for libagl MIPS optimizations
+
+Change-Id: I9f2b0014319028bc0eab169a92a067c0864d3fc4
+",2012/10/10 0:16,252
+133,[MIPS] Benchmark test for MIPS memset16/memset32,"[MIPS] Benchmark test for MIPS memset16/memset32
+
+Author: Chris Dearman <chris@mips.com>
+AuthorDate: 2011-07-26 19:24:40
+Change-Id: I0a7b3360aaf45de8ee47744f7031b84f15f37611
+",2012/10/12 21:29,254
+134,Remove curReceiver and use curApp instead,"Remove curReceiver and use curApp instead
+
+curReceiver of ProcessRecord is used by both foreground and background
+broadcasts. In special condition, it is overwritten by the other
+broadcast. It causes ANR.
+
+This change removes curReceiver of ProcessRecord. And use curApp of
+BroadcastRecord instead of curReceiver.
+
+Change-Id: I3320dbe5b4ffbf47477d0214fa32c984bba94070
+",2014/11/18 15:18,256
+135,Fix stagefright crash on devices without a real camera,"Fix stagefright crash on devices without a real camera
+
+Author: Bhanu Chetlapalli <bhanu@mips.com>
+Change-Id: Ifead2f00dc98fa9f3f4857ddee05ac1a6e495b64
+",2012/10/15 17:58,257
+136,Remove some pointless code.,"Remove some pointless code.
+
+Unnecessary disk reads for values that are never
+used (and cached elsewhere, so that optimization is
+rendered pointless).
+
+Change-Id: Ic14a8b53a96908bb03eae28759d7be2c217e8125
+",2014/6/13 16:47,261
+137,Enable OpenMP,"Enable OpenMP
+
+Change-Id: I77806236bc46626975be2eea5be7e77956dff757
+",2012/12/26 7:25,277
+138,FLACExtractor: Don't check size of first STREAMINFO,"FLACExtractor: Don't check size of first STREAMINFO
+
+The size of the first STREAMINFO is not necessarily 042, as some
+encoders may fill it with padding. The metadata parser handles
+premature EOF just fine, so we don't need to be strict about it.
+
+Change-Id: Ic077633c2622bb54402cdd8f04d30cd2b7776727",2013/12/3 2:01,322
+139,"Fix logic that delete ""-wal"" file.","Fix logic that delete ""-wal"" file.
+
+""databaseList()"" method, All files in database folder are returned.
+Such as ""-wal"" file, ""-shm"" file and so on.
+
+In case of media provider, it uses WAL mode.
+If ""-wal"" file is deleted, side effects appear to SQLITE_IOERR_SHORT_READ and user data is deleted.
+Therefore, When deleting a database file, "".db"" extension should be checked.
+
+Signed-off-by : kwangjung kim <kwangjung.kim@lge.com>
+
+Change-Id: Ie833d3990f1988929665d4c1b2ea77ad92bd2ded
+",2013/4/3 12:50,376
+140,mips: goldfish: Basic kernel support for MIPS Goldfish,"mips: goldfish: Basic kernel support for MIPS Goldfish
+
+Change-Id: Ia3463b5195068505e458c611ca28c90c75fdb17c
+Signed-Off-By: Chris Dearman <chris@mips.com>
+Signed-Off-By: Bhanu Chetlapalli <bhanu@mips.com>
+Signed-off-by: Raghu Gandham <raghu@mips.com>
+Signed-off-by: Young-Ho Cha <ganadist@gmail.com>",2013/3/14 1:23,391
+141,DeviceManager: fix Device hashCode.,"DeviceManager: fix Device hashCode.
+
+The new optional attributes (tag-id and boot.props) should not change
+a device's hashcode when the attributes are not used/defined.
+
+Change-Id: I2fcfe61d559bfa654e659e02cd39fce802d5699d
+(cherry picked from commit 03b8f3ee81d6d63520108c88391a05eb6525bf6d)",2014/2/21 21:49,479
+142,"[AUDIO] When setting a null device for an audio output, force the next routing request.","[AUDIO] When setting a null device for an audio output, force the next routing request.
+
+When a null device is set for an audio ouput, the outputDesc->mDevice is not updated,
+thus the routing update is not done next time the device is selected for that output.
+To meet the device change conditions, a boolean member mForceRouting has been
+introduced to force the routing next time the output is set with a non-null device.
+
+Change-Id: Ia0aa2f27fe63c39f0980dec2e1e79dbc26b81e56
+Author: Vincent Becker <vincentx.becker@intel.com>
+Signed-off-by: Vincent Becker <vincentx.becker@intel.com>
+Signed-off-by: Zhi Jin <zhi.jin@intel.com>
+Signed-off-by: Shuo Gao <shuo.gao@intel.com>
+Signed-off-by: Bruce Beare <bruce.j.beare@intel.com>
+Signed-off-by: Jack Ren <jack.ren@intel.com>
+Signed-off-by: Robert Beatty <robert.m.beatty@intel.com>
+",2014/6/25 21:41,562
+143,Fix limits.h to include page.h which provides PAGE_SIZE,"Fix limits.h to include page.h which provides PAGE_SIZE
+
+See 6331db3fd251ddc350913cc1e8a7941740c25f63
+
+Change-Id: I85083d754fe9b722efcb8ea73f17d88d505c90d1
+",2012/11/20 8:13,595
+144,libpixelflinger: disabled ARMv6 optimization on ARMv5te,"libpixelflinger: disabled ARMv6 optimization on ARMv5te
+
+Change-Id: Ie7048fc69b2a874c3a2c5d2e961f6610cd280516
+Signed-off-by: xingli <xingli@marvell.com>
+Signed-off-by: Hurri Lu <jlu32@marvell.com>
+Signed-off-by: Weichuan Yan <yan.weichuan@gmail.com>
+",2012/8/9 7:18,730
+145,"[MIPS] iterators0032(int32_t*,...)  was calling itself instead of calling iterators0032(int64_t*,...)","[MIPS] iterators0032(int32_t*,...)  was calling itself instead of calling iterators0032(int64_t*,...)
+",2012/1/31 23:39,938
+146,ext4_utils: xattr_assert_sane false positives,"ext4_utils: xattr_assert_sane false positives
+
+The end of the xattr block is a moving target, the
+value is placed at the end of the block. Make sure
+the end check understands when it collides with the
+value data.
+
+Change-Id: Iee6e4e90664a3c2c5056006870b0f2f22b236bad
+",2015/4/3 0:17,772
+147,stagefright: Fix seeking in MPEG4 container,"stagefright: Fix seeking in MPEG4 container
+
+- seek based on user-visible timestamp
+- seek to previous, next and closest exactly
+
+Bug: 12786906
+Change-Id: I2d5e1fbff6469b6f081a284be2222a4cb50aa754
+",2014/7/18 23:31,666
+148,FM Radio: Add support for FM Radio in Android,"FM Radio: Add support for FM Radio in Android
+
+Creating interface and framework for using FM Radio
+RX and TX from different vendors.
+
+Depends-On: I1c950690b13cfda09a14ef5f8fbfc2c41f49e2d2
+
+Change-Id: I1a71aed01bfffdddfabf1cdfbfa3707cb1ed016b
+Signed-off-by: Benn Porscke <benn.porscke@stericsson.com>",2012/11/6 9:42,660
+149,"Generate idmap files via proxy program, just like dexopt.","Generate idmap files via proxy program, just like dexopt.
+
+This commit changes how idmap files are generated by introducing a new
+program, /system/bin/idmap, responsible for idmap creation. The tool
+may be invoked similar to dexopt, ie via installd or as a stand-alone
+program.
+
+The stand-alone program allows creation of idmap files at any given
+moment during runtime (eg package installation), rather than during boot
+only.
+
+Note: this commit depends on project platform/build to include the
+addition of module `idmap'.
+
+Change-Id: Ie6f8ecdcf92ae929407c4457b08882a9ce4c210a",2012/3/8 16:07,283
+150,Suppress Clang compilation warnings.,"Suppress Clang compilation warnings.
+
+Ignore warnings about unused parameters, deprecated declarations,
+mismatched struct vs class tags, and initialization of static
+constant float data members.
+Also change one potential error of allocating variable length
+array of non-POD element type on stack.
+
+BUG: 17512760
+Change-Id: I3a09c945fb1c17f27aff74a7e439dd4c35d1fb32
+",2014/9/15 22:03,277
+151,Update Mac build environment documentation,"Update Mac build environment documentation
+
+This breaks the build environment instructions into branch-specific sections so that the documented environment requirements for each branch may evolve independently. Since I have only tested builds on 10.6 and 10.7, I tried to leave all other sections as untouched as possible.
+
+While I cannot say that the instructions in the ""android-4.0.3_r1 branch and all earlier branches"" section are exactly correct, this change makes it obvious that building Master on a modern OS X environment is extremely easy. I think this will be valuable to developers who choose to work on Macs.
+
+I'm trusting that developers who actually need to build earlier branches will update the documentation in those sections.
+
+A live version of this change is available here:
+
+http://mohsdev.com:8080/source/initializing.html
+
+Change-Id: I0539c412604836debfbe3986a6fc7f7be15f7e89
+Signed-off-by: David Mohs <dmohs@google.com>
+",2012/3/1 3:39,270
+152,Switch to NetBSD's kill(1).,"Switch to NetBSD's kill(1).
+
+Change-Id: Idd1635673e01758b5a7d34f1fdfbb695296c6164
+",2014/7/22 17:46,259
+153,Don't force x86 devices to run an insanely long test.,"Don't force x86 devices to run an insanely long test.
+
+This takes 3 minutes on a z620, so it's borderline unacceptable even on a fast
+desktop!
+
+Change-Id: I1ab63f857540011e62ff5ee71128ed15204bfdef
+",2013/8/12 20:43,238
+154,Re-factor Quick ABI support,"Re-factor Quick ABI support
+
+Now every architecture must provide a mapper between
+VRs parameters and physical registers. Additionally as
+a helper function architecture can provide a bulk copy
+helper for GenDalvikArgs utility.
+All other things becomes a common code stuff:
+GetArgMappingToPhysicalReg, GenDalvikArgsNoRange,
+GenDalvikArgsRange, FlushIns.
+
+Mapper now uses shorty representation of input
+parameters. This is required due to location are not
+enough to detect the type of parameter (fp or core).
+For the details
+see https://android-review.googlesource.com/#/c/113936/.
+
+Change-Id: Ie762b921e0acaa936518ee6b63c9a9d25f83e434
+Signed-off-by: Serguei Katkov <serguei.i.katkov@intel.com>
+",2014/11/21 9:20,233
+155,Phone: Display Supplementary Service Notifications,"Phone: Display Supplementary Service Notifications
+
+CallNotifier registers for SVC notifications and the message
+is displayed in the form of Toast to the user with the appropriate
+text depending on the type of notification.
+
+Change-Id: Ic61628882fef7409deae677f50f380e62bef98f6
+",2012/1/19 13:17,226
+156,"RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore","RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore
+",2009/9/24 0:17,195
+157,change the policy when connecting to Wi-Fi access point. The secure AP has higher priority than the open AP. Signed-off-by: zhihong.GUO <zhihong.guo@orange.com>,"change the policy when connecting to Wi-Fi access point. The secure
+AP has higher priority than the open AP.
+Signed-off-by: zhihong.GUO <zhihong.guo@orange.com>
+
+Change-Id: I4180419bd30619aa7079b8cee0f650d65a813b69
+",2013/8/6 13:18,188
+158,Fix abort(3) to raise SIGABRT rather than causing SIGSEGV.,"Fix abort(3) to raise SIGABRT rather than causing SIGSEGV.
+
+tgkill() needs the .save stack unwinding directive to get the complete
+stack trace.
+
+Change-Id: Ifb447dca2147a592c48baf32769dfc175d8aea72
+",2013/6/11 0:03,183
+159,Unify how base and overlay packages are matched,"Unify how base and overlay packages are matched
+
+This commit removes the legacy strategy for matching base and overlay
+packages, based on explicit path names (eg [1] and [2]). The only
+recognized strategy going forward is specifying overlay packages with
+the following tag in their AndroidManifest.xml files:
+
+  <manifest>
+    <overlay target=""..."" priority=""...""/>
+    ...
+  </manifest>
+
+The target attribute is the package name of the base package; the
+priority attribute an integer. A higher number corresponds to a higher
+precedence. Packages with higher precedence will be consulted earlier
+during resource lookup, effectively giving them the option to provide
+a value for the requested resource or pass the request on to other
+packages (configuration constraints and tighter configuration coherence
+rules still apply).
+
+Overlay packages must reside directly in /vendor/overlay. This is a
+change from earlier commits, where overlay packages were expected to
+reside in directories /vendor/overlay/framework and /vendor/overlay/app.
+
+1. /system/framework/framework-res.apk
+2. /vendor/overlay/framework/framework-res.apk
+
+Change-Id: Id196346d751619dc8537178e835ca3395de69933
+",2012/7/27 9:21,120
+160,WIP: art: Refactor RuntimeOptions/ParsedOptions,"WIP: art: Refactor RuntimeOptions/ParsedOptions
+
+A (mostly done) work-in-progress to refactor the RuntimeOptions to be a
+type-safe map (VariantMap, see runtime_options.h) and the ParsedOptions
+to delegate the parsing to CmdlineParser (see cmdline/cmdline_parser.h).
+
+TODO: Finish the glue in ParsedOptions::Init to return a map, and then
+ParsedOptions itself can become just some static helper methods.
+
+Change-Id: Ic67c6bca5e1f33bf2ec60e2e3ff8c366bab91563
+",2015/1/28 1:48,119
+161,Fix delivery report error with PENDING status in SMS,"Fix delivery report error with PENDING status in SMS
+
+1. According to TS 23.040, TP-Status values is changed properly.
+2. When processing Status Report, it should be checked whether tpStatus is PENDING or FAILED.
+
+Change-Id: I91c315cfb363f3e4b936c6b6b1a01083687a580f
+",2011/1/31 9:45,113
+162,Deprecate GrowableArray and use ArenaVector in MIRGraph.,"Deprecate GrowableArray and use ArenaVector in MIRGraph.
+
+Change-Id: I92157d3a6ea5975f295662809585b2dc15caa1c6
+",2014/9/22 16:44,110
+163,UICC : fix read EF Image Instance,"UICC : fix read EF Image Instance
+
+The EFs(4Fxx) path under DF Graphics are not distinguish
+with the EFs(4Fxx) path under DF Phonebook.
+The getEFPath() is not able to return correct path.
+So, the path should be defined as MF_SIM + DF_TELECOM + DF_GRAPHICS.
+
+And some duplicated codes are removed on handleMessage() of IccFileHandler class.
+
+Bug : 9767739
+
+Change-Id: I754ec5c40cff99adef11a9dfdc31b8e0446befbb
+",2013/9/3 6:36,110
+164,goldfish: enable SELinux for ARM,"goldfish: enable SELinux for ARM
+
+Enable ""NSA SELinux Support"". This option depends on the following
+other options:
+* Socket and Networking Security Hooks
+* Auditing support
+
+Change-Id: Icb0f58985ee2b283c563ebc8513cebfcc7a3f871
+Signed-off-by: Nick Kralevich <nnk@google.com>
+",2013/6/25 22:32,104
+165,Set environment to run the apps with native bridge,"Set environment to run the apps with native bridge
+
+1. Provide the private dir to native bridge if need.
+2. Invoke geAppEnv and get the envirioment values
+   if native bridge is present and supports this app.
+3. Set the environment for apps running native bridge.
+
+Change-Id: I0b93da93251c6b4638de786bf98cf99df07c3fc2
+Signed-off-by: jgu21 <jinghui.gu@intel.com>",2014/9/10 11:14,99
+166,lgd: Fix pruning,"lgd: Fix pruning
+
+In a scenario in which an on-line (blocking) client is running, and
+and a clean is attempted (logcat -c) is issued, the following can
+be observed:
+
+1) the on-line logger seams to freeze
+2) any other clear attempt will have no effect
+
+What is actually happening:
+
+In this case prune function will ""instruct"" the oldest timeEntry
+to skip a huge number (very close to ULONG_MAX) of messages, this
+being the cause of 1.
+[fixed in LogTimeEntry::triggerSkip_Locked]
+
+Since the consumer thread will skip all the log entries, mStart
+updating will also be skipped. So a new cleaning attempt will have
+the same oldest entry, nothing will be done.
+[fixed in LogTimeEntry::FilterSecondPass]
+
+Change-Id: I1b369dc5b02476e633e52578266a644e37e188a5
+Signed-off-by: TraianX Schiau <traianx.schiau@intel.com>
+",2014/12/16 13:28,96
+167,There is no _MIN for unsigned types.,"There is no _MIN for unsigned types.
+
+Change-Id: I49c38e51197b750210bdbf28c9cf6db30452a206
+",2014/7/22 0:17,91
+168,Suppress or fix clang errors before the fix from upstream.,"Suppress or fix clang errors before the fix from upstream.
+
+* Make Exynos_UpdateFrameSize global to link with other modules.
+* Suppress warnings about int conversion, pointer conversion,
+  implicit function declaration, sign/unsign comparison, and
+  c++11-narrowing.
+
+Change-Id: I462902cbc0d1c3442d59a6741c66d8a870a99e8c
+",2015/1/6 18:46,91
+169,Fix <sys/klog.h> to correspond to the kernel operations.,"Fix <sys/klog.h> to correspond to the kernel operations.
+
+This makes the constants correspond to those in the Linux kernel's
+include/linux/syslog.h, but keeping our old badly-named constants for
+source compatibility.
+
+Change-Id: Ia47d1299205754cbfffd29ed48b497b53d1edaae
+",2012/9/14 22:44,80
+170,ART: x86 specific clearing higher bits when converting long to int,"ART: x86 specific clearing higher bits when converting long to int
+
+The following problem description is taken from
+https://android-review.googlesource.com/107261
+  If destination and source of long-to-int is the same physical
+  register on 64-bit then we do not emit any instructions but
+  consider that destination is a 32-bit view of source register.
+  As a result high part contains garbage. If the destination is
+  used later as index to array access then this garbage is used
+  in computation of address because address is 64-bit. For all
+  other cases garbage is just ignored.
+
+A generic solution (113023) for all hw platforms was suggested
+but rejected later for the sake of HW specific solution:
+  https://android-review.googlesource.com/113023
+  https://android-review.googlesource.com/114436
+
+This patch is a rework of patch 113023 to stick with x86_64
+specific changes: for 64-bit target this patch forces generating
+reg-to-reg copy if the src and dest are the same physical
+registers. This makes the higher bits be zeroed by 32-bit move
+instruction.
+
+Change-Id: Id29af839506ff9319ffba08b2e86e240fef4dafd
+Signed-off-by: Serguei Katkov <serguei.i.katkov@intel.com>
+Signed-off-by: Yevgeny Rouban <yevgeny.y.rouban@intel.com>
+",2014/11/26 12:13,77
+171,Clean up libc/Android.mk a bit after the crtbrand changes.,"Clean up libc/Android.mk a bit after the crtbrand changes.
+
+Change-Id: Icfb95fffe70967418cd93da8cbeae22dcd68f8c9
+",2012/8/8 21:08,64
+172,Enable chromium http stack for x86,"Enable chromium http stack for x86
+
+Use chromium http stack as the online media http stack for x86 platform.
+
+Change-Id: I16a7a8697127a51fab8105833f7463911852f0b3
+",2012/5/2 7:15,52
+173,Comment out unused parameters.,"Comment out unused parameters.
+
+BUG: 18205090
+Change-Id: I3b4e5961d8cca96c1ca131bc51233f473c980e67
+",2014/11/19 23:53,48
+174,ART: Clean up compiler,"ART: Clean up compiler
+
+Clean up the compiler: less extern functions, dis-entangle
+compilers, hide some compiler specifics, lower global includes.
+
+Change-Id: Ibaf88d02505d86994d7845cf0075be5041cc8438
+",2014/8/22 6:31,46
+175,Rename mipsr6 as mips32r6,"Rename mipsr6 as mips32r6
+
+Change-Id: Ia0d0083227ce9a78f8f38001e067288a4eda22af
+",2015/1/7 3:10,43
+176,Enable x86_64 emulation support.,"Enable x86_64 emulation support.
+
+At last, we can support x86_64 targets by simply adding
+TARGET_X86_64 1 in target-x86/config.h.
+
++ Recognize 'x86_64' as a valid CPU ABI in build.prop
+  and associate it with 'emulator-x86' properly.
+
++ Remove obsolete definition of TARGET_PHYS_ADDR_SPACE_BITS,
+  since this is now handled by target-*/cpu.h anyway.
+
++ Add missing util/host-utils.c required by x86_64 helper
+  functions in target-i386/op_helper.c
+
++ Remove obsolete VPATH entry in top-level Makefile.
+
+This replaces the patches:
+  https://android-review.googlesource.com/80370
+  https://android-review.googlesource.com/80371
+
+NOTE: This still only supports 3.4 kernels, for 3.10 and
+      higher, a future patch will address required changes.
+
+Change-Id: Iad221ac96b68fd1a1a8ca89650ef5db69c74c312
+",2014/3/7 22:46,38
+177,Enable armv7/thumb2 multilib for arm-eabi.,"Enable armv7/thumb2 multilib for arm-eabi.
+
+Configured multilib:
+
+> arm-eabi-gcc -print-multi-lib
+.;
+thumb;@mthumb
+thumb/thumb2;@mthumb@march=armv7
+
+Change-Id: Ie6d951929432610a7317dd37bdf12cb97544e1b4
+",2012/11/30 5:29,38
+178,Windows adb: stdout and stderr handles not inheritable,"Windows adb: stdout and stderr handles not inheritable
+",2012/11/29 1:23,35
+179,"AMR-NB opensource contributions: 10904, 10905 and 10906","AMR-NB opensource contributions: 10904, 10905 and 10906
+",2009/8/31 19:12,32
+180,"AMR-NB opensource contributions: 10904, 10905 and 10906","AMR-NB opensource contributions: 10904, 10905 and 10906
+",2009/8/31 19:12,32
+181,Update build system for better Clang behavior on Mac.,"Update build system for better Clang behavior on Mac.
+
+Change-Id: I1813954681b670807d7e3faaf6d5f5a769cc5f2e",2014/4/21 21:01,32
+182,Complete agreed changes to Navigation Editor and enable by default,"Complete agreed changes to Navigation Editor and enable by default
+
+As per recent meeting:
+
+1. Enable navigation editor (show ""Navigation Editor"" menu item in ""Tools->Android"" menu.
+2. Remove toolbar icon.
+3. *Move "".navigation"" directory to "".idea/navigation"". [*reversed - made it easy to switch]
+4. Create navigation directories if they don't exist when navigation editor is first launched.
+5. Add in-tool link for on-line help at ""d.android.com/tools/help/navigation-editor.html"".
+6. Remove ""phablet"" option in (straw-man) form-factor selector in nav editor UI.
+
+Change-Id: I6cf0e9676378fd8cf69b73f98fbf35afc5d608da
+",2014/6/9 23:42,28
+183,Check for tagged pointer support,"Check for tagged pointer support
+
+This is arm64 only
+
+Change-Id: Iaa67b7cfc16dc0367002695a028e8475e3e3975e
+",2014/2/11 19:25,27
+184,Support kernels with version >= 3.10,"Support kernels with version >= 3.10
+
+Newer Android Linux kernels modify the way certain devices are
+named, i.e.:
+
+  /dev/qemu_pipe is renamed as /dev/goldfish_pipe.
+  /dev/ttyS<num> is renamed as /dev/ttyGF<num>
+
+This patch adds support code to the emulator to deal with this
+as transparently as possible:
+
+1) Add a new hardware property 'kernel.newDeviceNaming', a string
+   which can only take the values 'autodetect', 'no', and 'yes'.
+
+2) Support code to probe the type of a kernel image.
+   IMPORTANT: The kernel implementation depends on the host
+   /usr/bin/file to properly recognize kernel files and extract
+   their version number. This really only works on Linux and
+   OS X, and only for x86 and x86_64 kernel images.
+
+   A future patch will implement more robust detection by
+   essentially doing its own probing through libmagic or equivalent.
+
+   Note that there doesn't seem to be any existing libmagic rules
+   to recognize ARM and MIPS kernel images at the moment :-(
+
+   See android/kernel/kernel_utils*
+
+3) Modify the emulator startup code to perform auto-detection
+   when possible (broken on Windows, and non Intel archs, see
+   comment above).
+
+4) Modify the kernel command line generation to handle the new
+   TTY device naming
+
+5) Modify the Goldfish pipe virtual device implementation
+   (since the device name presented to the kernel also changed).
+
+This should be enough to auto-detect Linux 3.10+ x86_64 kernel
+images on Linux.
+
+Change-Id: Ied517f8a1fdeb18d84fa9a12ebcdc3daa1f41d9a
+",2014/3/7 22:46,25
+185,"RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore","RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore
+",2009/9/24 0:17,24
+186,Replace gnu designator with standard syntax.,"Replace gnu designator with standard syntax.
+
+Clang compiler complains about the non-standard syntax.
+
+BUG: 18193625
+Change-Id: Ibdd0035b6d47670ee138820748035d702c83de3d
+",2014/10/30 22:58,23
+187,"RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore","RIO-7396: Speech decoders AMR-NB & WB: bring android change request: 11541, 11542, and 11543 to Opencore
+",2009/9/24 0:17,23
+188,add more PowerVR exceptions for FileSystemPermissionTest,"add more PowerVR exceptions for FileSystemPermissionTest
+
+On the platforms with a PowerVR GPU and newer device drivers,
+the /dev/dri/card, /dev/dri/card0, and /dev/dri/controlD64
+device nodes may be created to support the IMG GPU libary
+
+The device nodes are used by any process using EGL/GLES, which
+includes system processes such as SurfaceFlinger and most
+sandboxed native/java applications.
+
+It is therefore not possible to use only group-writable permissions.
+
+Imagination Technologies believe that the  /dev/dri/card,
+/dev/dri/card0 , and /dev/dri/controlD64 device driver is secure
+and has been properly audited
+
+Change-Id: Icb93665d845d8f95df16fb710eb0ed4e222c23d3
+Signed-off-by: Leon Hsiao <leon.hsiao@intel.com>
+",2014/1/7 3:53,21
+189,NetworkImage - fix nullPointerException.,"NetworkImage - fix nullPointerException.
+
+1. getLayoutParams() can be null.
+2. old version used LinearLayout.LayoutParams instead of ViewGroup.LayoutParams
+",2013/7/1 18:42,20
+190,ART: Fix Clang CFLAGS inclusion,"ART: Fix Clang CFLAGS inclusion
+
+Only include the CFLAGS if Clang is not explicitly disabled for the
+architecture.
+
+Change-Id: Ic63d7c8018f633a9b20a4ff9285d6380426017a5
+",2015/1/7 22:37,20
+191,libnfc-nxp: fix build for 64-bit,"libnfc-nxp: fix build for 64-bit
+
+Turn off unused parameter warnings to unclutter the build output
+When storing an int in a void*, use intptr_t to cast between them
+Store pointer handles in an intptr_t or a uintptr_t
+
+Change-Id: If48290ca23dd295f1a87220c5b1d5232ebdc8d45
+",2014/3/24 20:10,19
+192,Fix system and GABI++ headers.,"Fix system and GABI++ headers.
+
+The C++ headers provided by the 'sytem' and 'gabi++' runtimes do
+not compile for API level < 9 (cstdlib), or at all (stl_pair.h).
+
+This patch fixes these issues, and also adds a regression test.
+
+Change-Id: Ia78b3871039ed40dd2089da96bd775e9c2d359cd
+",2013/2/18 14:06,17
+193,Rewrite atomic.h to use stdatomic.h.,"Rewrite atomic.h to use stdatomic.h.
+
+Replace atomic-inl.h with a file that just includes atomic.h.
+Remove platform specific implementations.
+
+Change-Id: If16d74fbe0af7836ed8c1296c17e13a2d0d20f64
+",2014/10/2 1:15,17
+194,Fix embedded build,"Fix embedded build
+
+1) Disable dexpreopt if DALVIK_VM_LIB isn't set up by the product.
+2) DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES is moved to config.mk,
+for it's only decided by target arch.
+3) Move Java module input from embedded.mk to base.mk.
+
+Change-Id: Ife70b0cd8cee2e5c92f356c808affa56f494b49a
+",2014/3/20 19:16,16
+195,[WIP] Rewrite the POSIX timer functions.,"[WIP] Rewrite the POSIX timer functions.
+
+This simplifies the implementation a little and fixes some of the bugs,
+but I think we can do a lot better. Checkpointing what I have so far...
+
+Change-Id: Iad19f155de977667aea09410266d54e63e8a26bf
+",2014/3/4 23:59,15
+196,Remove dead code from cpp.py.,"Remove dead code from cpp.py.
+
+Change-Id: Ie66c65b3a7ae13b4e98ed8038a6a534f06eae0e5
+",2013/11/5 22:54,15
+197,Add missing .cpp in Makefile.,"Add missing .cpp in Makefile.
+
+Change-Id: I8c9b5fe7474673c54906846129e677e4f0cf6c02
+",2015/2/5 20:32,14
+198,Fix arm64 bug introduced by refactoring.,"Fix arm64 bug introduced by refactoring.
+
+- Commit 1d8cdbc5202378 made changes to the parameters for
+artSet64InstanceFromCode, but did not change THREE_ARG_DOWNCALL
+to THREE_ARG_REF_DOWNCALL for arm64.
+
+Change-Id: If256b0bd32dbd1c95f61e0afcb35975bb09a8b97
+Signed-off-by: Stephen Kyle <stephen.kyle@arm.com>
+",2014/10/22 14:40,14
+199,Don't assume minusSign is a single char.,"Don't assume minusSign is a single char.
+
+Locales like arabic have a multi char minusSign in
+their locale data.
+
+The only difficulty here is presented by DecimalFormatSymbols,
+which is a public API and expects the minus sign to be
+a single codepoint. The API has been changed to return the
+first character of the minusSign string for getMinusSign, which
+seems like the least bad option at this point.
+
+The serialized form hasn't been modified either, since it's
+public API as well and it isn't easy to expand to a String
+without awkward semantics.
+
+bug: 13410257
+
+Change-Id: I0e575b7eea0fd811ccb9fb5dc04e20d2e0fa13bf
+",2014/3/13 17:02,14
+200,AArch64: Add few more inline functions,"AArch64: Add few more inline functions
+
+This patch adds inlining support for the following functions:
+* Math.max/min(long, long)
+* Math.max/min(float, float)
+* Math.max/min(double, double)
+* Integer.reverse(int)
+* Long.reverse(long)
+
+Change-Id: Ia2b1619fd052358b3a0d23e5fcbfdb823d2029b9
+Signed-off-by: Serban Constantinescu <serban.constantinescu@arm.com>
+",2014/7/2 18:27,14
+201,Update aosp/master compiler-rt for rebase to r222486.,"Update aosp/master compiler-rt for rebase to r222486.
+
+Change-Id: I38047809dbac0425193c82e810315998adbb380d
+",2014/11/27 1:57,12
+202,"Coalesce shared_app, media_app, release_app into untrusted_app.","Coalesce shared_app, media_app, release_app into untrusted_app.
+
+This change folds the shared_app, media_app, and release_app
+domains into untrusted_app, reducing the set of app domains down
+to just distinct domains for the fixed UID apps (e.g. system_app, bluetooth,
+nfc, radio), a single domain for apps signed by the platform key
+(platform_app), and a single domain for all other apps (untrusted_app).
+Thus, SELinux only distinguishes when already distinguished by a predefined
+Android ID (AID) or by the platform certificate (which get the signature-only
+Android permissions and thus may require special OS-level accesses).
+
+It is still possible to introduce specific app domains for specific
+apps by adding signer and package stanzas to mac_permissions.xml,
+but this can be done on an as-needed basis for specialized apps that
+require particular OS-level permissions outside the usual set.
+
+As there is now only a single platform app domains, get rid of the
+platformappdomain attribute and platform_app_domain() macro.  We used
+to add mlstrustedsubject to those domains but drop this since we are not
+using MLS in AOSP presently; we can revisit which domains need it if/when
+we use MLS.
+
+Since we are dropping the shared, media, and release seinfo entries from
+seapp_contexts, drop them from mac_permissions.xml as well.  However,
+we leave the keys.conf entries in case someone wants to add a signer
+entry in the future for specific apps signed by those keys to
+mac_permissions.xml.
+
+Change-Id: I877192cca07360c4a3c0ef475f016cc273e1d968
+Signed-off-by: Stephen Smalley <sds@tycho.nsa.gov>
+",2014/4/4 13:16,12
+203,Reinstate the CTS tests for the DateUtils year 2038 bugs.,"Reinstate the CTS tests for the DateUtils year 2038 bugs.
+
+Bug: https://code.google.com/p/android/issues/detail?id=13050
+Change-Id: I832bdc562e600b9f40e369cd9e4245a22d999427
+",2013/3/11 18:22,12
+204,"[MIPS] Fast android_memset for Mips64, Mipsr6","[MIPS] Fast android_memset for Mips64, Mipsr6
+
+Fix broken mips64 build by replacing mips32r2-only android_memset.S.
+Use HW-bonded pairs of 64-bit stores to fill 128 bits/cycle.
+Rely on HW automatic cache prefetch optimizations.
+Software cache prefetching is counterproductive on next mips cores.
+New method is coded in C, and also works okay on non-Mips architectures.
+
+Change-Id: Id7153a8fe11538fe25287e101375661b0e99e2a2
+",2015/4/17 1:21,11
+205,init: prevent action being added to the action_queue twice,"init: prevent action being added to the action_queue twice
+
+Property triggers may cause an action to be queued twice, resulting
+in a loop in the action queue.  Keep actions that are not on the queue
+in the list_empty state (act->qlist->next == act->qlist), and only
+add them to the list if they are in that state.
+
+Bug: 8335133
+Change-Id: I3a3ec18176cf19cbaa3a45220a03c7560eacfe79
+",2013/6/10 21:16,11
+206,Fixed ld --gc-sections bug.,"Fixed ld --gc-sections bug.
+
+Change-Id: Ib856c96ca91fea2860c872d81a15ebd496a42783
+",2012/5/16 20:05,10
+207,X86-64 support for artInvokeInterfaceTrampoline,"X86-64 support for artInvokeInterfaceTrampoline
+
+This allows to determine target method when the interface method has
+no dex index.
+
+Change-Id: I2997592c7dd1f4dd2bd497522c64bd235ae615a6
+Signed-off-by: Alexei Zavjalov <alexei.zavjalov@intel.com>
+",2014/6/5 16:17,9
+208,Fix multilib build.,"Fix multilib build.
+
+Change-Id: I403b832319585b04edf69a27474dcdd23982b93b
+",2014/3/13 17:25,9
+209,Use stlport for libv8 and v8shell,"Use stlport for libv8 and v8shell
+
+Currently we incorrectly use the STL implementation from the toolchain.
+
+Change-Id: Icc337d19e46188a818b07ceab7be7721ebf12ffa
+",2012/1/20 17:43,9
+210,Fix executable symlinks.,"Fix executable symlinks.
+
+32 bit targets will leave TARGET_PREFER_{32,64}_BIT_APPS unset
+so adjust accordingly. Also clean up an explanatory comment.
+
+Change-Id: I1f6faa640e4e862631fff49f7c565766ef2c567f
+",2014/5/14 17:27,9
+211,Drop permissive constraint from kickstart policy.,"Drop permissive constraint from kickstart policy.
+
+Change-Id: Id391b3be01e76c4b96b6720bd72786e5365f5ab8
+Signed-off-by: rpcraig <rpcraig@tycho.ncsc.mil>
+",2013/10/30 17:34,9
+212,Add missing features of JELLY_BEAN and JELLY_BEAN_MR1 to feature summary list,"Add missing features of JELLY_BEAN and JELLY_BEAN_MR1 to feature summary list
+
+Change-Id: I53f01b14c7247c8f68f6cd4e6cdd4bf64d32ea75
+Signed-off-by: Leo Liao <leo_liao@asus.com>",2013/2/7 18:48,9
+213,Remove support for non-PIE executables,"Remove support for non-PIE executables
+
+Don't support the dynamic linker loading ET_EXEC executables. Only
+support ET_DYN executables.
+
+Bug: 14566672
+Change-Id: Ia1f2bfffe7ea867c1cd62e67d7fd637c60c0728d
+",2014/5/8 15:57,8
+214,gpu: ion: Also shrink memory cached in the deferred free list,"gpu: ion: Also shrink memory cached in the deferred free list
+
+When the system is low on memory, we want to shrink any cached
+system memory ion is holding.  Previously we were shrinking memory
+in the page pools, but not in the deferred free list.  This patch
+makes it possible to shrink both.  It also moves the shrinker
+code into the heaps so they can correctly manage any caches they
+might contain.
+
+Change-Id: I177f587f999a5220eddbf7af94745aae736cac75
+Signed-off-by: Rebecca Schultz Zavin <rebecca@android.com>
+",2013/5/23 22:43,8
+215,Clean up warnings in the malloc_debug_* files.,"Clean up warnings in the malloc_debug_* files.
+
+Change-Id: Ia18e89c4c6878764f8d7ed34b8247e7a8d8fe88b
+",2012/8/28 21:15,8
+216,Add opt/telephony and opt/mms to eclipse .classpath,"Add opt/telephony and opt/mms to eclipse .classpath
+
+Change-Id: I7ac5ff06f72435dbe10463ca71413df1fde9e676
+",2012/8/9 15:16,8
+217,"[4.9] Switch gcc-4.9 to use google/gcc-4_9 branch. This source drop uses svn version r212828 of google/gcc-4.9 branch. All gcc-4.9 patches before July 3rd are ported to google/gcc-4.9. The following prior commits has not been merged to google branch yet. (They are included in this commit). e7af147f979e657fe2df00808e5b4319b0e088c6, baf87df3cb2683649ba7e9872362a7e721117c23, and c231900e5dcc14d8296bd9f62b45997a49d4d5e7.","[4.9] Switch gcc-4.9 to use google/gcc-4_9 branch.
+This source drop uses svn version r212828 of google/gcc-4.9 branch.
+All gcc-4.9 patches before July 3rd are ported to google/gcc-4.9.
+The following prior commits has not been merged to google branch yet.
+(They are included in this commit).
+e7af147f979e657fe2df00808e5b4319b0e088c6,
+baf87df3cb2683649ba7e9872362a7e721117c23, and
+c231900e5dcc14d8296bd9f62b45997a49d4d5e7.
+
+Change-Id: I4bea3ea470387ff751c2be4cb0d4a12059b9299b
+",2014/7/21 23:58,8
+218,Disable setting of restorecon_last attribute on /data/data.,"Disable setting of restorecon_last attribute on /data/data.
+
+Since /data/data labeling is based on seapp_contexts and seinfo
+assignments rather than file_contexts, we do not want to set
+the security.restorecon_last attribute on /data/data (and /data/user)
+as that will wrongly disable subsequent attempts to relabel /data/data.
+Also, setting a security. attribute other than selinux or capability
+requires CAP_SYS_ADMIN and thus attempting to do this will trigger
+denials for installd, which handles /data/data relabeling.
+
+Ensuring that /data/data is only relabeled when necessary is the
+responsibility of the caller.
+
+Change-Id: I33476236c493f9749a3da068afd83d9f279409a9
+Signed-off-by: Stephen Smalley <sds@tycho.nsa.gov>
+",2014/2/27 18:11,8
+219,Refresh endian.h,"Refresh endian.h
+
+See b15c58bb0fe55f076751acd7a5d00ded0ec33963
+
+Change-Id: I71858f6d15adb688e0b05685e55582f0f1ddae54
+",2012/12/4 13:36,7
+220,Telephony: Support ShiftJIS encoding and Skip unsupported bearer data subparam,"Telephony: Support ShiftJIS encoding and Skip unsupported bearer data subparam
+
+Support Shift-JIS CHARi encoding type per 3GPP2 C.R1001 section 9.1.
+
+3GPP2 C.S0015-B, v2.0, table 4.5-1 shows bearer data subparam ID
+above 0x17 is reserved. Fix to skip reserved bearer data subparams
+instead of throwing CodingException.
+
+Change-Id: Ib83e7e72189a267421ba5fd77695b8f684ef00e2
+",2012/8/22 23:08,7
+221,Let clang driver to decide ASan linker flags.,"Let clang driver to decide ASan linker flags.
+
+Pass -fsanitize=address instead of manually specifying asan libraries
+and other linker flags. This requires ASan runtime library to be part
+of prebuilt clag toolchain.
+
+Change-Id: Ief55ab296e94974560eeb10507ec8d90f0025d5c
+",2014/11/6 15:38,6
+222,Fix MediaStubActivity Layout,"Fix MediaStubActivity Layout
+
+Change the mediaplayer layout to evenly distribute the
+three SurfaceViews so that all three are always visible
+regardless of screen size. The videos do stretch a bit
+weird, but the tests still work.
+
+Remove the manual setting of width and height and the
+deprecated push buffers setting in MediaStubActivity.
+
+Change-Id: I40025b3a24dae7acdd9a3a3ed7d85484b09fe9e5
+",2012/4/11 19:11,6
+223,Backport of clang svn@r200510,"Backport of clang svn@r200510
+
+Make x86 Android default target CPUs compatible with GCC (http://llvm-reviews.chandlerc.com/D2655)
+
+git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@200510 91177308-0d34-0410-b5e6-96231b3b80d8
+
+Change-Id: Ic5466c2c2c2ff01caf1ae6b3786498b962ac7185
+Signed-off-by: Alexey Volkov <alexey.v.volkov@intel.com>
+
+Conflicts:
+	test/Driver/clang-translation.c
+",2014/2/5 9:23,6
+224,Use default system header files.,"Use default system header files.
+
+Do not specify bionic include directories.
+When compiled with clang/llvm in C++11 mode, libcxx type_traits requires
+standard definition of nullptr_t in cstddef. The bionic version of cstddef
+does not have nullptr_t. This change will allow the compilation to
+include correct cstddef from libcxx.
+
+Change-Id: I12d8cdd608d8f2a4c215b5134c054a8a4001d038
+",2014/12/2 19:35,5
+225,Add permission checking for binder IPC.,"Add permission checking for binder IPC.
+
+Do not apply permission checks to private files.
+
+Fix security_binder_transfer_binder hook.
+
+Drop the owning task argument to security_binder_transfer_binder
+since ref->node->proc can be NULL (dead owner?).
+Revise the SELinux checking to apply a single transfer check between
+the source and destination tasks.  Owning task is no longer relevant.
+Drop the receive permission definition as it is no longer used.
+
+This makes the transfer permission similar to the call permission; it is only
+useful if you want to allow a binder IPC between two tasks (call permission)
+but deny passing of binder references between them (transfer permission).
+
+Change-Id: I51e7a9a6662e826073b35e4f70a57f9ec73e472e
+Signed-off-by: William Roberts <w.roberts@sta.samsung.com>",2013/4/30 1:56,5
+226,Add support for socket security context specification.,"Add support for socket security context specification.
+
+Add an optional argument to the socket option for specifying
+a SELinux security context for the socket.  Normally the socket
+security context is automatically computed from the service security
+context or set using the seclabel option, but this facility allows
+dealing with two scenarios that cannot be addressed using the existing
+mechanisms:
+1) Use of logwrapper to wrap a service.
+In this case, init cannot determine the service security context
+as it does not directly execute it and we do not want logwrapper
+to run in the same domain as the service.
+
+2) Situations where a service has multiple sockets and we want to
+label them distinctly.
+
+Change-Id: I7ae9088c326a2140e56a8044bfb21a91505aea11
+Signed-off-by: Stephen Smalley <sds@tycho.nsa.gov>
+",2013/5/13 16:40,5
+227,Remove (near-)duplicate definitions of size_t and ssize_t.,"Remove (near-)duplicate definitions of size_t and ssize_t.
+
+The near duplicates upset fussier compilers that insist that
+typedefs be exactly the same, but the fix isn't to make all
+copies identical...
+
+Change-Id: Icfdace41726f36ec33c9ae919dbb5a54d3529cc9
+",2012/11/30 1:29,5
+228,Process files on the fly for FreeBSD compatibility,"Process files on the fly for FreeBSD compatibility
+
+Added apply-freebsd-patches and apply-platform-patches() definition
+in definitions.mk to process paths to interpretators at file headers
+from /bin/bash to /usr/local/bin/bash. That allows keep source tree
+unchanged and shared with main repositary.
+",2009/9/4 21:08,5
+229,system/core: Android atomic api update for x86_64.,"system/core: Android atomic api update for x86_64.
+
+For 64bit system, we have two requirements for atomic operations:
+    1. operator is 32bit
+    2. operator is 64bit
+
+We refine the atomic operations as:
+    1. split the atomic operations to
+            android_atomic_xxxx
+       and
+            android_atomic32_xxxx
+
+    2. android_atomic_xxxx has 32bit operator for 32bit system
+       and 64bit operator for 64bit system. This is to avoid
+       #ifdef __LP64__ block for those operations which size
+       are different for 32bit/64bit system (like long, uintptr_t).
+
+Change-Id: Ia0f982dd89479838fe5642b524cfb94510f90ed5
+Signed-off-by: Fengwei Yin <fengwei.yin@intel.com>
+",2014/1/14 9:00,4
+230,"okhttp should depend on only core.jar, not frameworks.jar","okhttp should depend on only core.jar, not frameworks.jar
+
+Change-Id: I673a50ea5258bdc5c76d4fb8914d047ddc02684f
+",2013/4/2 20:21,4
+231,Support new mips64 multilib,"Support new mips64 multilib
+
+The new mips64 multilib accepts the following:
+
+1. -mips64r6 (implies -mabi=64), sysroot/usr/lib64 (default, mips64 ABI)
+2. -mips64r2 (implies -mabi=64), sysroot/usr/lib64r2
+3. -mabi=32 -mips32, sysroot/usr/lib (mips ABI)
+4. -mabi=32 -mips32r2, sysroot/usr/lib
+5. -mabi=32 -mips32r6, sysroot/usr/libr6
+
+ToDo: default to -mabi=32 when one of -mips32, -mips32r2, -mips32r6 (or
+equivalent -march=... is selected)
+
+Change-Id: If6700e1546444e72796f1cacbec53d8699722f87
+",2014/7/14 10:20,4
+232,Fix for flakiness in URLConnectionTest.testServerShutdownOutput,"Fix for flakiness in URLConnectionTest.testServerShutdownOutput
+
+Flakiness reported by Junjie.Hu <junjie.hu@mediatek.com>
+This fix relies on changes to MockWebServer to provide
+deterministic ordering of responses.
+
+Change-Id: I4f296fa2f8d227876f52c69e22001f4e0d7b4ffd
+",2014/5/28 16:33,4
+233,Add the ability to set the number of worker threads,"Add the ability to set the number of worker threads
+
+There is a long comment in MockWebServer detailing the reason.
+This is to fix a flaky test that was issuing two requests in
+quick succession and getting unexpected results.
+
+Change-Id: I9af3f7f83fafc72002d874dd251fdf5a1df5d487
+",2014/5/28 16:32,4
+234,Ignore Clang warnings until upstream is fixed.,"Ignore Clang warnings until upstream is fixed.
+
+Example error: promoted type 'int' of K&R function parameter is not compatible
+with the parameter type 'u_int8_t' (aka 'unsigned char') declared in a
+previous prototype [-Werror,-Wknr-promoted-parameter]
+
+BUG: 18092219
+Change-Id: Ibe618e1db531ed2409eb71d8c7f6b72d731d5158
+",2014/10/22 22:14,3
+235,Fix clang to compile and run host tests.,"Fix clang to compile and run host tests.
+
+Don't use the computed goto interpreter with clang 3.4 as it causes compilation
+to hang.
+Avoid inclusion of LLVM_(HOST|DEVICE)_BUILD_MK except for with portable as it
+sets clang incompatible cflags.
+Most fixes are self-evident, for the quick dex file method inliner the enums
+were being used with ostreams, so fix the enums and operator out python script
+to allow this.
+Note this change effects portable but this is untestable as portable was broken
+by ELF file and mc linker changes.
+
+Change-Id: Ia54348f6b1bd3f76d3b71c6e8c5f97626386b903
+",2014/3/1 3:10,3
+236,New lib64SDL.a and lib64SDLmain.a for 64-bit emulator,"New lib64SDL.a and lib64SDLmain.a for 64-bit emulator
+
+This is built by following the instructions in file PREBUILT
+
+Change-Id: I11cf36103009ef77e7b612ebc82657c012936bda
+",2012/3/19 18:43,3
+237,Cache invalidation for AARCH64. Disabled for Apple for now as requested by Tim Northover. Written by Matt Thomas.,"Cache invalidation for AARCH64. Disabled for Apple for now as requested
+by Tim Northover. Written by Matt Thomas.
+
+Differential Revision: http://llvm-reviews.chandlerc.com/D2631
+
+git-svn-id: https://llvm.org/svn/llvm-project/compiler-rt/trunk@200317 91177308-0d34-0410-b5e6-96231b3b80d8
+
+Conflicts:
+	lib/clear_cache.c
+
+Change-Id: I08417a541c413205382a1abea36d941bb30727b6
+",2014/3/13 18:11,2
+238,Fix a pointer cast for 64bit.,"Fix a pointer cast for 64bit.
+
+Change-Id: I502f46e41a1089bd6f1cd84ddee8e92c35e6ef61
+",2014/1/29 23:54,2
+239,Fix build,"Fix build
+
+Change-Id: Ie011cbf74a08f760ccd93ca37fa2b437b7063462
+",2012/12/17 0:01,2
+240,Remapping ELF section headers to match loaded code,"Remapping ELF section headers to match loaded code
+
+Remap ELF headers when rsloaderCreateExec is called so the object can be registered with GDB.
+
+Change-Id: I89de5caaee8caad5136d817698cf9fc8a5bd545b
+",2012/3/1 4:19,2
+241,Better way to package up the otatools-package.,"Better way to package up the otatools-package.
+
+With this, you can easily add more executables, jars or shared libraries
+to the package. Also now it automatically takes care of
+32-bit-v.s.-64-bit library issue.
+
+Change-Id: I5afe00fadc978d0da229b192eca1a4b1c149764e
+",2015/4/8 19:35,2
+242,Alternative fix to disable autoconf run in cloog build,"Alternative fix to disable autoconf run in cloog build
+
+Another fix is here: https://android-review.googlesource.com/#/c/49393/
+
+Change-Id: I7c041f5ee3c44282cfe7e3982eb65a2b7527b8a1
+Signed-off-by: Pavel Chupin <pavel.v.chupin@intel.com>",2013/1/11 7:21,2
+243,Stop rmt_storage service from starting.,"Stop rmt_storage service from starting.
+
+Flo devices don't have a radio and therefore
+the rmt_storage service doesn't need to run.
+Under some conditions having the rmt_storage
+run can cause SELinux denials, but really
+running this service just serves to waste
+cycles.
+
+Change-Id: I7b2bb9611232c31ae10bf9eaef507c0ae9cd631a
+Signed-off-by: rpcraig <rpcraig@tycho.ncsc.mil>
+",2014/1/29 14:42,2
+244,Update x86 toolchain i686-linux-android-4.6 (darwin-x86),"Update x86 toolchain i686-linux-android-4.6 (darwin-x86)
+
+See previous commit for build instruction
+
+Change-Id: I61df39bd887f33a8113571b2682a3971c33038be
+",2012/8/29 7:16,2
+245,NullPointerException invoking Field.getModifiers,"NullPointerException invoking Field.getModifiers
+
+Change-Id: I56c5908d16458d36098ffa7e2dc8c3518280f2e3
+",2012/7/28 4:24,2
+246,Fix broken build,"Fix broken build
+
+Change-Id: I988a1fa78dac9903fe6e5bfbdfc83076a2101911
+",2014/10/1 18:10,1
+247,Do not handle intents containing javascript scheme,"Do not handle intents containing javascript scheme
+
+Bug: 19296779
+
+Tighten browser security by not allowing intents that include
+javascript scheme.
+
+Change-Id: I7774dcf73673268f63929443faec88660c19f956
+",2015/3/28 1:44,1
+248,WIP: Working with Appu / Joe to resolve open files in wizards,"WIP: Working with Appu / Joe to resolve open files in wizards
+
+Change-Id: Id2d16e9f010f01d8162441da82cce53ca3bcfc3c
+",2015/3/24 17:15,1
+249,Use NULL instead of 0 when invoking CallStaticVoidMethod,"Use NULL instead of 0 when invoking CallStaticVoidMethod
+
+static void CallStaticVoidMethod is variable argument function.
+if pass 0 to the function like: CallStaticVoidMethod(......, 0),
+0 will be treated as INT data type.but in the CallStaticVoidMethod
+implement 0 will be treated as pointer data type.Pointer in 64bit
+system occupied 8 bytes, but in 64bit system int occupied 4 bytes.
+if call function like: CallStaticVoidMethod(......, 0),
+only low 4 bytes will be assigned 0.Turned out it actually call
+function like this: CallStaticVoidMethod(......, 0xXXXXXXXX00000000).
+intent to pass NULL to function but passed non-NULL parameter to
+the function.this will cause GCDaemon crash.
+
+Change-Id: I9d700d3790a80dbee6826f64baf9ef5d81ca390f
+Reviewed-by: Liao, Bruce <bruce.liao@intel.com>
+Signed-off-by: Yong Yao <yong.yao@intel.com>
+",2015/1/6 7:31,1
+250,package-release.sh: script breaks if commit msg contains single quote('),"package-release.sh: script breaks if commit msg contains single quote(')
+
+tr doesn't handle single quote properly.
+use sed to escape single quote in commit msg
+
+Change-Id: I7bc7a7a8faea0c1de0f677703c640430ec7116f3
+Signed-off-by: Jason Hu <jia-cheng.hu@intel.com>",2014/5/21 12:39,1
+251,Fix voice mail number to modify when insert H3G Denmark sim card.,"Fix voice mail number to modify when insert H3G Denmark sim card.
+
+1.H3G Denmark SIM Card is set to ""not available"" in UST(Usim service Table) to
+  EF_MBDN file of SIM CARD.
+  so do not edit voicemail number.
+
+2.HammerHead default voicemail number is empty.
+  so if inserted H3G Denmark SIM card,
+  User cann't edit voicemail number and do not use voicemail service.
+
+Change-Id: I2469ef8e8bda376adcdc9549bf4227bc4c0ddb2e
+Sign-off-by: Giseok Seo <giseok.seo@lge.com>",2014/5/7 3:52,1
+252,CatService: OPEN_CHANNEL p-cmd to send event confirmation and not T.R,"CatService: OPEN_CHANNEL p-cmd to send event confirmation and not T.R
+
+Upon handling OPEN_CHANNEL command, send User confirmation instead of
+terminal response as lower layers expect confirmation information.
+CRs-Fixed: 390425
+
+Change-Id: Ie9e162d87bae18c011edede238ded7eee65f8766
+",2012/12/14 18:33,1
+253,Don't pass in empty arg to dex2oat.,"Don't pass in empty arg to dex2oat.
+
+We would occassionally pass in an empty arg """" instead of a NULL.
+This caused problems since dex2oat isn't made to handle empty args.
+
+Change-Id: Ibb1aed64a4aa17459b2a75a5a2abcf13c7fa8ac7
+",2014/3/6 0:59,1
+254,Make libEGL build cleanly under 64-bit,"Make libEGL build cleanly under 64-bit
+
+Change-Id: I255dfb70b166b7469d59352b1acfc7aececa07de
+",2014/1/28 2:16,1
+255,Fixed an end-of-program  memory leak and added const as qualifiers for various parameters.,"Fixed an end-of-program  memory leak and added const as qualifiers
+for various parameters.
+
+The memory leak involves the pass array holder that would not be freed.
+The solution now uses a template getter that holds the unique instance.
+
+Change-Id: Ie8f5b0e5f4249f92851e8ba14e4238952edffee6
+",2014/1/16 16:57,1
+256,New prebuilts and moved some other.,"New prebuilts and moved some other.
+
+Some artifacts should have been in internal vs repository so
+they got moved.
+
+New prebuilts for the Gradle 1.10 API.
+
+Change-Id: I6217c553013115ed120d71a62b3275c87caa8e90
+",2013/12/20 23:08,1
+257,Ensure that local.properties contains a Gradle-path,"Ensure that local.properties contains a Gradle-path
+
+Change-Id: I21838334224f457fa016562b65812a10be12b203
+",2013/11/14 21:56,1
+258,Pass the correct pointer to munmap on failure.,"Pass the correct pointer to munmap on failure.
+
+This won't ever happen, and you're probably screwed anyway if it
+does, but that's no excuse...
+
+Change-Id: I2c56f607e351e84308a72b41b834d13aaa98fc62
+",2012/12/17 17:32,1
+259,Use a typed comparison of floating point field values rather than just a string comparison. This addresses toolchain issues; see http://code.google.com/p/android/issues/detail?id=994,"Use a typed comparison of floating point field values rather than just a string comparison.
+This addresses toolchain issues; see http://code.google.com/p/android/issues/detail?id=994
+",2008/10/23 3:27,1
+260,Update emulator binaries for mips64 on linux-x86_64,"Update emulator binaries for mips64 on linux-x86_64
+
+Following CLs in external/qemu-android are added into this prebult:
+103b999f4d42be1bc93576d80e8a36062e408c3a hw/mips/mips_ranchu.c: Add firmware node to DT
+1253cd80c0bfdc3de946671b72c0d32416c804d6 target-mips: FRE support, MSA & R6 fixes
+1386b9d7e6b0302eeb86731865947566cf414ff9 hw/mips/mips_ranchu.c: Trigger goldfish_fb rotation on command
+
+Change-Id: Iadfa885b0df65c3652f3d7a3c0a8fc1c8c8da3c9
+",2015/3/31 1:23,1
+261,"Don't use C++11's std::trunc and std::round, use the traditional C functions.","Don't use C++11's std::trunc and std::round, use the traditional C functions.
+
+R=bmeurer@chromium.org
+
+Review URL: https://codereview.chromium.org/703893002
+
+Cr-Commit-Position: refs/heads/master@{#25140}
+git-svn-id: https://v8.googlecode.com/svn/branches/bleeding_edge@25140 ce2b1a6d-e550-0410-aec6-3dcde31c8c00
+",2015/3/12 15:14,1
+262,Update submodules to latest versions.,"Update submodules to latest versions.
+
+Update the submodule commits to the latest versions to stop git status
+showing them as modified.
+
+Change-Id: Ifcd22ea65a147b597e92e054b10c86045224aa6b
+",2015/3/12 15:29,1
+263,DO NOT MERGE: Scripts for x86_64 host mode build,"DO NOT MERGE: Scripts for x86_64 host mode build
+
+Temporary enables compilation of all methods with any bytecode.
+Only image is not compiled.
+
+How to build 64-bit host mode and run art tests:
+1) cd $ANDROID_BUILD_TOP
+2) source build/envsetup.sh
+3) lunch aosp_x86-eng
+4) rm -rf out
+5) rm build-host-art64.log
+6) source art/host_mode/build.sh 64
+7) cd art/test
+8) ./run-all-tests --host
+
+On AOSP 05/28 96 tests are passed
+Tests 096 002 can hang
+(with cherry-pick of https://android-review.googlesource.com/#/c/94927/)
+
+succeeded tests: 96
+failed tests: 19
+failed: 003-omnibus-opcodes[pid=27323]
+failed: 005-args[pid=27325]
+failed: 014-math3[pid=27345]
+failed: 015-switch[pid=27348]
+failed: 027-arithmetic[pid=27395]
+failed: 045-reflect-array[pid=27522]
+failed: 051-thread[pid=27551]
+failed: 052-verifier-fun[pid=27555]
+failed: 054-uncaught[pid=27563]
+failed: 064-field-access[pid=27600]
+failed: 069-field-type[pid=27628]
+failed: 074-gc-thrash[pid=27657]
+failed: 083-compiler-regressions[pid=27725]
+failed: 095-switch-MAX_INT[pid=27821]
+failed: 100-reflect2[pid=27837]
+failed: 106-exceptions2[pid=27865]
+failed: 107-int-math2[pid=27868]
+failed: 202-thread-oome[pid=27908]
+failed: 302-float-conversion[pid=27932]
+
+Change-Id: Ifbf945cf0806027b1b538d573496e9960574221b
+Signed-off-by: Dmitry Petrochenko <dmitry.petrochenko@intel.com>
+",2014/5/29 18:02,1
+264,[WIP] AArch64: Add arm64 runtime support.,"[WIP] AArch64: Add arm64 runtime support.
+
+Add some support for aarch64 in art. Primarily includes an implementation
+of art_quick_invoke_stub, using an AAPCS64 like ABI.
+
+Change-Id: I4a07c79d1e037b9f5746673480e32cf456867b82
+Signed-off-by: Stuart Monteith <Stuart.Monteith@arm.com>
+",2014/2/14 16:48,1
+265,Fixed apparent copy/paste mistake Bug: 11634378,"Fixed apparent copy/paste mistake
+Bug: 11634378
+
+Change-Id: I44766217f414988bfd3be68043a4b80dd21554d8
+",2014/2/5 3:16,1
+266,Don't build GDB in canadian build->target,"Don't build GDB in canadian build->target
+
+In canadian build->target is built first (eg. in order to build/run
+executable on build system to generate table), then host->target.
+
+Don't build GDB in build->target, because GDB doens't need it.  Besides,
+--with-python= pointing to ""host"" header can fail ""build""'s gcc.
+
+Change-Id: Ic1a8a9d6fe5974a6747ca4342a336beea9987f47
+",2013/5/3 8:04,1
+267,Change TOOLCHAIN_GIT_DATE to now,"Change TOOLCHAIN_GIT_DATE to now
+
+Use 'now' instead of specific date until when we need to cut a
+release.  This way, we don't need to commit dev-defaults.sh too
+often just to update TOOLCHAIN_GIT_DATE and catch recent commits
+in toolchain repo, development.git and ndk.git
+
+Change-Id: I6150c374ca74c4ba42ed81ca7aeba8b2dd40fa0a
+",2012/9/20 1:16,1
+268,Update mips toolchain mipsel-linux-android-4.6,"Update mips toolchain mipsel-linux-android-4.6
+
+Update mips toolchain to account for fix in
+https://android-review.googlesource.com/#/c/37797/ and
+other enhancements in toolchain.git
+
+Build instructions:
+
+Cherry-pick the following (not yet merged at the time of this CL):
+  https://android-review.googlesource.com/#/c/37730
+  https://android-review.googlesource.com/#/c/37843
+
+export NDK=your-AOSP-path/ndk
+cd $NDK ; ./build/tools/dev-cleanup.sh
+./build/tools/download-toolchain-sources.sh /tmp/ndk-$USER/src
+./build/tools/gen-platforms.sh --minimal --dst-dir=$NDK --ndk-dir=$NDK --arch=mips
+./build/tools/build-gcc.sh /tmp/ndk-$USER/src $NDK --gdb-version=7.3.x mipsel-linux-android-4.6
+rm -rf $NDK/toolchains/mipsel-linux-android-4.6/prebuilt/linux-x86/sysroot
+cp -a $NDK/toolchains/mipsel-linux-android-4.6/prebuilt/linux-x86/* $NDK/../prebuilts/gcc/linux-x86/mips/mipsel-linux-android-4.6
+
+Change-Id: I95f50f12700d4516371723e922dde32d7aecda9c
+",2012/6/12 9:10,1
+269,Bump generic_mips64 system partition size.,"Bump generic_mips64 system partition size.
+
+Fix broken mips64 build via 20% increase.
+
+Change-Id: Ie30418c6fc7cf8810139abe53537ef8259a49a2f
+",2015/3/31 0:04,1
+270,Fix arm64 build.,"Fix arm64 build.
+
+Change-Id: Ib6babc1c6e8f2e78badc93cfcf89950e53f71bbb
+",2015/3/4 10:28,1
+271,Fix mips build fail of gdbserver,"Fix mips build fail of gdbserver
+
+Introduced by 3955f0de839d4bc65b4ff0605d3033f6f0168ece
+
+Change-Id: Ieebbee53a5c009afd3e7e44a67e9763dc6d7a718
+Signed-off-by: Pavel Chupin <pavel.v.chupin@intel.com>
+",2013/6/19 7:53,1
+272,x86_64: Several fixes required for enabling promotion,"x86_64: Several fixes required for enabling promotion
+
+This patch includes x86_64 fixes which solve the issues
+reproducible with promotion optimization enabled.
+
+Change-Id: I3a3b0d290380d639705cd58f38b8d62b1eb930d3
+Signed-off-by: Serguei Katkov <serguei.i.katkov@intel.com>
+Signed-off-by: Dmitry Petrochenko <dmitry.petrochenko@intel.com>
+",2014/6/18 12:16,1

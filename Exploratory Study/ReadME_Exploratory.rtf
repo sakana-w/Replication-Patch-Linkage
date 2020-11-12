@@ -1,39 +1,14 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+{\rtf1\ansi\ansicpg936\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 This file refers to the original corpus for three studied projects: Qt, Android and OpenStack.\
+\f0\fs24 \cf0 In Exploratory Study folder, there are three sub-folders:\
 \
-Our data is constructed based on the dataset provided by MSR 2016 paper: {\field{\*\fldinst{HYPERLINK "https://kin-y.github.io/miningReviewRepo/"}}{\fldrslt 
-\f1 \cf2 \expnd0\expndtw0\kerning0
-\ul \ulc2 https://kin-y.github.io/miningReviewRepo/}}\
+1) All_linkage, where store the dataset for all retrieved raw patch linkages.\
 \
-I would like to introduce the column names in excel file:\
+2) Label_Linkage, where store the dataset consisting of manually labeled patch linkages (i.e., Alternative Solution, Broader Context, and Dependency).\
 \
-*********************************************************************************************************\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 sql_changeId: refers to the index number in the sql dataset\
-\
-change_hash: refers to the hash-id of the patch which can be searched online page as well\
-\
-SubmissionTime: refers to the time when the patch is submitted to review tools\
-\
-NotifyTime: refers to the time when the link is notified in the discussion threads\
-\
-NotifyComment: refers to the comment where the link is provided\
-\
-DecisionTime: refers to the time when the patch is decided to be abandoned or merged\
-\
-NotifyPatch: refers to the patch number where the link is provided\
-\
-TotalPatch: refers to the patch number from the submission time to the decision time\
-\
-LinkedPatch: refers to the target patch of the link. The number here is consistent with the online page and is not the index number in the sql dataset\
-\
-Project: refers to the project that patches belong to\
-\
-Category: refers to the type of the link i.e., Alternative Solution, Broader Text and Dependency\
-}
+3) Control_Group, where stores the dataset that are used for the control study including the necessary statistics and the further qualitative analysis results with 30 samples.}

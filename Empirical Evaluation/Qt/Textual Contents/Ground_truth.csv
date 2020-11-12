@@ -1,0 +1,2186 @@
+Id,Title,Message,Time,Time_diff
+1,Merge remote-tracking branch 'origin/5.4' into dev,"Merge remote-tracking branch 'origin/5.4' into dev
+
+Change-Id: I7db3f66a1ac98d32a206c288b53151ad0a249944
+",13/2/2015 12:11:01,70
+2,Android: availableTimeZoneIds returns QList not QSet,"Android: availableTimeZoneIds returns QList not QSet
+
+Fixes error: invalid covariant return type
+
+Change-Id: I5b5fead1b48c2502ae40bc9cd181939444ff715a
+",20/2/2015 11:08:01,0
+3,Examples: update license headers,"Examples: update license headers
+
+Change-Id: I41096c464db4e1513db1d4ffe7311be3c902d973
+",5/2/2015 14:18:47,94
+4,Docs: update license headers,"Docs: update license headers
+
+Change-Id: I2c181d880e88c16a169c87b9260423db093d9ce8
+",5/2/2015 14:18:47,94
+5,ClearCase: Fix not detecting that a file is already checked out,"ClearCase: Fix not detecting that a file is already checked out
+
+ClearCase violates POSIX since it gives a file a new inode when
+checked out. This gives QtCreator problems with noticing that
+a file has changed permissions to writeable and thus it will
+insist on trying to check out the file again in some cases.
+
+Change-Id: Ia3f621daff258b3ea5d9ff4f5cec7629ca46e6bd
+",2/1/2015 12:20:11,123
+6,"doc: clarify that macextra is OSX only, it is skipped on iOS","doc: clarify that macextra is OSX only, it is skipped on iOS
+
+Change-Id: I0a02bb7c0b6eb33647db3c1b2e8becffe26d8410
+",28/10/2014 09:26:48,27
+7,Remove Qt version checks.,"Remove Qt version checks.
+
+Qt 5.3 is the minimum requirement these days. Remove all fallback code
+from sources and project files.
+
+Change-Id: If6188a471197acadda4d6baee71804ba1a8026c6
+Reviewed-by: Eike Ziller <eike.ziller@digia.com>",29/8/2014 12:24:11,3
+8,Add qtwebchannel as submodule,"Add qtwebchannel as submodule
+
+Change-Id: I9f3564c78d08abdca73ce395f31b3031a829e502
+",22/7/2014 18:10:29,12
+9,Use runtime check instead of ifdef to detect ES3 in QVertexArrayObjectHelper,"Use runtime check instead of ifdef to detect ES3 in QVertexArrayObjectHelper
+
+The code path in QOpenGLVertexArrayObjectPrivate::create() that triggers
+the creation of a QVertexArrayObjectHelper is guarded by runtime checks
+for ES3 or the GL_OES_vertex_array_object extension, but the actual
+function lookup was ifdef'ed, which broke on iOS where the SDK may
+support ES3, but an older (supported) runtime target might not.
+
+Change-Id: Id578667c1f5aebf53e197f3a79eb2f9273fea487
+",30/7/2014 11:26:14,1
+10,Stabilize tst_QMenu::statusTip().,"Stabilize tst_QMenu::statusTip().
+
+Instantiate the timer on the stack to prevent it from
+interfering with other tests.
+
+Change-Id: I91ffe23b502fcddaeb6d6d3f89ea3d27b083cdb0
+",14/7/2014 07:15:20,0
+11,Use QModelIndex to get the data from underlying model,"Use QModelIndex to get the data from underlying model
+
+Change-Id: Ibeb70079afd566c78289168540296b926f36d1af
+Initial-patch-by: Irfan Omair <irfan.omair@gmail.com>
+Task-number: QTBUG-27597
+",17/6/2014 15:16:13,362
+12,Fix size of HB_FontRec in qharfbuzz_copy_p.h,"Fix size of HB_FontRec in qharfbuzz_copy_p.h
+
+HB_FontRec was defined in qharfbuzz_copy_p.h as a void* typedef,
+which is incorrect, and is the wrong size. This caused things
+accessing QFontEngine data after an HB_FontRec to read from the
+wrong offset. The visible consequence of this was incorrect text
+rendering in OpenGL in Linux (QTBUG-29966).
+
+Change-Id: I71e6a6c5b4ef7b2c8a92631d2b9540537afc56b1
+",9/3/2013 01:54:28,177
+13,WIP: put basic language types into QtQml import,"WIP: put basic language types into QtQml import
+
+TODO: docs/unit tests
+
+Change-Id: I8ff190f057fc92969020cf8e896da1649ca3069b
+",23/5/2012 08:05:51,41
+14,Squish: Fix minor bugs (mostly on Mac),"Squish: Fix minor bugs (mostly on Mac)
+
+This avoids some timing issues as well as a problem
+I only saw on Mac: Sometimes Squish fails inside
+placeCursorToLine() with 'I don't know how to type on
+object of type QmlJSEditor::QmlJSTextEditorWidget'.
+
+Change-Id: Ifc192914375fb37362fa31399be4972c9ce50b92
+",25/1/2012 11:00:24,13
+15,Fix build with -Wpedantic,"Fix build with -Wpedantic
+
+Too many semicolons...
+
+Change-Id: I538a87a0bd160e2d91a36c8a9ed0016cf49430d8
+",21/4/2015 13:30:35,0
+16,Add internal ScenePosListener,"Add internal ScenePosListener
+
+Makes it possible to implement floating text selection handle popups
+that retain correct position whilst the scene position of the attached
+text input control changes. The text input may be eg. in a Flickable
+and thus does not receive geometry change notifications since its own
+position in relation to the direct parent does not change.
+
+Task-number: QTBUG-42538
+Change-Id: Ic8f136150e1d094b81ea16705bd326542c4fc5eb",9/3/2015 14:59:14,141
+17,Squashed commit of the following:,"Squashed commit of the following:
+
+commit cb28f324e5c716a52c2caf5fe422ff153beaa305
+Author: Jani Heikkinen <jani.heikkinen@theqtcompany.com>
+Date:   Wed Dec 17 14:46:05 2014 +0200
+
+    Added Qt3D as a part of qt5.git default repositories
+
+    Change-Id: I0e74e6c6ab6c347396c449859b1cf24752a42fb8
+    Reviewed-by: Johanna _ijälä <johanna.aijala@digia.com>
+
+commit ac6168c0cb00b32a644509645cb77e33470c4e2c
+Author: Oswald Buddenhagen <oswald.buddenhagen@theqtcompany.com>
+Date:   Wed Mar 4 12:03:54 2015 +0100
+
+    use git clone --branch instead of --no-checkout
+
+    git submodule update does not cause an actual checkout if HEAD matches
+    the recorded submodule sha1 even if it was not actually checked out.
+
+    it would be possible to work around this by calling git checkout HEAD in
+    each submodule if no files are checked out, but that seems hacky.
+
+    instead, just make the module cloning already check out the desired
+    branch. this produces checkouts that are within a few commits of the
+    final sha1, so isn't too bad.
+
+    Change-Id: I435c1a2e24f39fd8c0d65f0d90df0216715668b7
+
+commit c2d151522bf8ae761937b51d1a630d3c5eb7a449
+Author: Jani Heikkinen <jani.heikkinen@theqtcompany.com>
+Date:   Tue Feb 17 12:41:59 2015 +0200
+
+    Update copyright headers
+
+    Qt copyrights are now in The Qt Company, so we could update the source
+    code headers accordingly. In the same go we should also fix the links to
+    point to qt.io.
+
+    Change-Id: Ieb3be34b0d4061fb8dc886991528951f59dbd67e
+    Reviewed-by: Tuukka Turunen <tuukka.turunen@digia.com>
+    Reviewed-by: Iikka Eklund <iikka.eklund@theqtcompany.com>
+
+Change-Id: I9b711c9db9f7edf17fb975d09e3e5c72975f0425
+",20/3/2015 08:34:47,0
+18,fix CreateShortcutOperation,"fix CreateShortcutOperation
+
+CreateShortcutOperation has four optional parameters. Positional parameter
+number three ""targetArguments"" and three named arguments ""workingDirectory"",
+""iconPath"", and ""iconId"".
+
+Change-Id: I39d89b8dfef6688a3501b59e7d48d7540f368c4e
+",9/3/2015 15:33:41,178
+19,Add missing space to user visible error message,"Add missing space to user visible error message
+
+Change-Id: I526cef7a996ca7a7bd6de113e22bb7eb75a1b642
+",5/3/2015 07:25:51,59
+20,Fix remoting of objects without a classinfo set.,"Fix remoting of objects without a classinfo set.
+
+meta is the QMetaObject we stop exporting here, not the one we export.
+So by using object->metaObject() for that we were not exporting anything
+at all.
+
+This fixes a regression from 9f79c5a7, which removed the superClass() call.
+
+Change-Id: If3cb8bbc281a6265b7b0023e71aaaed360a78228
+",4/3/2015 14:32:21,38
+21,[Fix] Change to QMetaType type lookup,"[Fix] Change to QMetaType type lookup
+
+Switch from QVariant lookup (which only works for Qt types) to QMetaType
+lookup (which works for custom types).
+
+This duplicates the change in I15a391a0adbc4eb6f8b8abd7b04b6f860d0da09c,
+which should be used instead (to get the additional tests) if that patch
+is rebased.
+
+Change-Id: Ie7e98a00ffce0b57bcff39a5558f9aba4d4ed682
+",4/3/2015 03:33:50,39
+22,Improve handling of XRandR events in XCB backend,"Improve handling of XRandR events in XCB backend
+
+Querying X server for data can be very expensive, especially when there
+are multiple processes querying it at the same time (which is exactly what
+happens when screen configuration changes and all Qt applications receive
+XRandR change notifications). This patch is aiming to reduce the number of
+queries to X server as much as possible by making use of detailed information
+available in the RRCrtcChangeNotify and RROutputChangeNotify events.
+
+Firstly, the backend now does not rebuild all QXcbScreens on any change (which
+involved the very expensive xcb_randr_get_screen_resources() call), but only
+builds the full set of QXcbScreens once in initializeScreens(), and then just
+incrementally updates it.
+
+Secondly, it avoids querying X server for all screens geometry as much as
+possible, and only does so when CRTC/Output change notification for a particular
+screen is delivered.
+
+As a result, handling of all XRandR events on screen change is reduced from tens
+of seconds to less then a seconds and applications are better responsive after
+that, because we don't block the event loop for long. The X server is also more
+responsive after the screen change, since we are not overloading it with requests.
+
+Change-Id: I9b8308341cada71dfc9590030909b1e68a335a1f
+Reviewed-by: Shawn Rutledge <shawn.rutledge@digia.com>",24/2/2015 10:55:26,21
+23,Merge remote-tracking branch 'origin/5.4' into dev,"Merge remote-tracking branch 'origin/5.4' into dev
+
+Conflicts:
+	.qmake.conf
+	src/serialport/qserialport_unix.cpp
+	src/serialport/qserialport_unix_p.h
+	src/serialport/qserialport_win.cpp
+	src/serialport/qserialport_win_p.h
+	src/serialport/qserialport_wince.cpp
+	src/serialport/qserialport_wince_p.h
+
+Change-Id: Ief422ae7b630c37560cf3539346055d12212d8db
+",16/2/2015 09:50:51,3
+24,Fix overrride related warnings on clang for QQmlParserStatus,"Fix overrride related warnings on clang for QQmlParserStatus
+
+There are plenty more cases in qtdeclarative but this particular case
+catches 95% of all warnings coming from qtdeclarative in repos
+depending on qtdeclarative.
+
+Change-Id: Idce1ec91272959d0b632ffc97d71bdec370b192a
+",9/2/2015 14:47:31,209
+25,Windows: Introduce delayed population to the FreeType font database.,"Windows: Introduce delayed population to the FreeType font database.
+
+Further Split apart Windows CE/Windows code paths to provide 2
+implementations of populateFontDatabase():
+
+- The desktop version uses a callback which only
+  registers the font families using
+  QPlatformFontDatabase::registerFontFamily() to be
+  populated on demand later by populateFamily().
+
+- The Windows CE version is unchanged.
+
+Task-number: QTBUG-43774
+Task-number: QTBUG-44647
+Change-Id: Iad4ec849006a4daf86a5caea9afc89e83ccc7c63
+Reviewed-by: Konstantin Ritt <ritt.ks@gmail.com>",11/2/2015 09:24:32,438
+26,OS X: Decouple Qt and App SDK versions,"OS X: Decouple Qt and App SDK versions
+
+Use the most recent SDK on the system in cases where
+the SDK Qt is configured with is not available.
+
+Change-Id: I13655cd6c336c67ad75ccf52936ca1ce79085e4a
+",18/9/2014 09:25:31,6
+27,GLSL: Do not leak engine,"GLSL: Do not leak engine
+
+Change-Id: I7b218df141ed2e783fb965eb7114c8aee8094251
+",12/1/2015 16:14:08,322
+28,WIP: Adding new testcases to test separation of clients,"WIP: Adding new testcases to test separation of clients
+
+Added a new file containing 3 tests to test separation of
+clients:
+1. auto-wrapped objects do not get published to newly
+   initialized clients
+2. auto-wrapped objects do not get published to already
+   existing clients
+3. signals are only sent to clients that know about that
+   specific object
+
+Change-Id: Idfc011f6e3dc45416a0606d2189f56517855dad3
+",13/8/2014 13:36:36,5
+29,Merge remote-tracking branch 'origin/5.4' into dev,"Merge remote-tracking branch 'origin/5.4' into dev
+
+Conflicts:
+	src/core/browser_context_qt.cpp
+	src/webengine/api/qquickwebengineview_p.h
+
+Change-Id: Icf51b24c433a2525e055d6e88412838d1b3aa41c
+",11/11/2014 15:41:23,0
+30,Fix QGraphicsItem caching to work at full resolution on HiDPI/Retina displays.,"Fix QGraphicsItem caching to work at full resolution on HiDPI/Retina displays.
+
+Patch (by Mihail Naydenov) for enabling devicePixelRatio to be used together with GraphicsItem's cache.
+
+Task-number: QTBUG-26795
+Change-Id: I79554b1415f4cc86e069f78f8712442cbf7935a2
+",13/11/2014 21:43:52,71
+31,Android 5.0: extract RippleDrawable color,"Android 5.0: extract RippleDrawable color
+
+This is essential for the Qt Quick Controls to be able
+to visualize Android 5.0 buttons in pressed state.
+
+Task-number: QTBUG-42488
+Task-number: QTBUG-42520
+Change-Id: I542a741bde30024cad752ec8497c5567acf68e96
+",12/11/2014 12:21:01,28
+32,Fix compiler warnings in QQuickDialog.,"Fix compiler warnings in QQuickDialog.
+
+quickdialog_p.h: In constructor 'QQuickDialog::QQuickDialog(QObject*)':
+qquickdialog_p.h:108:21: warning: 'QQuickDialog::m_enabledButtons' will be initialized after [-Wreorder]
+qquickdialog_p.h:107:20: warning:   'QQuickAbstractDialog::StandardButton QQuickDialog::m_clickedButton' [-Wreorder]
+qquickdialog.cpp:203:1: warning:   when initialized here [-Wreorder]
+qquickdialog.cpp: In member function 'virtual void QQuickDialog::setVisible(bool)':
+qquickdialog.cpp:233:25: warning: statement has no effect [-Wunused-value]
+
+Change-Id: I01d3b2fe79e68a091fe1616bfbebad989880c9df
+",19/9/2014 07:14:49,15
+33,Fix wrong operator,"Fix wrong operator
+
+Change-Id: I518cb737004ec2ba44bf48c3d29e33062a6fa09f
+",16/9/2014 09:50:35,12
+34,Fix compilation: can't pass QString temporaries to QString&,"Fix compilation: can't pass QString temporaries to QString&
+
+outputpanemanager.cpp:726:76: error: no matching function for call to __ore::Internal::BadgeLabel::setText(QString)_
+     m_badgeNumberLabel.setText(number ? QString::number(number) : QString());
+
+QString::number() and QString() are both QString temporaries, so the
+result of the ternary operator is an xvalue QString. You can't bind that
+to an lvalue-ref QString.
+
+Change-Id: Idd5d8d827982315114bbd49fb7fd514762d94219
+",11/9/2014 02:06:16,58
+35,QElapsedTimer: document that the timer is not initialized on creation,"QElapsedTimer: document that the timer is not initialized on creation
+
+Change-Id: I1254db77a3be918ceeb4ebf2674efd8896655960
+",22/8/2014 07:26:28,437
+36,Map KEY_POWER to Qt::Key_PowerOff,"Map KEY_POWER to Qt::Key_PowerOff
+
+KEY_POWER is now mapped when using evdevkeyboard
+
+Task-number: QTBUG-40840
+Change-Id: I1e7f34222a31d53ab8ffe549a482ec02cfb01ee3
+",20/8/2014 08:40:26,20
+37,Fix render scenegraph with no context,"Fix render scenegraph with no context
+
+Related to commit 5494dc7bff733 which fixes QTBUG-39858
+but introduces a new side-effect using the same
+Qt-creator plugin like in the bugreport.
+
+Problem is that the context is invalidated but not
+destroyed and hence not recreated after hide+show
+what results in
+
+QQuickWidget: render scenegraph with no context
+at QQuickWidgetPrivate::renderSceneGraph
+
+The working solution is to also proper destroy
+the context on QQuickWidget::hideEvent like done at
+other places too. Then on QQuickWidget::showEvent
+the context is recreated and then proper rendered.
+
+Change-Id: I187f9e3ec144a36f67d10523534d2953c04fdb85
+",15/8/2014 13:24:58,3
+38,Fixing failing testcases,"Fixing failing testcases
+
+Some testcases do not consider all messages. These changes make
+the test wait at specific points until these messages are sent.
+
+Change-Id: I77cc1477d3f5ea384f24da4c71fb925d7be74848
+",11/8/2014 11:49:26,89
+39,Fix the Windows build after accessibility patch was added.,"Fix the Windows build after accessibility patch was added.
+
+Exclude some code from compilation on Windows for now.
+Change-Id: I1961ccbf20a3ac9a7dfa643ba5110efc6a93e546
+",10/7/2014 16:48:28,81
+40,Remove Qt 4 code paths from adminauthorization_x11.cpp,"Remove Qt 4 code paths from adminauthorization_x11.cpp
+
+Change-Id: Icd26199db7ba84b31c54b7daaa4e2a1c369915a2
+",19/6/2014 12:39:54,6
+41,Fix up Fancy Browser example.,"Fix up Fancy Browser example.
+
+  * Prevent leaking of MainWindow.
+  * Use proper command line argument parsing.
+  * Make the Qt project page the default page.
+
+Task-number: QTBUG-38069
+Change-Id: Ic7c49200020df0dd510fe469c7e01d19b99506ae
+",7/4/2014 12:11:40,72
+42,Bump version to 5.2.1,"Bump version to 5.2.1
+
+Because now qtwayland/stable depends on qtbase/stable
+(mkspecs/features/wayland-scanner.prf).
+
+Change-Id: Ie829de24a581352db3837193f4edfda6e90a28d0
+",4/1/2014 14:23:09,85
+43,cpp.qdoc: correct snippet paths Added qt.qdocconf Several references to it in qdoc-manual.qdoc,"cpp.qdoc: correct snippet paths
+Added qt.qdocconf
+Several references to it in qdoc-manual.qdoc
+
+Task-number: QTBUG-31574
+
+Change-Id: I722bc5596e038d6dea6ea60bdb37c48a0422647f
+",10/6/2013 11:16:25,117
+44,QmLDesigner: Fix warning.,"QmLDesigner: Fix warning.
+
+Change-Id: Id466da7304a4afe0352d1f09d6f533f4f83bd810
+",10/4/2013 08:50:18,177
+45,"Doc: Corrected typo ""the the ""","Doc: Corrected typo ""the the ""
+
+Corrected in qml-extending.qdoc
+
+Task-number: QTBUG-28756
+
+Change-Id: Ifb63c7e93488314c6d278518a8d2a5f20a6a66d8
+",7/1/2013 12:57:50,192
+46,WIP: fix bootstrap for win32-g++-cross,"WIP: fix bootstrap for win32-g++-cross
+
+I suspect that win32 didn't used to be defined here.
+Anyway, bootstrap is built for the build system, not
+the target/host.
+
+Change-Id: I8c670e58015b4a654a200cce86487bf56bc64155
+",21/6/2012 12:32:00,0
+47,Add QQuickView constructor that takes an engine as argument.,"Add QQuickView constructor that takes an engine as argument.
+
+Change-Id: Ibe19175e67e439d153d6edf0df638d241239669a
+",16/5/2012 11:56:40,13
+48,QmlCppDebugging: State Transitions,"QmlCppDebugging: State Transitions
+
+Updated state transitions for the caser when a breakpoint is
+set in a cpp file while debugging QML.
+
+Change-Id: I550d4bff628b60fc5492a9e726215e7a96f50a8b
+",5/4/2012 15:15:19,24
+49,QmakeProjectManager: Don't add mkspec include dir explicitly,"QmakeProjectManager: Don't add mkspec include dir explicitly
+
+It will be added via INCLUDE anyway.
+
+This also removes all code using BaseQtVersion::systemHeaderPaths(),
+which is thus also removed. This function was introduced to support
+Symbian.
+
+Change-Id: Id372e1cfc20bd22de948ed9a7d28dfa9135cbfa9
+Task-number: QTCREATORBUG-13964
+",9/4/2015 10:44:30,266
+50,Ensure the UTF-8 string for a xcb_keycode_t has the correct length.,"Ensure the UTF-8 string for a xcb_keycode_t has the correct length.
+
+On my platform (Archlinux, libxcb 1.11-1) and a recent build of Qt dev
+I noticed that writing anything to a QLineEdit was broken, as not only
+the character for the pressed key was inserted, but also what looks
+like whitespace. A simple debug program showed that a ""\u0000"" is
+appended to every character in the QString text associated with a
+QKeyEvent, which brought me to QXcbKeyboard::lookupString.
+
+There, the size of the buffer is returned as 1 and apparently that
+is also the amount of chars written to in the QByteArray buffer. There
+is no '\x00' char at the end, but rather a literal char(0), potentially
+from the default-initialization in the QByteArray::resize call.
+This then gets included in the QString following the QString::fromUtf8
+conversion.
+
+By leveraging the size returned by the xcb API and passing that to
+QString::fromUtf8 we can prevent this problem from arising.
+
+I believe this might also be a bug in XCB, but this patch in Qt should
+never be incorrect and being explicit seems to help in my situation.
+
+Change-Id: Ic1d4390e4154e9ed729cd23286811d6eecdf54f6
+",16/4/2015 15:57:06,58
+51,WIP Qml&Js Code Model properies/methods/enums inspection,"WIP Qml&Js Code Model properies/methods/enums inspection
+
+.. of builtIn qml and cpp code over code model dumps.
+
+Change-Id: I70d5bec2933b682295c5242248a2b0f95dba4e76
+",8/1/2015 19:45:02,164
+52,Merge remote-tracking branch 'origin/5.5' into dev,"Merge remote-tracking branch 'origin/5.5' into dev
+
+Change-Id: I44a6915c1212bb636456368a2b5dc36b9c26fe01
+",19/3/2015 12:04:18,31
+53,Update bundled FreeType to 2.5.5,"Update bundled FreeType to 2.5.5
+
+Change-Id: Iea948e41f7761f1580382b3763d04c7a61383382
+",7/3/2015 10:45:33,112
+54,Add required CONFIG conditions to pro file,"Add required CONFIG conditions to pro file
+
+The module will be skipped if the conditions are not met.
+
+Change-Id: I99593777348bd8c74e8c32f0a4ff482bbaa8812d
+",19/3/2015 10:36:19,219
+55,QTBUG-33015: Fixed Delete key symbol in native menubar.,"QTBUG-33015: Fixed Delete key symbol in native menubar.
+
+Change-Id: I4548cef7a10f792bba2d50b74787b0757d5015f7
+",11/3/2015 14:35:16,923
+56,Avoid detaching pixmaps when it has not changed,"Avoid detaching pixmaps when it has not changed
+
+setDevicePixelRatio is often called unconditionally even when the
+devicePixelRatio matches the pixmap or image.
+
+This causes a lot of unncessary detaches wasting some memory.
+
+Change-Id: I27535b2b22312ec0edc9bdc00c99d322afb727c1
+Reviewed-by: Gunnar Sletta <gunnar@sletta.org>",9/3/2015 19:01:44,195
+57,Fix Q_OS_MAC macro in tst_qdeclarativeflickable::flickVelocity(),"Fix Q_OS_MAC macro in tst_qdeclarativeflickable::flickVelocity()
+
+Change-Id: I15889eee3cee1513e49576be40a7abf97a31da45
+",23/2/2015 10:45:58,11
+58,Utils: Introduce FileName::baseName(),"Utils: Introduce FileName::baseName()
+
+* Replacement for QFileInfo::fileName()
+* Supports additional path parts
+
+Change-Id: I2b3e3dfb02617c8f98f1d67e16396bed97f97526
+",10/1/2015 18:04:18,742
+59,TextEdit: fix construction time text cache,"TextEdit: fix construction time text cache
+
+QQuickTextEdit does not apply cached text to the underlying document
+until component construction is complete. However, if text() was called
+during the construction (eg. because of a binding), it would blindly
+overwrite the cached text with (still) empty document content.
+
+Task-number: QTBUG-41583
+Change-Id: I6c5c1b6283d70d8a5ec2c8bd986095ee3c35a14c
+",17/11/2014 11:46:43,3
+60,restrict Product.name to a small character set,"restrict Product.name to a small character set
+
+Especially directory separators must be excluded from product names.
+
+Task-number: QBS-637
+Change-Id: I722d0d2c78471d17a0111497c7e17d71b349ec57
+",10/11/2014 14:40:50,102
+61,Fix incorrect file permissions after commit 9c3a58a913a7e59359146264ee59d40d703d4db2,"Fix incorrect file permissions after commit 9c3a58a913a7e59359146264ee59d40d703d4db2
+
+These files should not be executable
+
+Change-Id: I292eb9df480a642a65f9065e4fe36bd52c093dc7
+",30/10/2014 19:19:59,0
+62,Cocoa: Don't activate popup windows.,"Cocoa: Don't activate popup windows.
+
+Qt expects a handleWindowActivated call for non-
+popup windows only. Add a window type check, similar
+to the other handleWindowActivated calls.
+
+Task-number: QTBUG-38707
+Change-Id: Iaa5959675f7e3ae4664bdf785d3f374debb0d0a7
+",23/10/2014 12:28:04,8
+63,QShapedPixmapWindow: do not leak the backing store,"QShapedPixmapWindow: do not leak the backing store
+
+Change-Id: Id7cc8cbbcd62c546055d525473f90d2bad0c144a
+",30/10/2014 09:26:02,85
+64,"Hardcode UTF-8 for ""unicode"" in QTextCodec::codecForHtml().","Hardcode UTF-8 for ""unicode"" in QTextCodec::codecForHtml().
+
+ICU would return a utf-16 (endian dependent) codec for unicode
+which is very rarely what people want. In most cases, unicode is
+encoded in utf8 these days, so return a utf8 codec for it.
+
+Task-number: QTBUG-41998
+Change-Id: I51ee758d520702b263a8b2011787eb1f3455ed96
+",27/10/2014 09:47:43,4
+65,Merge remote-tracking branch 'origin/5.3' into 5.4,"Merge remote-tracking branch 'origin/5.3' into 5.4
+
+Conflicts:
+	src/gui/text/qtextengine.cpp
+	src/plugins/platforms/xcb/qxcbconnection_xi2.cpp
+	src/testlib/qtestcase.cpp
+	src/testlib/qtestlog.cpp
+	tests/auto/gui/text/qtextscriptengine/tst_qtextscriptengine.cpp
+	tests/auto/widgets/widgets/qlineedit/tst_qlineedit.cpp
+
+Change-Id: Ic5d4187f682257a17509f6cd28d2836c6cfe2fc8
+",28/8/2014 15:27:14,17
+66,Add iOS style stub (NOTE: cherry-pick of faa5f59),"Add iOS style stub (NOTE: cherry-pick of faa5f59)
+
+The current look and feel on iOS (with the default Base style)
+is terrible. This commit alone doesn't change anything, but it
+allows us to do minor iOS-specific tweaks that will greatly
+improve the usability on iOS already in Qt 5.4.
+
+Change-Id: I86764dd92bdfaae8170a8cd6709177a9a064cda8
+",18/9/2014 11:39:50,550
+67,Fix failing assertion when compiling self-referencing QML singleton,"Fix failing assertion when compiling self-referencing QML singleton
+
+When a QML singleton file accesses itself, we would hit incomplete
+type data. Regression from commit b42c8c4de293af0b6e9c0691daa835939b54d4e1
+
+Change-Id: Id0bd5fd71cf9be21f7e4ad8527fa8724a718d702
+",10/9/2014 11:18:48,64
+68,OS X: Fix pan gestures.,"OS X: Fix pan gestures.
+
+The QPanGesture recognizer requires single-point touch events. The touch
+implementation in Qt 4 would test Qt::WA_TouchPadAcceptSingleTouchEvents
+and forward single touch events if set.
+
+Making this work in Qt 5 is a little bit more involved since the platform
+plugins don't know about widgets.
+
+Change the Cocoa touch implementation to send single-point touch events
+to QWidgetWindow windows only. Make QApplication forward single-point
+touch events only if the target widget has the
+Qt::WA_TouchPadAcceptSingleTouchEvents attribute set.
+
+Task-number: QTBUG-35893
+Change-Id: I68712a5e3efb4ece7a81ca42f49c412e525eeb3a
+Reviewed-by: Jake Petroules <jake.petroules@petroules.com>",22/8/2014 08:18:57,14
+69,Remove QQuickWindow::glslVersion & glslIsCoreProfile,"Remove QQuickWindow::glslVersion & glslIsCoreProfile
+
+Superceded by the SurfaceFormat attached type
+
+Change-Id: I7511fd28eb375eb3cd3cdd4bda6d82c1883e3094
+",10/8/2014 11:28:33,56
+70,Clean up tst_QPalette,"Clean up tst_QPalette
+
+Remove ctor, dtor, and empty test functions.
+
+Change-Id: I0cf60732258c4470f40ddb258d87f0ac2de64edf
+",25/7/2014 21:28:10,0
+71,Improve debug output of QPalette.,"Improve debug output of QPalette.
+
+Task-number: QTBUG-39997
+Change-Id: I25b8ce8791c25c7ef7b97270ec50dad45fbdfecd
+",8/7/2014 14:07:42,971
+72,Translate Super/Hyper keys to MetaModifier,"Translate Super/Hyper keys to MetaModifier
+
+This is how it was done in Qt4. If users are interested
+in an actual X11 keysym they can use QKeyEvent::nativeVirtualKey().
+
+Change-Id: I710664e48c5db1633a357aa0a5d238f3453103ab
+Task-number: QTBUG-38428
+",17/6/2014 09:45:59,13
+73,resolve output of .depend_command relative to $$OUT_PWD,"resolve output of .depend_command relative to $$OUT_PWD
+
+... as that is the CWD of the command (since b139e7e96e5c).
+leave the resolution relative to $$PWD as a fallback with a warning.
+
+Investigated-by: Harald Hvaal <hhvaal@cisco.com>
+Task-number: QTBUG-19352
+Change-Id: I75de9444a647cd9e6f509e3d8eb3382dc985e5ca
+",15/7/2013 13:22:51,0
+74,mkspecs are installed to QT_HOST_DATA instead of QT_INSTALL_ARCHDATA.,"mkspecs are installed to QT_HOST_DATA instead of QT_INSTALL_ARCHDATA.
+
+These are the same for normal builds, but differ when cross-compiling Qt.
+
+Change-Id: I75eccc6f4b67b440a08c4aba41aabb7df686c9f9
+",5/4/2013 09:59:48,315
+75,Removed dead assignments,"Removed dead assignments
+
+Change-Id: Ia4b9c27b8aa405e3e7c6e92639eb105689a0f299
+",20/10/2011 18:02:58,8
+76,fix CreateShortcutOperation,"fix CreateShortcutOperation
+
+CreateShortcutOperation has four optional parameters. Positional parameter
+number three ""targetArguments"" and three named arguments ""workingDirectory"",
+""iconPath"", and ""iconId"".
+
+Change-Id: I39d89b8dfef6688a3501b59e7d48d7540f368c4e
+",9/3/2015 15:33:41,178
+77,NodeInstanceServer::setupImports(): Fix warning about unused variable.,"NodeInstanceServer::setupImports(): Fix warning about unused variable.
+
+Change-Id: I201c539dd8eedcad7856b030130365b57502fe72
+",10/3/2015 08:13:44,206
+78,Add testsupport QML API and error page signals,"Add testsupport QML API and error page signals
+
+The testsupport API is used for test those features that are not
+planned to be accessible via the public API. For example,
+signals of the chromium's error page should not be visible for the
+develepor but it is important to test whether the error page is loaded
+properly.
+
+Change-Id: Ie5b3265a207d05649cabd624a001a6ffe2e45971
+Reviewed-by: Andras Becsi <andras.becsi@theqtcompany.com>",29/1/2015 17:47:34,56
+79,OS X: prevent wheel events from closing popups,"OS X: prevent wheel events from closing popups
+
+Commit 92c7cb81 implemented closing of popups on
+wheel events, which is the expected behavior on
+Windows.
+
+This is not what we want on OS X, instead an open
+popup should block scroll events to parent widgets.
+
+As noted in the bug, the effect of 92c7cb81 on OS X
+was particularly bad: context menus would in some
+cases close immediately.
+
+Change-Id: Id9fa372022b138082d8cf0895a189ada2f66bf7f
+Task-number: QTBUG-43257
+",9/1/2015 14:11:21,371
+80,Android 5.0: add missing ripple effect,"Android 5.0: add missing ripple effect
+
+Android 5.0 uses a new ripple effect for the pressed state of
+button-like controls. Without this change, buttons don't react
+to presses visually.
+
+Control press points are not available via the style data, so we
+keep it simple for now and always anchor to ripple to the center
+so it looks visually pleasing enough.
+
+Task-number: QTBUG-42520
+Change-Id: Ic47014c653e780da41cb7b7d8bf7ea859a911a43",12/11/2014 12:42:41,14
+81,C++: handle case-insensitive file names by keying on Utils::FileName,"C++: handle case-insensitive file names by keying on Utils::FileName
+
+Change-Id: Ifc2d966388793f916ec7ad89fa3deb2deb0ab5dc
+Task-number: QTCREATORBUG-12390
+",17/11/2014 12:54:45,4
+82,Enhance precision of the FP conversion to strings in Qvariant,"Enhance precision of the FP conversion to strings in QVariant
+
+This now guarantees that doing a round-trip from an FP number to string
+and back to number results in the same number. This change is required
+because DBL_DIG and FLT_DIG don't have the meaning that we were
+expecting them to, here: they mean the minimum number of digits of
+precision in decimal (i.e., changing the last decimal will always cause
+the FP number to change). We need the maximum number: there is one
+change in the last decimal place that causes the FP number to change.
+
+IEEE 754 single-precision has 24 binary digits and double precision has
+53 binary digits in their mantissa. To convert that to decimal, multiply
+by the number of decimal digits a binary digit represents (log2(10) =
+0.3), then add one for the rounding and one more digit for the actual
+precision we want. That is, for floats we now ask for 9 digits and for
+double, 17 decimal digits.
+
+Task-number: QTBUG-42574
+Change-Id: Ic78beb60a218f75322f832d33d63fd84e7a65b65
+Reviewed-by: Lars Knoll <lars.knoll@digia.com>
+Reviewed-by: J_drzej Nowacki <jedrzej.nowacki@digia.com>",12/11/2014 04:00:06,253
+83,Use QScopedPointer for XKB objects,"Use QScopedPointer for XKB objects
+
+Using scoped pointers is nice for avoiding possible memory leaks.
+
+Change-Id: Ie0be3389edb5dbca0f37a2a13395ee4bbee11cef",24/9/2014 08:54:59,3
+84,MRU list implemention.,"MRU list implemention.
+
+QMRUList in QtGui
+QMRUMenu in QtWidgets
+
+platform dependent implementiation working together with Mac Sandbox
+
+Change-Id: Ib19c90a22ba5d8277d0260d220b64556226cb589
+",10/4/2012 09:26:59,181
+85,"Add parent / child getters, rename prefix to ancestor","Add parent / child getters, rename prefix to ancestor
+
+Change-Id: I354689a01a8ec30e8bc3b2545bfc24ceb0ff8ab1
+",27/8/2014 11:12:22,151
+86,Vista style: Don't draw scrollbar gripper if not enough space,"Vista style: Don't draw scrollbar gripper if not enough space
+
+Fix a regression introduced by 176bd1edfadcb68b:
+As a side effect, the above patch unconditionally sets the size of the
+QRect gripperBounds, leading to the gripperBounds.isEmpty() check to
+always succeed.
+
+Task-number: QTBUG-42001
+Change-Id: I261346b96e4c29601e2064853c5a30eaadb668f4
+",21/10/2014 08:26:29,5
+87,Vista style: Don't draw scrollbar gripper if not enough space,"Vista style: Don't draw scrollbar gripper if not enough space
+
+Fix a regression introduced by 176bd1edfadcb68b:
+As a side effect, the above patch unconditionally sets the size of the
+QRect gripperBounds, leading to the gripperBounds.isEmpty() check to
+always succeed.
+
+Task-number: QTBUG-42001
+Change-Id: I261346b96e4c29601e2064853c5a30eaadb668f4
+",21/10/2014 08:26:29,4
+88,WIP: Fix compilation for -opengl=dynamic builds (Windows),"WIP: Fix compilation for -opengl=dynamic builds (Windows)
+
+Change-Id: I9a1c0856df5e062f108d34b7c163e638760c1712
+",18/9/2014 11:53:09,5
+89,Register QQuickWindow* as a meta type,"Register QQuickWindow* as a meta type
+
+QQuickItem::window is a new property introduced in Qt 5.4. This change
+ensures that reading the property (consider iterating all available
+properties like QML TestCase does) without importing QtQuick.Window
+does not throw:
+
+    QMetaProperty::read: Unable to handle unregistered datatype
+    'QQuickWindow*' for property 'Foo::window'
+
+Change-Id: Icb7fee6ecc2f7c47ad57d1f1b09ae41edd2b7c5d
+",30/7/2014 12:09:01,131
+90,Android: Fix Qt4 compile,"Android: Fix Qt4 compile
+
+Change-Id: I7d4261e36ddfa64f0483b031e8fd3062800be85e
+",30/7/2014 07:39:57,0
+91,Do not decode the HTTP resource name,"Do not decode the HTTP resource name
+
+The resource needs to be sent encoded in the HTTP request
+
+Change-Id: I3c6c56f5fea1553f3b5751de7da0cfc76150f4b9
+",9/3/2015 17:39:19,177
+92,Do not decode the HTTP resource name,"Do not decode the HTTP resource name
+
+The resource needs to be sent encoded in the HTTP request
+
+Change-Id: I3c6c56f5fea1553f3b5751de7da0cfc76150f4b9
+",9/3/2015 17:39:19,355
+93,Do not decode the HTTP resource name,"Do not decode the HTTP resource name
+
+The resource needs to be sent encoded in the HTTP request
+
+Change-Id: I3c6c56f5fea1553f3b5751de7da0cfc76150f4b9
+",9/3/2015 17:39:19,355
+94,Merge remote-tracking branch 'origin/5.5' into dev,"Merge remote-tracking branch 'origin/5.5' into dev
+
+Conflicts:
+	src/widgets/accessible/qaccessiblewidgets.cpp
+
+Change-Id: If032adb9296428f62384ed835dbf41ee7a0b886c
+",27/3/2015 06:30:51,27
+95,Doc: Fix various documentation issues,"Doc: Fix various documentation issues
+
+    - Use 'Qt Canvas 3D' as the module name throughout the
+      documentation.
+    - Replace unnecessary use of \group with \page commands
+    - Fix example group page not being generated correctly
+    - Add QML types to the correct module, remove their use
+      of \ingroup
+    - Replace 'indexes' variable with 'depends' as this is
+      no longer a module external to Qt.
+    - Add correct dependencies and ensure linking to other
+      Qt module docs works.
+    - Style and language fixes
+    - Limit line width to 80 characters in .qdoc files
+
+Change-Id: Ib4f4ca59e250db3a5d60c4988701a8fb209438c1
+Task-number: QTBUG-45247
+",31/3/2015 09:59:13,8
+96,Updated submodules.,"Updated submodules.
+
+Change-Id: Ie0b703ccb7081240278fd803d18d3da11bc3b1b7
+",26/3/2015 12:41:14,2
+97,Introduce QRgba64 structure for 64bit RGBA values,"Introduce QRgba64 structure for 64bit RGBA values
+
+This structure is meant to replace QRgb where higher precision is
+needed.
+
+Change-Id: I49d441e2133371a8b91c2e6af0c137bcc5fcb9ed
+",12/2/2015 14:43:20,262
+98,Merge remote-tracking branch 'origin/5.5' into dev,"Merge remote-tracking branch 'origin/5.5' into dev
+
+Conflicts:
+	src/webengine/api/qquickwebengineview_p_p.h
+	src/webengine/ui_delegates_manager.cpp
+	src/webengine/ui_delegates_manager.h
+	src/webenginewidgets/api/qwebenginepage_p.h
+
+Change-Id: I8052de4d3b2e68a950832226f6f99e2aafca5505
+",12/3/2015 14:53:10,274
+99,Fix tst_qaccessibility::textEditTest for some screen resolutions,"Fix tst_qaccessibility::textEditTest for some screen resolutions
+
+On a high resolution display the test will potentially create a text
+edit that introduces line breaks and these make it fail then.
+
+Change-Id: Ie82cc4b4139fe0f51ddca219c5c911957fa715b7
+",10/2/2015 17:06:33,236
+100,Update copyright headers,"Update copyright headers
+
+Qt copyrights are now in The Qt Company, so we could update the source
+code headers accordingly. In the same go we should also fix the links to
+point to qt.io.
+
+Change-Id: I9e68d256991ef7325c29c38ce9c007506ce6b150
+",12/2/2015 07:36:08,291
+101,Fix some qdoc-warnings.,"Fix some qdoc-warnings.
+
+qtmultimedia/src/multimedia/qmediaserviceprovider.cpp:850: warning: Cannot find 'defaultDevice(...)' in '\fn' QMediaServiceSupportedDevicesInterface::defaultDevice(const QByteArray &service) const
+qtmultimedia/src/multimedia/qmediaserviceprovider.cpp:850: warning: Cannot find 'defaultDevice(...)' in '\fn' QByteArray QMediaServiceSupportedDevicesInterface::defaultDevice(const QByteArray &service) const
+qtmultimedia/src/multimedia/video/qabstractvideofilter.cpp:261: warning: Undocumented parameter 'parent' in QAbstractVideoFilter::QAbstractVideoFilter()
+
+Change-Id: I72bfc1dc7697cd1323cb7aad16539932ace9d8ea
+",20/2/2015 13:37:47,0
+102,BareMetal: Support remote channel without port,"BareMetal: Support remote channel without port
+
+e.g. ""| vgdb""
+
+Change-Id: Iedae02dab5bbb884d57604605597225fe9a262c2
+",9/2/2015 21:05:38,208
+103,Core: Remove unneeded qualifications,"Core: Remove unneeded qualifications
+
+Mostly done using the following ruby script:
+Dir.glob('**/*.cpp').each { |file|
+  next if file =~ %r{src/shared/qbs|/qmljs/}
+  s = File.read(file)
+  s.scan(/^using namespace (.*);$/) {
+    ns = $1
+    t = s.gsub(/^(.*)\b#{ns}::((?!Const)[A-Z])/) { |m|
+      before = $1
+      char = $2
+      if before =~ /""|\/\/|\\|using|SIGNAL|SLOT|Q_/
+        m
+      else
+        before + char
+      end
+    }
+    if t != s
+      puts file
+      File.open(file, 'w').write(t)
+    end
+  }
+}
+
+Change-Id: I5c6690f51488bf8ca3610ba9fb11e6e5fd814aaa
+",3/2/2015 21:56:28,98
+104,Add QNX650 to nightly builds,"Add QNX650 to nightly builds
+
+Change-Id: I17844ad4362fb05d0b33762d199e154f36eb0d57
+",27/1/2015 10:42:19,0
+105,Haiku: Add implementation for QStandardPaths,"Haiku: Add implementation for QStandardPaths
+
+Change-Id: Ic64a5ab3a1ef711180b855ee99154177b7e25696
+",14/1/2015 10:11:44,7
+106,Squish: Load QmlProjectManager if needed for debugger tests,"Squish: Load QmlProjectManager if needed for debugger tests
+
+Change-Id: Iffea74ffa8794b8c496987a4eb22ff76f181f55e
+",14/1/2015 16:47:25,0
+107,Update qbs submodule and do the necessary adjustments.,"Update qbs submodule and do the necessary adjustments.
+
+Namely:
+    - Expose the new build options in the UI and document them.
+    - Remove the default deployment step.
+
+Change-Id: Ic2c9fd93276ab925effe327fac38642d2153f6cc
+",9/1/2015 09:30:22,236
+108,Stabilize tst_qquickflickable.,"Stabilize tst_qquickflickable.
+
+- Use one engine per test
+- Use QQuickView for the margins test
+- Verify QWindow cleanup.
+
+Change-Id: Id2a10b56101832c362822963a2a7bd1d66daa143
+",26/11/2014 09:02:29,3
+109,Don't disable C++11 on Mac OS X,"Don't disable C++11 on Mac OS X
+
+On OS X, enabling C++11 has the side effect of switching
+the standard library from libstdc++ to libc++. Qt 5.2
+enables C++11 by default, which leads to a Qt build
+that uses both standard libraries. This is something
+we would like to avoid.
+
+Change-Id: I0ad8fb550ef79ac37ac97a75799ac38aa19d39d4
+Reviewed-by: Fawzi Mohamed <fawzi.mohamed@digia.com>
+Reviewed-by: Morten Johan S_rvig <morten.sorvig@digia.com>",19/9/2014 10:45:15,255
+110,WIP: Support QOpenGLWidget and QQuickWidget on Android,"WIP: Support QOpenGLWidget and QQuickWidget on Android
+
+Just the enablers, no idea if it will work. Will test it soon.
+
+Change-Id: I6f9261fc0fd993afcda7f30d379c5410069033d3
+",20/8/2014 09:48:42,7
+111,Install missing index.html for standalone example,"Install missing index.html for standalone example
+
+Change-Id: I908f06bdcea1dfa422cf70817df48cdb1d290690
+",11/7/2014 15:06:39,113
+112,Collect polish timings from the basic render loop,"Collect polish timings from the basic render loop
+
+By reusing the windows specific event type we can stay compatible with
+older clients and even make them evaluate the new events in a somewhat
+useful way. At the same time it enables us to change newer clients so
+that they'll show all different scene graph changes as separate
+entities.
+
+Task-number: QTBUG-39876
+Change-Id: I0b4aaf87162c652b8dcea6cd4f54db053f8312fe
+",30/6/2014 13:26:29,3
+113,tst_qcollator: Exclude failing test cases for non-ICU/Windows.,"tst_qcollator: Exclude failing test cases for non-ICU/Windows.
+
+Change-Id: I17912ddb34337216805259dab9d90eb2c9ac64cc
+",27/6/2014 12:48:19,0
+114,Updated submodules.,"Updated submodules.
+
+Change-Id: Id244c1196d101d97817594c5ec4f8a76d4bad3a1
+Reviewed-by: Jani Heikkinen <jani.heikkinen@digia.com>",18/6/2014 16:06:14,0
+115,Updated changes-4.8.6 file,"Updated changes-4.8.6 file
+
+Change-Id: Ia758818a9fcb716baeaf37c0fc37cb79c7974cf5
+",16/4/2014 14:58:43,3
+116,Fix building of JSC with libc++.,"Fix building of JSC with libc++.
+
+Follow-up to 0de22e8 and 427d50d: the former was not just a cleanup commit,
+and part of the changes reverted in the latter actually broke the build with
+libc++ again: clang defines __GNUC__ for compatibility with GCC, but if
+libc++ is used ext/atomicity.h does not exist.
+
+Change-Id: Id86646d38b7bc62dbe0731f8f32efb2353335210
+",18/4/2014 17:40:36,52
+117,Detect AArch64 architecture,"Detect AArch64 architecture
+
+Adds WTF platform support for the AArch64 architecture.
+
+Patch is based on WebKit-gtk patch done by Riku Voipio, and was
+cherry-picked and tested by Marcin Juszkiewicz.
+
+Task-number: QTBUG-35442
+Change-Id: I81b8c43fb3a6a65c56446f84a7b1001075998d1e
+",7/1/2014 15:07:33,174
+118,Mac OSX: get the correct key code when the control key is pressed,"Mac OSX: get the correct key code when the control key is pressed
+
+The control key results in modifiers having Qt::MetaModifier, and then
+the correct character is found in charactersIgnoringModifiers.  The
+rest of the time, [nsevent characters] seems to be correct.  If we
+use charactersIgnoringModifiers too much of the time, then the keycode
+will be wrong in some cases even though typing is still possible.
+
+Task-number: QTBUG-29005
+Task-number: QTBUG-31811
+Task-number: QTBUG-31977
+Change-Id: Ib23b89f03bc9a61fe6d177320fa603c05649e979
+",26/6/2013 08:26:57,370
+119,Split converter functions out into a different file.,"Split converter functions out into a different file.
+
+This functionality is resuable so it should be made external to clients
+(plus we need replacements for functions like QImage::toCGImageRef
+which existed in Qt 4).
+
+Change-Id: Id8409805d5c6fa590bc1625242f3f95241cfb463
+",7/1/2013 20:21:25,179
+120,"Revert ""Move QWindowSystemInterface out of qpa.""","Revert ""Move QWindowSystemInterface out of qpa.""
+
+This reverts commit 784a877d3cd9a1a75aca9c83146389503a966071.
+
+Conflicts:
+
+	src/plugins/platforms/cocoa/qcocoawindow.mm
+
+Change-Id: Iebfed179b3eb7f30e4c95edcae5a8ad6fd50330e
+",26/7/2012 17:06:07,0
+121,Make the QNX QPA plugin work with non blackberry.,"Make the QNX QPA plugin work with non blackberry.
+
+Change-Id: Id85d18d9f21711e8d53e8e4bfdf39d10e135f593
+",18/4/2012 09:00:26,6
+122,XCB: fix the key event text conversion,"XCB: fix the key event text conversion
+
+For obtaining the key event string, xcb plugin uses a
+QString::fromUtf8(QByteArray &) conversion. From some days, this
+function preserves an embedded NUL's for faster processing. Remove
+terminating NUL-byte from source QByteArray to restore a proper
+text writing in widgets.
+
+Change-Id: I16b28a9eec6da28f27afb2f58b26874432f19788
+",13/4/2015 08:32:47,54
+123,Add QtWebEngineCore namespace to FilePickerController class,"Add QtWebEngineCore namespace to FilePickerController class
+
+Change-Id: I3d7da23b75c51de59b2a9c7cb6bcac690821e03d
+",9/3/2015 12:44:03,174
+124,Fix crash in src/corelib/json on shutdown,"Fix crash in src/corelib/json on shutdown
+
+Reason is that during shutdown when the lib is unloaded/cleaned
+the static keys QHash was already destroyed.
+
+An alternate, maybe better?, approach would be to turn this
+static variables into Q_GLOBAL_STATIC's...
+
+Change-Id: Ie28df0533df0bc2db7048751aca46c08c3bf4b11
+Task-number: QTBUG-40987
+",26/8/2014 13:43:26,61
+125,Fix compiler warning,"Fix compiler warning
+
+The data was initialized in the wrong order
+
+Change-Id: I442554d3c8e637969389d9343a5446154afa8510
+",19/1/2015 14:42:03,0
+126,Windows fixes for cpp2rep change,"Windows fixes for cpp2rep change
+
+Change-Id: I99b1b3ece8d1f89617c3cf89fb68bcbfc68984eb
+",29/11/2014 18:13:51,10
+127,Replace usage of Item.window with Window attached property,"Replace usage of Item.window with Window attached property
+
+Change-Id: Ifc1b31312b59cd876db2e5db7917f40c4de56bd0
+",8/8/2014 14:33:09,0
+128,FusionStyle: Dpi-aware radio button size,"FusionStyle: Dpi-aware radio button size
+
+The radio button radius was specified as 6.5 pixels. On systems with
+higher Dpi, we now want the style metrics to adapt. Therefore now the
+radio button size depends on the QStyleOption.rect which gest passed to
+QFusionStyle::drawPrimitive(). That was already the case for the
+checkbox drawing.
+
+Task-number: QTBUG-40277
+Change-Id: Ibd4884595216d6c1fa6c692c3fb12993134a2f8c
+",18/7/2014 10:19:25,6
+129,Update feed URLs for rssnews demo,"Update feed URLs for rssnews demo
+
+The URLs changed. Also Oceania doesn't exist anymore,
+added Asia instead as category.
+
+Task-number: QTBUG-37203
+Change-Id: Id4dbd445027411b8570569a87e3f60a3a5e0cd8b
+",13/6/2014 10:42:16,0
+130,QML file loading: honor synchronous requests made through QNAM,"QML file loading: honor synchronous requests made through QNAM
+
+So that it can skip loading state when the underlying
+QNetworkReply is already finished.
+
+Change-Id: Ic2d26271868b64bf8a411b4b54d7e5be7ee5d2b5
+Parts-of-the-patch-by: Jeremy Nicholl
+Task-number: QTBUG-27723",26/11/2012 21:17:22,0
+131,fix tst_QMdiArea::subWindowActivated2,"fix tst_QMdiArea::subWindowActivated2
+
+For this test the QMdiArea widget must be active after minimizing and
+showing it again. QMdiArea has no active sub window if itself is
+inactive.
+
+The original test works if
+   1) QMdiArea stays active after calling showMinimized, then showNormal.
+   2) or showNormal results in a QShowEvent when unminimizing.
+
+1 doesn't apply, because the window manager activates a different window
+when minimizing.
+2 doesn't apply, because going from minimized to normal doesn't change
+the visibility of the window and thus doesn't send a QShowEvent.
+
+Change-Id: Ic817549ad985ae4bba9dec3589c99218f7201404
+",16/7/2012 07:43:49,13
+132,WIP: Remove QQuickMouseEventEx,"WIP: Remove QQuickMouseEventEx
+
+Change-Id: Idfcb5e0feac7abde65626602d514e18f679f47b8
+",22/5/2012 10:24:46,28
+133,Improve the architecture-detection mechanism,"Improve the architecture-detection mechanism
+
+For the Unix part, this now obeys the -v option, printing the full
+command-line it used to compile, allowing testers to identify why
+something went wrong.
+
+Unfortunately, it requires a full compilation cycle, instead of just
+preprocessing. Just one more among the many on Unix, but maybe a
+noticeable slow-down on Windows.
+
+Change-Id: I654b70d99887e04c96731a5b91be9ad555e4d8fe",27/3/2012 17:46:25,18
+134,Correct mask of A2B10G10R10,"Correct mask of A2B10G10R10
+
+Green mask is missing an F.
+
+Change-Id: I7387ef01ee414abc1a48efec71d71f46922c1bed
+Reviewed-by: Oswald Buddenhagen <oswald.buddenhagen@theqtcompany.com>
+Reviewed-by: Frederik Gladhorn <frederik.gladhorn@theqtcompany.com>",2015/3/16 11:53,176
+135,Add @FULL_VERSION@ qmake variable substitution.,"Add @FULL_VERSION@ qmake variable substitution.
+
+Change-Id: I36adad6acfef5a091368319c11f97038971d94c5
+",2014/9/23 8:36,0
+136,Fix QWebSocketServer for clients preferring lowercase http headers.,"Fix QWebSocketServer for clients preferring lowercase http headers.
+
+QWebSocketServer should not use case-sensitive compare to validate
+http headers for incoming connections.
+
+Task-number: QTBUG-40615
+Change-Id: I309e95e06369d1d93e7dec6e4e4866565b069354",2014/8/6 13:17,178
+137,Opt-out of the build on platforms where we won't build successfully,"Opt-out of the build on platforms where we won't build successfully
+
+To allow the qt5.git integration, allow the build to succeed if the
+repository is checked out on a platform that we don't maintain.
+
+This is the initial list of platforms that we want the integration
+to succeed and we can add new ones once we start maintaining them.
+
+Change-Id: Idce2a84eb8d5b1ef7f14d399fe013f666b479108
+",2014/8/11 12:47,13
+138,Add qtwebchannel as submodule,"Add qtwebchannel as submodule
+
+Change-Id: I9f3564c78d08abdca73ce395f31b3031a829e502
+",2014/7/22 18:10,137
+139,androiddeployqt: Force Qt Gui dependency for all apps,"androiddeployqt: Force Qt Gui dependency for all apps
+
+Currently, the only way to launch an Android application is through
+the platform plugin, which of course depends on Qt Gui. This causes
+problems running corelib autotests, since they have QT = core in
+the .pro file and thus will not deploy or load the platform plugin.
+
+At some point, we may have a way to launch pure corelib-applications
+on Android (like services), but until then, we need to hardcore the
+dependency on Qt Gui to make sure these autotests run properly.
+
+Change-Id: Ica794af972a06ec021c1fa28333866296eab96e0
+",2014/7/23 14:52,106
+140,Avoid race condition in QQmlEngine on shutdown.,"Avoid race condition in QQmlEngine on shutdown.
+
+The QQmlTypeLoader was deleted (and its thread shut down) when
+the QQmlEnginePrivate was destroyed. However, the QQmlTypeLoader
+runs a thread which would happiliy make calls on the engine and
+its managed data. Fix this by stopping the QQmlTypeLoader's
+thread right away in QQmlEngine.
+
+Task-number: QTBUG-39905
+Change-Id: Ida8e95d083f79237c74b036fd3521133a9fa4ac7
+",2014/7/1 12:57,4
+141,"Revert ""GCC: Better mkspec suggestion on mac""","Revert ""GCC: Better mkspec suggestion on mac""
+
+This reverts commit 4c863371c44eab119ff440c0ad9ac48378efbc47",2011/12/24 7:43,8
+142,xcb: Use XIGrabDevice instead of xcb_grab_pointer with XI 2.2,"xcb: Use XIGrabDevice instead of xcb_grab_pointer with XI 2.2
+
+Switch to using the pointer events from XI2 when touch is available (i.e.
+version is >= 2.2). This allows us to select and grab the button and motion
+events together with the touch ones. This prevents the issue of not getting
+touch events when grabbing via the plain xcb functions.
+
+After all the plumbing and recabling of things the result is much cleaner than
+before since now the pointer and touch events, which influence each other in
+certain ways anyhow, are handled on the same unified path. The xcb-only path for
+pointer events are not changed - that functions as before when XI 2.2+ is not
+available.
+
+To prevent touch sequences from being replayed after ungrabbing (for example after
+dismissing a popup that caused a grab), we try to accept touches via XIAllowTouchEvents.
+Unfortunately this leads to a deadlock and therefore we can only do it when we know
+we have a new enough libXi. This is a configure time check which is not ideal since
+the system on which apps run can have a newer libXi than the machine that did the Qt
+build, but seems like the best we can do.
+
+The environment variable QT_XCB_NO_XI2_MOUSE can be set to 1 in order to prevent
+processing mouse events through XInput. This restores the old behavior with broken
+grabbing.
+
+Done-with: Michal Klocek <michal.klocek@theqtcompany.com>
+Task-number: QTBUG-43525
+Task-number: QTBUG-45054
+Task-number: QTBUG-30417
+Change-Id: I8e7432fe99a44d0ae3d75c3cc8226e3de006d125",2015/3/27 10:51,8
+143,Vcs: Use correct project to trim down list of files on commit,"Vcs: Use correct project to trim down list of files on commit
+
+Change-Id: I9961e981864f7dc261c2028fd3b80a36647a9a00
+",2015/2/20 10:51,0
+144,tst_treeview: Enable tests using mouse double click,"tst_treeview: Enable tests using mouse double click
+
+Change-Id: I721dbda1ef45f78a178d7d901dd530039cb66906
+",2015/2/27 11:16,7
+145,Fix two gcc warnings,"Fix two gcc warnings
+
+Change-Id: I549eb67109eba2cfb766eec78377d63ecc34d3c8
+",2015/2/26 14:07,0
+146,xcb: Update mouse buttons from MotionNotify events,"xcb: Update mouse buttons from MotionNotify events
+
+We don't receive ButtonRelease event after closing a popup
+by clicking outside of the client area. Thus the internal
+state of mouse buttons in the xcb plugin becomes outdated
+until we receive ButtonRelease event.
+
+This commit updates the internal state of mouse buttons
+from MotionNotify events. So when a user will move a mouse
+on the client area, the xcb plugin will send a mouse event
+with updated buttons to Qt Gui and QGuiApplication will
+detect the following mouse events correctly.
+
+Task-number: QTBUG-35065
+Change-Id: Ica334dfbf04f7ef81db86b25262328fe5da11808
+",2015/2/9 15:08,20
+147,Make it possible to build Qt against custom OpenSSL headers,"Make it possible to build Qt against custom OpenSSL headers
+
+The ""old"" way of building Qt against a specific version of OpenSSL
+headers was to append -I/path/to/headers to configure's command line.
+This will however effectively prepent the specified path to the
+included search paths for all qmake projects.
+
+This patch adds the -openssl-cpaths path option to configure that
+will propagate the specified arguments (e.g. include paths) to the
+configure build test for OpenSSL as well as into QtNetwork's ssl.pri,
+the only place where it is needed.
+
+Change-Id: I22fa219de489644467e72206e43de0e6039ad9a7
+",2014/10/29 10:18,165
+148,Safeguard QScreen::refreshRate against buggy platform behavior,"Safeguard QScreen::refreshRate against buggy platform behavior
+
+Change-Id: I891bd5272db76e8562f6722b633cc0fdaac5f7a2
+Task-number: QTBUG-43853
+",2015/1/16 9:43,1
+149,QProcess/Win: fix spurious crash,"QProcess/Win: fix spurious crash
+
+QProcessPrivate::_q_processDied() was potentially called twice if there
+was a slot connected to readyRead() that called processEvents(), because
+the processFinishedNotifier was still enabled when readyRead() was
+emitted.
+This led to a spurious null pointer access in findExitCode.
+
+Change-Id: I4b796b81f050dc46bb9469602984accaa6ebfa28
+Task-number: QTBUG-33731
+",2015/2/4 14:17,75
+150,Merge remote-tracking branch 'origin/5.4' into dev,"Merge remote-tracking branch 'origin/5.4' into dev
+
+Conflicts:
+	.qmake.conf
+	tests/auto/controls/data/tst_stackview.qml
+
+Change-Id: I54b55d51452e812315f97bcdfd1a8e361a427f56
+",2015/1/16 12:48,29
+151,Introduce WebEngineProfile,"Introduce WebEngineProfile
+
+Introduces initial API for the Chromium BrowserContext.
+
+[ChangeLog][QtWebEngineWidgets][QWebEngineProfile] New API for profiles
+applying
+to groups of QWebEnginePages.
+
+Change-Id: I3c4ef4053fde7564af29178c91a0aca8a2b61a5f
+",2014/11/24 17:15,108
+152,Read and write QObject pointer properties in QML without registration.,"Read and write QObject pointer properties in QML without registration.
+
+Previously, accessing QObject pointer properties from QML would require
+these types to be registered with qRegisterMetaType(), but this
+shouldn't be necessary if we're able to read/write the property.
+
+Change-Id: Ic8b00ed93a1e5e42cf7aaaf1c355e89557485c59
+",2014/12/1 13:38,11
+153,Add QFont::Weight enum values,"Add QFont::Weight enum values
+
+And try to make good use of them in order to match the QFont
+request more closely.
+
+Task-number: QTBUG-38482
+Change-Id: I768dfa8828e370d77a1c17ecf4796d750b3edd9b",2014/10/27 15:11,75
+154,Bump version number to 5.4.1,"Bump version number to 5.4.1
+
+Change-Id: I54231de422ffc63162e49c587f371c56c3312210
+",2014/12/7 19:01,86
+155,Remove unneeded <Name> property from examples.,"Remove unneeded <Name> property from examples.
+
+Change-Id: I67b97bd033634e6189bda1aa68f5c2bc02ddee76
+",2014/12/1 15:16,322
+156,Use Holo theme on Android 5.0.,"Use Holo theme on Android 5.0.
+
+This is a temparary ""fix"" until we'll fix all the problems with the new
+Android Material theme.
+
+Task-number: QTBUG-42900
+Change-Id: I5485cfd5ac5fdd66cb85da423fe2e63e65be010f
+",2014/11/26 12:53,0
+157,Add support for compiling QtQuick Dialogs ahead of time,"Add support for compiling QtQuick Dialogs ahead of time
+
+Don't try to load .qml files from the disk
+
+Change-Id: Ib2ff82789dbae68f0821bdd1e0697fb2267539d0",2014/11/24 14:47,153
+158,Android: Extract AnimatedStateListDrawable,"Android: Extract AnimatedStateListDrawable
+
+Task-number: QTBUG-42488
+Change-Id: I6400c5ba54bdc9a0e1db71986432a6653da9e534
+",2014/11/14 15:30,1
+159,"Revert ""Fix fallbacks for adapted common script""","Revert ""Fix fallbacks for adapted common script""
+
+This reverts 1dd9a0af4f577ccb5578cea562a98686c8e290e6. It was
+a band-aid for a change in the unicode itemizing algorithm
+which caused the script of a script item to become unreliable.
+This change has since been reverted, so the band-aid is no longer
+needed, and it also causes problems for WebKit on Windows when
+it ends up preferring Arial Unicode MS as the font for Uchen
+script, even though the font does not support this script.
+
+The autotest from the reverted commit is kept in place and still
+passes.
+
+[ChangeLog][Text] Fixed regression when rendering Uchen text in
+WebKit on Windows.
+
+Change-Id: I488c84703bb55a050d90092c6bf9e5c70a9e31c2
+Task-number: QTBUG-41372
+",2014/11/13 12:13,0
+160,CMakeProject: Set file target with most includes,"CMakeProject: Set file target with most includes
+
+This fixes regression 65c113bcbc124a0718444c7eb4238f94eddc7b78 that caused
+files to be likely assigned to ""all"" target when all CMake targets were having
+sources residing in same directory using Ninja generator. As ""all"" came first
+then it became best match in such case.
+
+This introduces slight modification, so target with most include paths is
+chosen from these having best file system proximity to source file. Doing so we
+select likely real target and get all #include preprocessor directives resolved
+properly in the editor.
+
+Change-Id: Ifb85bb5954b4cf5618a6d8444c993c69ebab2259
+",2014/11/2 12:07,3
+161,Disable the build on Windows RT / Windows Phone,"Disable the build on Windows RT / Windows Phone
+
+Change-Id: I594737c60ed2d4c08de662b8ca534e5abbbffd60
+",2014/10/20 11:24,0
+162,Add setting ErrorPageEnabled,"Add setting ErrorPageEnabled
+
+This is required so that embedders can implement custom error pages,
+and is also needed for tests, where error-page loading has side-effects
+on subsequent page loads.
+
+Change-Id: I5ae276a58864a2fa9d7b608bea3340b482a92f4e",2014/10/10 16:44,61
+163,make -force-debug-info work for objective C,"make -force-debug-info work for objective C
+
+Task-number: QTBUG-35776
+Change-Id: Idb96108963e9330dd62c7878457c30bd74dc79a0",2014/9/25 10:03,115
+164,WIP: Improve checking for event/socket notifiers and timers,"WIP: Improve checking for event/socket notifiers and timers
+
+Starting/stopping timers from another thread may result in errors that
+may not appear until hours, days or weeks after if a release build of
+Qt is used with the GLib/UNIX event dispatchers. Such errors may
+manifest as warnings such as ""QObject::killTimer(): Error: timer id 7
+is not valid for object 0x2a51b488 (), timer has not been killed"" and
+application crashes (e.g. crashes in malloc, realloc and
+malloc_consolidate).
+
+Task-number: QTBUG-40636
+Change-Id: I2de50d50eb1fc7467fcebb9c73b74d2f85137933
+",2014/9/13 11:32,126
+165,"Fix cancel operation for example ""Application""","Fix cancel operation for example ""Application""
+
+On the save dialog the cancel option is detected now from exec()
+method.
+
+Change-Id: I977626b83fe770ddc148b57551becd04e5fd9dd5
+Task-number: QTBUG-41020
+",2014/9/16 13:56,0
+166,Fix WiX autotest.,"Fix WiX autotest.
+
+Change-Id: I11a7a73517cddb8f69db6270181f92c9674f9367
+",2014/9/2 16:04,3
+167,ANGLE is never available on WinCE,"ANGLE is never available on WinCE
+
+Change-Id: I853774af533d7f4b37b4789344e531d2688f91f5
+",2014/9/9 9:49,123
+168,Make sure to save the userId file in the expected place,"Make sure to save the userId file in the expected place
+
+Get the data location from the standard paths.
+
+Change-Id: Ic80d190f5140ece3f4d922f857d783a68eeffdcb
+",2014/8/29 12:50,231
+169,Fix render scenegraph with no context,"Fix render scenegraph with no context
+
+Related to commit 5494dc7bff733 which fixes QTBUG-39858
+but introduces a new side-effect using the same
+Qt-creator plugin like in the bugreport.
+
+Problem is that the context is invalidated but not
+destroyed and hence not recreated after hide+show
+what results in
+
+QQuickWidget: render scenegraph with no context
+at QQuickWidgetPrivate::renderSceneGraph
+
+The working solution is to also proper destroy
+the context on QQuickWidget::hideEvent like done at
+other places too. Then on QQuickWidget::showEvent
+the context is recreated and then proper rendered.
+
+Change-Id: I187f9e3ec144a36f67d10523534d2953c04fdb85
+",2014/8/15 13:24,1
+170,Backport: use backslashes for UNCs path,"Backport: use backslashes for UNCs path
+
+Qt5:18c916517f3004d34482c20ed66bf09ec274d385
+Task-number: QTBUG-13359
+
+Change-Id: I2f38ecb76d87b87dc1d40bd48c94c78550a6ca1f
+",2014/8/8 22:01,0
+171,Remove QQuickWindow::glslVersion & glslIsCoreProfile,"Remove QQuickWindow::glslVersion & glslIsCoreProfile
+
+Superceded by the SurfaceFormat attached type
+
+Change-Id: I7511fd28eb375eb3cd3cdd4bda6d82c1883e3094
+",2014/8/10 11:28,32
+172,Get rid of setTimeout calls in qwebchannel.js client code.,"Get rid of setTimeout calls in qwebchannel.js client code.
+
+This was a historic artefact which should not be required anymore.
+Back then it was added when trying to improve the perceived performance
+of the webchannel on an embedded device. Nowadays, using the built-in
+WebKit IPC mechanism instead of WebSockets, paired with the rest of
+the code cleanup and other changes, it should not be required anymore.
+
+Change-Id: I4b2d76d84aaf92e12592a0b2bcf94710b697846e
+",2014/8/11 11:47,2
+173,Get rid of setTimeout calls in qwebchannel.js client code.,"Get rid of setTimeout calls in qwebchannel.js client code.
+
+This was a historic artefact which should not be required anymore.
+Back then it was added when trying to improve the perceived performance
+of the webchannel on an embedded device. Nowadays, using the built-in
+WebKit IPC mechanism instead of WebSockets, paired with the rest of
+the code cleanup and other changes, it should not be required anymore.
+
+Change-Id: I4b2d76d84aaf92e12592a0b2bcf94710b697846e
+",2014/8/11 11:47,2
+174,More QQuickCanvas cleanup handling.,"More QQuickCanvas cleanup handling.
+
+Avoid calling into QQuickContext2D from QQuickContext2DTexture
+after QQuickContext2D has been deleted. We acheive this by
+
+1. Giving the texture a direct pointer to the gl context and
+   and surface, so that it doesn't need to go through m_context
+   to get to them (which may have been deleted).
+
+2. Protect access to QQuickContext2DTexture::m_context with
+   a mutex and make sure it is set to 0 in a safe manner
+   when the QQuickContext2D object is deleted.
+
+Change-Id: Ie0a30f9fc46f844224838a7cdf2f28a62e8ce322
+",2014/8/1 9:26,114
+175,Report keyboard modifiers in evdevmouse,"Report keyboard modifiers in evdevmouse
+
+Mouse and wheel events had no modifiers set. This is not ideal.
+Pass at least QGuiApplication::keyboardModifiers() to get the
+modifiers from the last key event.
+
+Change-Id: Ica0c338c60c3e289dccfafa5aa6d602d4e111ad5
+",2014/6/23 10:11,166
+176,Replaced Nokia copyrights,"Replaced Nokia copyrights
+
+Replaced Nokia copyrights with Digia copyrights
+Did NOT touch contact details
+This command also ignores INdT Copyrights and removes trailing
+whitespace from removed ""all rights reserved"" lines.
+
+find . -path '*/3rdparty/*' -prune -o
+-exec grep -ilI -E '.*Copyright.*Nokia.*' {} \; |
+tee >(xargs sed -i -r '1,10 { /INdT/ !{
+s/([ \t#*]*)(.*Copyright.*Nokia.*)/
+\1Copyright \(C\) 2013 Digia Plc and\/or its subsidiary\(-ies\)\./I }
+}') >(xargs sed -i -r '1,10 s/(^[ \t]*)([#*]*)([ \t]*)
+(all rights reserved.*)/\1\2/I')
+
+Change-Id: I76930f6905dda5947541de7e9e6b99e9a89c19c5
+",2013/5/23 9:07,0
+177,Do not use module-include in shader-plugin.,"Do not use module-include in shader-plugin.
+
+Task-number: QTBUG-27471
+
+Change-Id: I4f15e7358739ac6057798505af5ea4c171207f20
+",2012/10/8 14:24,120
+178,Fix doc errors in QScreen.,"Fix doc errors in QScreen.
+
+- Remove some stale \property tags
+- Ensure all args are documented
+- Remove signals from \sa tag
+- Ensure return values are documented
+
+Change-Id: I1db111d082ee47f046598695bc3fa53d67798333
+",2012/8/31 7:55,13
+179,Ensure that dynamic property storing QObject ptr notifies on delete,"Ensure that dynamic property storing QObject ptr notifies on delete
+
+Previously, when a QObject ptr was stored in a dynamic variant
+property, the value of the property could change (to a zero ptr)
+if the QObject was deleted without a notify signal being emitted
+by the QDeclarativeVMEMetaObject which stores the property.
+
+This commit ensures that such a notify signal is emitted correctly.
+
+Task-number: QTBUG-23451
+Change-Id: I5689abd984b177737f8d5f18950838b73ebde328
+",2012/1/27 5:54,3
+180,[Angle] Fix build on MinGW-w64 GCC-4.9 [2/2],"[Angle] Fix build on MinGW-w64 GCC-4.9 [2/2]
+
+d3d11.h defines the needed structs and enums as of MinGW-w64 4.9
+
+Change-Id: Id0f1a513270eca242b1cccf4633eab703c184482
+",2015/4/6 21:31,11
+181,Tests: remove insignificant flag for dbus tests on osx,"Tests: remove insignificant flag for dbus tests on osx
+
+Tests are now passing in CI.
+
+Change-Id: I0051fb7070c1c1027c557eba9dde6367ad59ac7a
+Task-number: QTQAINFRA-837
+",2015/3/27 8:40,0
+182,xcb: Update mouse buttons from MotionNotify events,"xcb: Update mouse buttons from MotionNotify events
+
+We don't receive ButtonRelease event after closing a popup
+by clicking outside of the client area. Thus the internal
+state of mouse buttons in the xcb plugin becomes outdated
+until we receive ButtonRelease event.
+
+This commit updates the internal state of mouse buttons
+from MotionNotify events. So when a user will move a mouse
+on the client area, the xcb plugin will send a mouse event
+with updated buttons to Qt Gui and QGuiApplication will
+detect the following mouse events correctly.
+
+Task-number: QTBUG-35065
+Change-Id: Ica334dfbf04f7ef81db86b25262328fe5da11808
+",2015/2/9 15:08,326
+183,"Coding Style: Update to MSVC 2013, g++ 4.7, clang 3.1","Coding Style: Update to MSVC 2013, g++ 4.7, clang 3.1
+
+And add stub texts for scoped enums, initializer list and delegating
+constructors.
+
+Change-Id: Ic1f9b97b09fa62b890ea3b7be4f2315ea1a72576
+",2015/3/18 15:47,2
+184,Updated submodules.,"Updated submodules.
+
+Change-Id: I9a9865ce282d870f755e08438ba187061a41ed9d
+",2015/2/26 4:34,70
+185,Implement smarter search logic for styles,"Implement smarter search logic for styles
+
+With this change it's possible to use any Qt-supported URI
+as a style path (HTTP works now). Also fixes situations when user-
+provided non-existent absolute paths prevented from loading
+default styles.
+
+Change-Id: I4011cb2c169166074bad28ed09938926dff700d7",2014/10/14 18:05,155
+186,Dark theme: Light icons for build step actions,"Dark theme: Light icons for build step actions
+
+For a dark background we need light icons.
+
+Change-Id: I86714598be70bff981f94fb6c4e4afd6acfbe96a",2014/11/10 17:04,30
+187,Add checks for python and GCC versions.,"Add checks for python and GCC versions.
+
+The GCC version check is only run on Linux.
+Change-Id: I524508d763005190764526ce337dc348e5ba4fcb
+",2014/10/27 16:06,60
+188,QWidgetTextControl: Suppress drag selection for OS-synthesized mouse events.,"QWidgetTextControl: Suppress drag selection for OS-synthesized mouse events.
+
+Change-Id: I09f82ed917586cd3de8b4146fc6638d19d428163
+Task-number: QTBUG-40461
+",2014/10/28 10:28,229
+189,add QDebug streaming operators to QWidget and QWindow,"add QDebug streaming operators to QWidget and QWindow
+
+It's useful to have more identifying details instead of just a pointer
+and a class name.
+
+Change-Id: Ia0d12331ba3aebd78ebd110ff2db85122e736323
+",2014/11/7 8:36,118
+190,Theming: fix regression in search result bg color,"Theming: fix regression in search result bg color
+
+Fixes QTCREATORBUG-13309
+
+Change-Id: I320f031a49f8ad2ef4eabd80597d8183f172aa78
+",2014/11/9 13:11,58
+191,Subversion: Improve detection of svn directories,"Subversion: Improve detection of svn directories
+
+* Subversion was not found when calling the managesDirectory method
+  in subversion's top level directory
+* Subversion was not found for non-existing directories. This broke
+  the wizard's version control support.
+
+Task-number: QTCREATORBUG-7763
+Change-Id: Iefbd8e179c48b188e4f079fce8f72ae8b3ec0236
+",2014/11/3 14:37,176
+192,Added missing -force-pkg-config for mac builds,"Added missing -force-pkg-config for mac builds
+
+Change-Id: I30d9d7efe7f0ad4fd492b7f878991fe81706ed8c
+",2014/10/3 9:50,174
+193,QbsProject: Provide compiler call data,"QbsProject: Provide compiler call data
+
+Change-Id: I9694535f02f631cac266c26b4f4c973a06c6c899
+",2014/10/29 15:59,1
+194,Fix ScrollView maximumValue binding evaluation,"Fix ScrollView maximumValue binding evaluation
+
+When content dimensions change in a ScrollView, ScrollViewHelper copies
+those properties and updates the scroll bar, taking care to avoid
+recursion. Because those properties were copied one-by-one, bindings
+could be evaluated repeatedly.
+
+This meant that the maximumValue was briefly calculated with a new
+contentHeight and an old originY, and the current value would be bounded
+to that result. In some cases, that resulted in the view's position
+jumping erratically while scrolling.
+
+Putting these layout properties inside an object allows updating them
+'atomically', with a single evaluation of bindings.
+
+Change-Id: I2a19e4c70096259ef7bbb5a00727ac767c4b8c57
+",2014/8/15 23:00,36
+195,QAccessible compile fix,"QAccessible compile fix
+
+Change-Id: Id2fc4a123a4b180b9ab439429a0d20245c7ee41b
+",2014/9/29 15:34,4
+196,Make strings translatable,"Make strings translatable
+
+Change-Id: I1dc1d306d0c1e8070e75a73c23f622389f06fad1
+",2014/7/30 12:19,33
+197,Moved Q_DECLARE_METATYPE outside of Qt namespace,"Moved Q_DECLARE_METATYPE outside of Qt namespace
+
+Change-Id: I87db065a38bc5cb8e8acb603d48e5856d3bc7080
+",2014/8/22 11:39,32
+198,Added a nodeJS example,"Added a nodeJS example
+
+This is a small sample of a command line chat client which
+shows how to use QWebChannel with NodeJS.
+See included readme for instructions on how to execute it.
+A known port has been introduced to make this work.
+
+Change-Id: If430703f8c2267df758df9d5978509675c8aea9d",2014/7/10 13:00,92
+199,Introduce QRasterWindow,"Introduce QRasterWindow
+
+A simple convenience class providing a QWindow that has a
+paintEvent and supports opening a painter on itself. It
+behaves exactly like QOpenGLWindow in this respect, which is not
+surprising since they share the same base class (QPaintedWindow).
+
+QRasterWindow does not however have any OpenGL dependencies and will
+be present in -no-opengl builds too.
+
+[ChangeLog] Added QRasterWindow, a thin convenience wrapper for a
+QWindow on which a QPainter can be opened.
+
+Change-Id: I37e82720492945d7b85d5f713eea8d5f7556e511
+",2014/7/29 14:58,51
+200,WIP: ScrollBar,"WIP: ScrollBar
+
+Change-Id: If4a6ba212c6067d26b87f17c039a80fefecd98d0
+",2014/7/3 12:07,87
+201,"Unify error, info, warning icons","Unify error, info, warning icons
+
+Deduplicate common 24x24 icons for error, info and warning.
+
+Change-Id: I667e5d326c99ae613ff9308ff23940b9d5c7aabf
+",2014/5/28 13:04,21
+202,Don't deploy networkmanager/connman/generic bearer on Android,"Don't deploy networkmanager/connman/generic bearer on Android
+
+Change-Id: I85c40ef7ae9ac5f9509123db11fe6f3d7a71604b
+",2015/2/19 6:19,0
+203,Detect qt.conf in bundle on OSX without QCoreApplication,"Detect qt.conf in bundle on OSX without QCoreApplication
+
+On OSX we don't need the applicationDirPath to find a qt.conf
+located in the application bundle. Let's take advantage of this and
+allow findConfiguration to use it.
+
+Task-number: QTBUG-24541
+Change-Id: I38c349a3bcd140fcf91352c88c24ca662e6e6f2e",2015/3/9 16:44,627
+204,Core: Reinitialize change notification after saving,"Core: Reinitialize change notification after saving
+
+When saving a version controlled file, a new version might be created.
+Therefore, ensure that the current file version is being monitored.
+
+Change-Id: Id71a9148a9434ce35b79e1632b9a87d222a57176",2015/1/2 14:27,357
+205,Make chat example more error tolerant,"Make chat example more error tolerant
+
+It becomes more obvious on platforms which do not support Bluetooth
+that the example will not work.
+
+Change-Id: Ia6d249a4a891f93abf29910500ba164662308889
+",2014/12/22 12:06,1
+206,Allow to define the name used for remote objects.,"Allow to define the name used for remote objects.
+
+This makes it possible to optional set the used name for
+QObject's too just like the case for QAbtractItemModel's
+already.
+
+Change-Id: Ifdb81c2e9273ac02f87548aa14c1006dd50c892e
+",2015/5/12 17:36,201
+207,OS X: Fix pan gestures.,"OS X: Fix pan gestures.
+
+The QPanGesture recognizer requires single-point touch events. The touch
+implementation in Qt 4 would test Qt::WA_TouchPadAcceptSingleTouchEvents
+and forward single touch events if set.
+
+Making this work in Qt 5 is a little bit more involved since the platform
+plugins don't know about widgets.
+
+Change the Cocoa touch implementation to send single-point touch events
+to QWidgetWindow windows only. Make QApplication forward single-point
+touch events only if the target widget has the
+Qt::WA_TouchPadAcceptSingleTouchEvents attribute set.
+
+Task-number: QTBUG-35893
+Change-Id: I68712a5e3efb4ece7a81ca42f49c412e525eeb3a",2014/8/22 8:18,23
+208,WIP: QWindow::requestUpdate().,"WIP: QWindow::requestUpdate().
+
+This is a continuation of https://codereview.qt-project.org/#/c/95893/
+and https://codereview.qt-project.org/#/c/93979/
+
+Change-Id: I0e2a09b53459a56d90dcd9043e694b19e2d77a9e
+",2014/9/30 11:21,3
+209,Merge remote-tracking branch 'origin/5.3' into 5.4,"Merge remote-tracking branch 'origin/5.3' into 5.4
+
+Conflicts:
+	.qmake.conf
+	translations/qtdeclarative_de.ts
+	translations/qtdeclarative_ja.ts
+	translations/qtdeclarative_ru.ts
+	translations/qtdeclarative_uk.ts
+
+Change-Id: I7aa9860bb115137063e667299ab614b636321e88
+",2014/9/8 13:01,30
+210,GLSL: Move toolbar creation to Widget constructor,"GLSL: Move toolbar creation to Widget constructor
+
+It doesn't need the editor parameter anymore, so the two-phase
+setup can go. Note that both paths through ctor() finally hit
+*Widget::createEditor() (one directly, one indirectly through
+the first BaseTextEditorWidget::editor() call), so this doesn't
+change what's set up, only when.
+
+Change-Id: If92a7e2a60ea3df417ecdeabc6f8e9dc3a23e4f8
+",2014/8/1 15:58,115
+211,ProjectExplorer: Fix recent regression in kit matcher,"ProjectExplorer: Fix recent regression in kit matcher
+
+Change-Id: I1268aae0a5063bf1ae0a144a99a9db70de508790
+",2014/7/29 7:02,0
+212,C++: Tests: Remove plain-cplusplus,"C++: Tests: Remove plain-cplusplus
+
+Change-Id: Ifdf4cd5ea478c87d585c9404caf8f4be6873f692
+",2014/7/28 8:12,2
+213,Git: Add on-demand branches expanding,"Git: Add on-demand branches expanding
+
+Make ""branches expanding"" on demand and asynchronous.
+After ""git show"" there is clickable text: ""Branches: <Expand>"" in
+description. If user clicks this text then branches for commit is
+triggered and done asynchronously.
+
+Task-number: QTCREATORBUG-11293
+Done-with: Przemyslaw Gorszkowski <pgorszkowski@gmail.com>
+Change-Id: I772cfef823d3f95e2b3060dfb5973157d81fc11a",2014/6/24 7:52,20
+214,Debugger: Speed up reading of 0 terminated blobs in dumpers,"Debugger: Speed up reading of 0 terminated blobs in dumpers
+
+Change-Id: Iebc64c21f4dd6f4876989e57d3a347b96e1bd449
+",2014/10/9 23:32,9
+215,Introduce mock UIDelegates for testing.,"Introduce mock UIDelegates for testing.
+
+Switch JS dialogs test to using this over the testsupport
+plugin.
+
+This is a less intrusive approach that lives as self contained qml
+modules within the test infrastructure. As an added benefit, it
+covers the UI delegation logic from end to end, including what
+happens in ui_delegates_manager.cpp.
+
+Change-Id: I1cc0afaf5514d53e1f3b4b0682379dd2d8d8a913
+",2015/3/20 11:18,3
+216,Skip tst_QFiledialog::directoryEnteredSignal() depending on side bar entry count.,"Skip tst_QFiledialog::directoryEnteredSignal() depending on side bar entry count.
+
+The test relies on having at least 2 entries, which is not always the
+case.
+
+Change-Id: Ief812c598409fe829edb930e563740e5f2213580
+",2015/4/21 7:04,2
+217,Stabilize tst_qquickimage::noLoading,"Stabilize tst_qquickimage::noLoading
+
+The test loads an image from a remote source and it has a QSignalSpy installed
+for the progressChanged(qreal) signal on the QQuickImage. The test counts the
+number of times the signal is emitted and expects it to hit an exact value.
+That seems wrong when loading an image over the network, as we have no control
+over in what pieces the data arrives on our end. And as it turns out, the test
+occasionally fails in the CI system, which is also reproducible.
+
+To stabilize the test, we now expect at least two emissions of the signal when
+loading from the network (0% and 100%) but there may be more (0% 10% 80% 100%
+for example). In addition the reload case is simplified by resetting the spy
+and verifying that progressChanged was not emitted at all.
+
+Change-Id: Ib2e660651d40b92eff889ebe3baabb74d6e00fb4
+",2015/4/14 12:38,9
+218,Ensure .rep includes are found,"Ensure .rep includes are found
+
+For some versions of Qt, doing a shadow build of a project that uses repc
+and includes headers by #include ""header.h"" will would not compile.
+
+Change-Id: I8563c9f434a22b62c1af4b0e85999d7a73046492
+",2015/2/28 0:40,5
+219,Bump version,"Bump version
+
+Change-Id: I250fa893cdf831d03f9217b5dc0a5aa2f9a6a6b5
+",2015/1/16 20:08,23
+220,[WIP] Make declarative organizer item ID completely opaque to the user,"[WIP] Make declarative organizer item ID completely opaque to the user
+
+pros:
+- makes it obvious the ID shouldn't be initialized with an arbitrary data
+cons:
+- console.log(item.id) has no any value anymore (could be solved separately)
+
+Change-Id: Idbb11840d81a0edaa97ec224f3b0c32169020d5d
+",2014/12/22 15:28,14
+221,Turn mingw 4.7 off from qtconnectivity wip/win,"Turn mingw 4.7 off from qtconnectivity wip/win
+
+The removal of this configuration is being discussed but no final
+decision has been made. THis change uhnblocks the development on this
+win32 feature/porting branch.
+
+Change-Id: Ib0d4a29143699256ab60cab00cd82e1cd7f272f2
+",2014/11/26 8:19,6
+222,Merge remote-tracking branch 'origin/5.4' into dev,"Merge remote-tracking branch 'origin/5.4' into dev
+
+Conflicts:
+	src/corelib/io/qiodevice.cpp
+	src/plugins/bearer/linux_common/qofonoservice_linux.cpp
+	src/plugins/bearer/linux_common/qofonoservice_linux_p.h
+	src/plugins/platforms/android/qandroidplatformtheme.cpp
+	src/widgets/styles/qmacstyle_mac.mm
+
+Change-Id: Ia02aab6c4598ce74e9c30bb4666d5e2ef000f99b
+",2014/11/21 15:16,7
+223,"Revert ""Fix fallbacks for adapted common script""","Revert ""Fix fallbacks for adapted common script""
+
+This reverts 1dd9a0af4f577ccb5578cea562a98686c8e290e6. It was
+a band-aid for a change in the unicode itemizing algorithm
+which caused the script of a script item to become unreliable.
+This change has since been reverted, so the band-aid is no longer
+needed, and it also causes problems for WebKit on Windows when
+it ends up preferring Arial Unicode MS as the font for Uchen
+script, even though the font does not support this script.
+
+The autotest from the reverted commit is kept in place and still
+passes.
+
+[ChangeLog][Text] Fixed regression when rendering Uchen text in
+WebKit on Windows.
+
+Change-Id: I488c84703bb55a050d90092c6bf9e5c70a9e31c2
+Task-number: QTBUG-41372
+",2014/11/13 12:13,63
+224,Move SLOT(...) parsing into repparser,"Move SLOT(...) parsing into repparser
+
+Leads to much cleaner code
+
+Change-Id: I379191a771b0b2c85e3b660d49420dc15a9b9ce3
+",2014/11/7 13:46,119
+225,Fix incorrect file permissions after commit 9c3a58a913a7e59359146264ee59d40d703d4db2,"Fix incorrect file permissions after commit 9c3a58a913a7e59359146264ee59d40d703d4db2
+
+These files should not be executable
+
+Change-Id: I292eb9df480a642a65f9065e4fe36bd52c093dc7
+",2014/10/30 19:19,65
+226,I19db4dd36491820d822d8e1d050b1b604ec7067a,"ManhattanStyle: Fix display for selected item
+
+Change-Id: I19db4dd36491820d822d8e1d050b1b604ec7067a",2014/10/11 18:26,274
+227,Welcome: Keep sidebar and headers static on scrolling,"Welcome: Keep sidebar and headers static on scrolling
+
+Task-number: QTCREATORBUG-12872
+Change-Id: I8ab9a88203fcce60fa9f9cdf06369eb0c572a0bf
+",2014/9/24 13:39,257
+228,let JS extension Process find executables in PATH,"let JS extension Process find executables in PATH
+
+Change-Id: I9052b8e895cb638bc4b8a185959c72e6819fb628
+",2014/10/8 9:55,59
+229,Make libtiff link on OS X 10.9.,"Make libtiff link on OS X 10.9.
+
+Backport of Ie6f8639fb920e57289c7d0ad8952603abcfe7377.
+
+Change-Id: I9d0cd625734fda88a9564d4fef7b1f5e9f22c774
+",2013/8/5 14:18,89
+230,clean paths of found files in prepareProject(),"clean paths of found files in prepareProject()
+
+any of the directories may be the root, which would lead to double slashes
+in the constructed filenames.
+
+Change-Id: I053e167a19b795b40e780fc29db356c7f24d286a
+Reviewed-by: Joerg Bornemann <joerg.bornemann@digia.com>",2013/5/16 15:54,1
+231,Getting prepared for relative submodule specs,"Getting prepared for relative submodule specs
+
+.gitmodules file may have relative submodule paths instead of full
+url.
+
+Change-Id: Ib4f00cb2a75a00ffdb7465b669354e0bf7bab1f9
+",2013/4/2 5:58,385
+232,centralize and fixup example sources install targets,"centralize and fixup example sources install targets
+
+follow respective change in qtbase
+
+Change-Id: I27502eb7ebea973e19ec5f7c3ec0e2338556f6e0",2012/12/4 16:11,326
+233,Emit Component.onDestruction before context is invalidated,"Emit Component.onDestruction before context is invalidated
+
+When a component no longer has any live references, emit the
+destruction signal immediately so that handlers are run before the
+associated V8 resources are invalidated.
+
+Change-Id: I722dd6e4b60c499b533fc45e33b61e95bca6187f
+",2012/4/27 6:15,113
+234,Improve contacts qml tests for jsondb notifications.,"Improve contacts qml tests for jsondb notifications.
+
+- Fix occasionally failing qml test test_removeMultipleContacts.
+- Disabled qml test debug logging by default.
+- Removed nested test cases and unneccessary if statements from qml tests.
+- Restore a comparison to qml test lost in previous edits.
+- Reuse model for autoupdate off tests.
+- Improve spying in qml tests for jsondb notifications.
+- Declare a dedicated contact for a qml test.
+- Reorder qml test functions.
+- Rename qml test functions.
+- Remove pending qml test functions (won't implement).
+- Add a test for notifications between models from removing contacts.
+- Add test for model to model notification from contact update.
+
+Change-Id: Ie50388e4caa259fcd642e410ed4280c6e621b2b5
+",2012/1/3 15:34,14
+235,Do not compile in dlldata.c or ia2_api_all_c.c,"Do not compile in dlldata.c or ia2_api_all_c.c
+
+These files are only required for a COM server, but since the
+IAccessible2Proxy will actually be the effective server (inside our
+process). We just have to make sure we respond to the correct events, and
+reimplement the virtual functions as required.
+This is already done, so these files can be removed.
+
+Change-Id: Ic95101945bad263a6da63c08b3e47cc0c9d5734a
+",2015/1/26 16:01,353
+236,"	Preliminary Android support to QtNFC.","	Preliminary Android support to QtNFC.
+
+	Only receiving Ndef messages to QNearFieldManager.
+
+	QNearFieldTarget and LLCP classes need to be implemented for Android
+
+------------------
+
+	Added Android buildsettings to nfc.pro
+	Including Android implementation in QNearFieldManager.h
+
+------------------
+
+QtNfc namespace removed.
+
+------------------
+
+Added Android support to QNearFieldManager::isAvailable() method
+
+------------------
+
+Improved isAvailable method
+
+------------------
+
+Fix QtNfc java module
+
+Added checking for NfcAdapter object so that calling QNearFieldManager::startTargetDetection()
+and QNearFieldManager::stopTargetDetection() methods will not crash application.
+
+------------------
+
+Added support for tag types.
+
+NFC tag type is now included in onNdefDiscovered() method call.
+Only showing information in debug messages for now.
+
+------------------
+
+Fixing missing return values and releasing aquired resources.
+
+------------------
+
+First proof of concept version of target creation for android.
+
+------------------
+
+Fix for include guards.
+
+------------------
+
+Added QHash container for NearFieldmanager
+
+Added QHash container for NearFieldManager which holds each discovered targets.
+Also added setters for NearFieldTarget.
+
+------------------
+
+Using signals and slots to move target information to main thread.
+
+Fixes problem when creating new targets as child of manager.
+
+------------------
+
+Fix for tag detection for tags without NDEF messages
+
+Tag type checking is not working if there is no NDEF messages currently.
+Need to find way to check tag type without Ndef object.
+
+------------------
+
+Added error reporting for QNearFieldTarget::readNdefMessages (Android)
+
+------------------
+
+Registering type name for QNearFieltTarget.
+
+Small refactoring for QNearFieldTarget android implementation.
+
+------------------
+
+Sending UID as bytearray.
+
+Also debug messages to show tech list added into QtNfc.java.
+
+------------------
+
+Trying different approach for android version of QtNfc module.
+
+In this approach we pass through intent object(Java) to NearFieldTarget object(c++).
+
+------------------
+
+	Fixed nfc.pro so QtNfc.jar is built.
+
+------------------
+
+Added tech list into android version of QNearFieldTarget
+
+Could be used to detect availability of NDEF messages and also to detect tag type.
+
+------------------
+
+	Fixed build files so both the C++ and Java libraries are built correctly.
+
+------------------
+
+	Support for writing Ndef messages.
+
+------------------
+
+Implementation for NearFieldTarget::hasNdefMessage().
+
+Also nice debug messages to show available technologies for current tag.
+
+------------------
+
+	Support for NdefFormatable tags.
+
+------------------
+
+	Support for writing NdefFormatable tags.
+
+------------------
+
+	Removed debug messages.
+
+------------------
+
+    Implemented type() method to Android's QNearFieldTarget.
+
+Conflicts:
+	src/nfc/qnearfieldtarget_android.cpp
+	src/nfc/qnearfieldtarget_android_p.h
+
+------------------
+
+Small fixes to remove some of the warnings.
+
+Conflicts:
+	src/nfc/qnearfieldtarget_android.cpp
+	src/nfc/qnearfieldtarget_android_p.h
+
+------------------
+
+Commiting test code for targetLost signal (Because of Merge)
+
+Conflicts:
+	src/nfc/qnearfieldtarget_android.cpp
+	src/nfc/qnearfieldtarget_android_p.h
+
+------------------
+
+Added support for target lost signal
+
+------------------
+
+    Using QString::fromUtf8 instead of QString()
+
+Conflicts:
+	src/nfc/qnearfieldtarget_android.cpp
+
+------------------
+
+    Fixed bug with targetLost not emitting when reading or writing Ndef
+    messages.
+
+    Added some untested code for sendCommand.
+
+------------------
+
+Refactoring.
+
+Conflicts:
+	src/nfc/qnearfieldtarget_android_p.h
+
+------------------
+
+Refactoring and fixes.
+
+------------------
+
+Less debug messages.
+
+------------------
+
+Refactoring and cleaning.
+
+Change-Id: Ideb4c8c8064f46b431532ea4870207691bc49c99
+",2014/12/4 9:00,236
+237,Merge remote-tracking branch 'origin/5.4.1' into 5.4,"Merge remote-tracking branch 'origin/5.4.1' into 5.4
+
+Change-Id: Idadb5639da6e55e7ac8cc30eedf76d147d8d5d23
+",2015/1/29 9:05,1
+238,Theming: allow to override base style,"Theming: allow to override base style
+
+Change-Id: I48e2d03b83fccf3d6eb4b508bd77912dbdaea1d0
+",2014/10/20 20:34,4
+239,Fix not having a context when cleaning up on Windows,"Fix not having a context when cleaning up on Windows
+
+The same old issue surfaces in the windows render loop too.
+The basic render loop is already fixed, apply a similar patch
+to the windows one too.
+
+Task-number: QTBUG-42213
+Change-Id: I07068315f5164014e329b8ce061947c97ae9da61",2014/11/7 7:22,148
+240,Move win32 and Alsa audio backends into plugins.,"Move win32 and Alsa audio backends into plugins.
+
+Change-Id: I9835cf5ee97900569f26421a19543b485e933051
+",2014/1/30 12:35,65
+241,QSqlDriverPrivate clean-up,"QSqlDriverPrivate clean-up
+
+Change-Id: Ia6cbb37330bc0beed7498e43cd18bb2a1afb8e3d
+",2013/4/3 21:32,30
+242,Paint the Z value of particles in ImageParticle,"Paint the Z value of particles in ImageParticle
+
+Just a proof of concept, still missing API that ideally would fall out
+of Qt3D for free.
+
+Change-Id: Ie75b22dc4cfd51f70271ddee806195c601fca122",2012/12/1 19:06,400
+243,Logging: Simplify message handler logic for windows,"Logging: Simplify message handler logic for windows
+
+Incorporate the functionality of qWinMessageHandler in qDefaultMessageHandler.
+
+Change-Id: Iec5b19e187c0d2e3d8d0874280ba57f6fb21d7b4
+",2012/7/13 11:33,21
+244,Remove binding dependency on QQmlExpression,"Remove binding dependency on QQmlExpression
+
+This is the first step to creating much lighter weight bindings that
+are tuned for the specific scenario in which they're used.
+
+Change-Id: Ib985dcff25679b711b5c634bbc891aa7902bf405
+",2012/3/9 10:15,15

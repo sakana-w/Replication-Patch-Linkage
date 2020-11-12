@@ -1,0 +1,3393 @@
+Id,Title,Message,Time,Time_diff
+1,Use constraints for api-ref environment,"Use constraints for api-ref environment
+
+Change [1] updated tox.ini to use constraints rather than
+specific, non-constrained install commands but neglected
+to update the api-ref environment.  In addition to fixing
+that omission we also remove a bit of ugly trailing
+whitespace.
+
+Co-authored-By: Gorka Eguileor <geguileo@redhat.com>
+
+[1] I879f34129c0d958be0a73bfdc7f641e178d4efe9
+
+Change-Id: I58ec756cd3de2e501c77a4d947e680d0959d22ec
+",08/23/2016 17:34:20,1
+2,WIP fix pci resize/migration,"WIP fix pci resize/migration
+
+Change-Id: Ie8690f2b7235d677ebe15fabaae81b0a6bda29de
+",04/18/2016 11:48:45,433
+3,Fallback to 'root' if provided  user doesn't work,"Fallback to 'root' if provided  user doesn't work
+
+In SSH manager try to use 'root' while connecting to
+slave nodes if authentication fails with login provided
+in settings.
+
+Change-Id: I647add5c67c51c26f710a3a0e92b0498478a90f9
+Closes-bug: #1580199
+",05/10/2016 16:09:56,25
+4,Support local_id configuration,"Support local_id configuration
+
+In some case, we want to specify the local id instead of use the
+external ip. For example, the router is behind NAT, and we don't
+want to expose this IP to peer. This patch will make local_id
+configurable. But if local id is not configured then external ip
+will still be used as the leftid.
+
+Note: this change is DocImpact & APIImpact
+
+Change-Id: I2433d72ba22ce410cbfafb7b8bfb16f51eefdfc1
+Closes-Bug: bug/1513353
+",04/28/2016 06:30:59,294
+5,Bump firewall modeul to 1.8.0,"Bump firewall modeul to 1.8.0
+
+To remove some execs we need to have 'checksum_fill' functionality.
+Unfortunately it was not able to do in 1.2.0. This patch bumps a version
+to 1.8.0 to enable the functionality we need.
+
+Change-Id: Ia06981f338b3e1797004e2c5c5b3e52e08f00124
+",04/07/2016 15:39:55,13
+6,glance_http: add IPv6 support,"glance_http: add IPv6 support
+
+The code is stolen from python-glanceclient.
+It helps to add IPv6 support when openning a socket to Glance server.
+
+Closes-Bug: #1557814
+Change-Id: Ice966f78f94196ba31e64939df4173a67943aa43
+",03/16/2016 01:41:44,281
+7,Add support for ubuntu xenial,"Add support for ubuntu xenial
+
+Change-Id: If3693594c2b02c28e47302158e1303176d282a5d
+Signed-off-by: Paul Belanger <pabelanger@redhat.com>
+",03/26/2016 17:48:38,48
+8,honor the rabbit user and password provided,"honor the rabbit user and password provided
+
+Currently rabbit username and password are defaulted and attempting
+to use anything else would result in a failure during deployment.
+
+Change-Id: I8a2e240a19f915309eee45ea3c3368d131af6c1b
+(cherry picked from commit cd9264d8d13fe0d460cb0497e554c0028e4c9eee)
+Related:  rhbz#1261303",11/10/2015 18:08:16,95
+9,WIP: Random resource names all follow set pattern,"WIP: Random resource names all follow set pattern
+
+This will make it easier to do out-of-band cleanup of Rally-created
+resources. It eliminates the ability for scenarios to specify a custom
+random name length, ensures that the random name prefix always starts
+with ""rally_"", and includes a random part that consists of four
+hyphen-delimited sets of four random characters.
+
+This also deprecates the Scenario._generate_random_name() function;
+all random names will be generated according to the same format to
+limit the likelihood of leaking misnamed resources.
+
+Change-Id: I189474fbb185ab402e3b248421b4188b7ccde7f4
+",05/21/2015 22:36:09,167
+10,"Ipset / Iptables refactor, for rebasing or followup (WIP)","Ipset / Iptables refactor, for rebasing or followup (WIP)
+
+Change-Id: I93000a37a71cd22753b32edbd0a5f3c9cb8b0bde
+",09/11/2014 15:07:18,241
+11,Don't update arch twice when create server,"Don't update arch twice when create server
+
+During the instance creation a dictionary of instance characteristics (base_options) is created in nova.compute.api._create_instance where
+""architecture"" is defined looking into image[properties]. Then ""architecture"" entry is updated to the same value in nova.compute.api._populate_instance_for_create if defined or it removes the 'Unknown' value for this key.
+
+This patch removes the unnecessary ""architecture"" update.
+
+Change-Id: Id76dedef8fc96dcd6fa5b72ace6c50c85e04215b
+",11/21/2012 12:03:46,6
+12,Remove the sample for policy.json,"Remove the sample for policy.json
+
+Closes-bug: #1633986
+
+Change-Id: Icb423bb1cc7cdf38ae1d2f9de95820ce5cdfa5f6
+Signed-off-by: Kevin Zhao <kevin.zhao@linaro.org>
+",10/17/2016 06:08:22,18
+13,Trivial issues with py3 compatible,"Trivial issues with py3 compatible
+
+1. from __future__ import print_function
+2. added missing parenthesis in a print call
+3. changed some quotes to maintain a uniform style
+
+Change-Id: I5622ea8284dfbbdfcb92aaaa9a9b7d38e00a01f9
+",07/08/2016 20:11:30,1
+14,Remove dead code from magnum.common.utils module,"Remove dead code from magnum.common.utils module
+
+After fixing the following bugs by using oslo_utils:
+https://launchpad.net/bugs/1585754
+https://launchpad.net/bugs/1585925
+
+A full cleanup was needed.
+
+Change-Id: I97822760ca8f2425dbe2e2c55cc1187bd4971877
+",05/26/2016 09:17:19,0
+15,Add fip support vlan network,"Add fip support vlan network
+
+Change-Id: I142bfae09a12149a5d48b0f81b4c4573fc840ea3
+",05/26/2016 09:17:56,7
+16,OpenStack services should reach Glance via the internal LB VIP,"OpenStack services should reach Glance via the internal LB VIP
+
+host and port are deprecated in favor of the api_servers config
+See https://github.com/openstack/nova/blob/master/nova/image/glance.py#L48
+
+Change-Id: Ia82bd482eb714d2ed5484d3e4aa879b0ea82ff3e
+Depends-On: I236be9edd95cc07766823f1ca53f2790705b510a
+",03/09/2016 21:02:54,0
+17,Use 'is None' rather than 'is_null()' in matches,"Use 'is None' rather than 'is_null()' in matches
+
+Currently in the matches function for api versions the function
+'is_null()' is called on both the min_version parameter and the
+max_version parameter. However, these parameters are intended to
+be strings, and there is no is_null function on strings so the
+function results in an error. This patch changes them to 'is None',
+since the is_null function is specific to the APIVersionRequest and
+it's only checking if it's values are None as well.
+
+Change-Id: I83ad6aa325650c50b1c0bae8b389370eff4238de
+Closes-bug: #1555817
+",03/10/2016 21:35:17,13
+18,Added keystone package dependency to domains dir,"Added keystone package dependency to domains dir
+
+Keystone class is attempting to create the domains directory
+before the keystone package is installed resulting in an error
+on first run. The resource definition for the domains directory
+has been updated to include a require on the keystone package.
+
+Change-Id: Ic4cb13129d1dd108115ec3cc62a61723cb04f5a2
+Closes-Bug: 1554108
+",03/07/2016 16:30:26,12
+19,[wip] Upgrade eslint dependency to 1.10.3,"[wip] Upgrade eslint dependency to 1.10.3
+
+The eslint package is frozen to version 1.2.1, which was released
+the 20th of August of 2015. The newer versions (last 1.x version
+is 1.10.3) fixes a lot of issues and a lot of checks which are not
+working correctly or which are totally missing.
+
+Also reduces the number of existing warnings when eslint is
+executed.
+
+Change-Id: I8945bbac4e4dd40b4ae44e5d66d9e16506387405
+Closes-Bug: #1547406
+",02/20/2016 22:14:56,1
+20,convert start and stop time to datetime type,"convert start and stop time to datetime type
+
+In AggregationResource controller, start and stop time were pass
+as plain text which is not suitable for get_measures method.
+This patch converts start and stop time to datetime type before
+they passed into storage.get_measures method.
+
+Change-Id: Ie305e1cd661d43054ef022797e62522fe4815049
+",01/25/2016 15:54:26,14
+21,Updated from global requirements,"Updated from global requirements
+
+Change-Id: Iaa11ce42b7c484d93586a60814751d57972cc259
+",08/22/2015 19:16:57,0
+22,Put mysql_secure_installation in codeblock,"Put mysql_secure_installation in codeblock
+
+Change-Id: Iec4ccb8f7afa26348e4488db37021956fe691d74
+Closes-bug: #1503948
+",10/08/2015 03:12:58,3
+23,Added oslo lib without adding dependacy,"Added oslo lib without adding dependacy
+
+moved keystoneclient above celiometerclient and django libs below
+celiometerclient to add list without adding dependancy
+
+Change-Id: I51e04ef76021564275ea857b71ece004d853cfa8
+Closes-Bug: #1481805
+",08/05/2015 21:07:30,16
+24,Create logs vg and use for controller and mongo,"Create logs vg and use for controller and mongo
+
+As stated in title we will create logs volume group and allocate 30 GB
+to it. If user wants to store logs on root partition - he should be
+able to remove all allocated space from logs partition.
+
+Change-Id: Ib14729f8ea95d343c819b3abbc8d1edbd8e89d33
+Closes-Bug: 1394864
+",08/12/2015 10:45:00,21
+25,Fix oslo config import in sync_db.py,"Fix oslo config import in sync_db.py
+
+Fix the import line to use the new oslo_config module.
+
+Change-Id: I5d04850f5b6529725553a1230a67b0383faded79
+Closes-Bug: #1479179
+",07/29/2015 01:56:44,6
+26,Add support for plugin packages of 3.0.0 version,"Add support for plugin packages of 3.0.0 version
+
+Change-Id: Ia5f3c8a15b58e95a902b2fe28f7357385668807d
+Partial-Bug: #1471757
+Implements: blueprint role-as-plugin
+",07/06/2015 15:12:55,10
+27,WIP - Empty test commit - do not merge,"WIP - Empty test commit - do not merge
+
+Change-Id: I012d9d4c1a591215db1c7d7ea99af4bd5fa53005
+",06/09/2015 09:20:05,0
+28,Fix the ipaddress validate issue,"Fix the ipaddress validate issue
+
+Jenkins jobs fail currently since something triggered
+the use of ipaddress instead of ipaddr in wsme.
+
+A lot of openstack projects use netaddr for validation, so
+we have to create a custom wsme type using netaddr to
+be independent of the vagaries of ipaddr/ipaddress with
+wsme's built in type.
+
+Closes-Bug: #1455405
+Co-Authored-By: Davanum Srinivas <davanum@gmail.com>
+Change-Id: I42ba7e58d1d7c3a3032308329ab1d4665332d195
+",05/15/2015 11:29:45,0
+29,Add minitest gem,"Add minitest gem
+
+minitest dependency is required to run acceptance tests
+on CentOS without rspec throwing exception:
+/usr/share/ruby/test/unit/assertions.rb:1:
+    in `require': cannot load such file -- minitest/unit (LoadError)
+
+Change-Id: I72198362181ed3fbfb69e7a06efb8242680c5259
+Closes-bug: #1444736
+",05/07/2015 10:34:49,9
+30,Add node-label parameter to trigger-builds builder,"Add node-label parameter to trigger-builds builder
+
+Add option which allows to set or override node-label parameter
+of the triggered job
+
+Change-Id: Ic4af1575c898263441d2f2aba1a5135211a0b1fd
+",04/15/2015 11:04:48,6
+31,Fix issue if public and internal endpoints are different,"Fix issue if public and internal endpoints are different
+
+Heat uses current request's URL to generate the redirect URL to
+send back to the client which may cause some issue if the
+endpoints are different. So we should provide a configuration
+heat_api_link_prefix that will be presented to users in links
+to the Orchestration API as other OpenStack projects do.
+
+Change-Id: I9631ba1ff2e179cf709bf56176691b87cb847390
+",04/17/2015 09:24:39,476
+32,Retype in driver should have the correct parameters,"Retype in driver should have the correct parameters
+
+A parameter mistach happens to the retype method in driver. This patch
+adjusts the parameters according to the calling method in manager.
+
+Change-Id: I7902986b3b7a4666337bf0da3dc04245fc0ea28e
+closes-bug: #1430605
+",03/11/2015 09:39:15,4
+33,WebSSO implementation.,"WebSSO implementation.
+
+Clone of CERN WebSSO implementation.
+
+This is a WIP. DO NOT REVIEW.
+
+Change-Id: I75b3302fa1b7f32ef402c809ae6aade86d37cd95
+",12/04/2014 16:50:19,13
+34,Fix a markup syntax issue on quickstart guide,"Fix a markup syntax issue on quickstart guide
+
+Change-Id: I3a2a48c1d948e722bc8c73bce381602632beef8c
+",01/22/2015 16:00:16,0
+35,Pre-release tags use rc instead of c,"Pre-release tags use rc instead of c
+
+Setuptools 8.1 now normalizes ""c"" to ""rc"" in release candidate
+versions, so our pre-release tag pattern needs to strictly match
+that.
+
+Change-Id: I47fae9682e4148d2e71c0e0c82742b3f8f3bd3a4
+",12/18/2014 15:20:43,0
+36,Avoid mutable default values,"Avoid mutable default values
+
+As http://docs.python-guide.org/en/latest/writing/gotchas/ mentioned,
+it is necessary to avoid mutable default values on method definitions.
+The behaviors of the methods, which this patch changes, are not changed
+but it is better to apply this because we will be able to avoid this
+mutable traps in the future.
+
+Change-Id: I79ac8d82f5aac84e1f069cc3c518a562434355b3
+",07/01/2014 05:13:58,15
+37,Fixes typo in manpage of proxy-server.conf,"Fixes typo in manpage of proxy-server.conf
+
+Change-Id: I50e2ae040f672eddab58f33a1771a2df4259090a
+Closes-Bug: #1326237
+",06/09/2014 06:56:08,4
+38,Remove sources.json installation from ceilometer element,"Remove sources.json installation from ceilometer element
+
+This change is required to fix image building after
+corresponding change was merged to master
+
+Drop deprecated api v1:
+If147d018ee571087eb3c11be6e1e66d9ab66cb22
+
+Change-Id: I325a21e9dd623bf482ae8d0a5fe2b204e6967c0e
+",05/20/2014 08:41:08,0
+39,unskip test_list_non_public_flavor,"unskip test_list_non_public_flavor
+
+The related bug #1209101 is fixed, so the V3 test_list_non_public_flavor
+can be unskiped.
+
+Change-Id: I37994c4bdc1e592fca7186c57abe4275f313e4cc
+",04/01/2014 20:17:25,0
+40,Optimize file tail reading for larger files,"Optimize file tail reading for larger files
+
+Instead of reading all file contents into memory just keep necessary
+number of lines from it in deque.
+
+Change-Id: I61a6c3ce1fa22be2fca7741acc1f1fb530ca92a4
+",03/11/2014 07:45:46,3
+41,DB: deleteion of an instance would not delete the system metadata,"DB: deleteion of an instance would not delete the system metadata
+
+Ensure that the instance system metadata is soft deleted when the
+instance is deleted.
+
+Change-Id: I87e973f3ae4a72bf83a110461d1b66137a2f5b3a
+Closes-bug: #1275479
+",02/02/2014 15:53:04,80
+42,Verify that parsed environment file maps to a dict,"Verify that parsed environment file maps to a dict
+
+An internal unexpected exception is raised while create a stack with an
+environment file which only has string content. We should handle the case
+and raise the correct error message such as ""The environment is not YAML
+mapping"".
+
+Change-Id: If1ca86fb4e05751908459bcb80d6e3a00f7b06f6
+Closes-Bug: #1279609
+",02/13/2014 02:13:47,14
+43,Python 3.x incompatible use of print operator,"Python 3.x incompatible use of print operator
+
+The print method should be used with parenthesis in order to keep Python 3.x compatibility.
+The file verify_tempest_config.py has 3 print methods breaking this compatibility.
+
+Closes-Bug: #1253718
+
+Change-Id: Ib65f70a9d42d2611c51203e80dc59480775d8adb
+",11/22/2013 15:43:24,8
+44,Test for both deletes in multiple delete test,"Test for both deletes in multiple delete test
+
+The multiple volume delete tests test for deletion of volumes
+""1234"" and ""5678"", but only ensure that the delete operation is
+called for the later.
+
+Change-Id: I6224eef8c4186b5df82b085666a2605489faa714
+",12/03/2013 00:02:04,34
+45,Rename to test_server_cfn_init.py,"Rename to test_server_cfn_init.py
+
+Renamed from test_instance_cfn_init.py to better match the
+semantics of Nova.
+
+Change-Id: I4bcdc5dfe75198f5375ae3c0efb4837dd4d2fd17
+",08/30/2013 02:12:59,0
+46,Fix the issue in VM launching with quantum port-id,"Fix the issue in VM launching with quantum port-id
+
+commit 394c693e35 changes allocate_for_instance() return only
+info about ports allocated, but we also need to consider the case
+where quantum port-id is passed. After this commit allocate_for_instance()
+returns new ports created or updated.
+
+Fixes bug 1161211
+
+Change-Id: I24eb74a0506be53d6e2c521377ca1d240c7aa1f5
+",03/28/2013 07:07:19,0
+47,Add instance host to device owner,"Add instance host to device owner
+
+nova side code for blueprint quantum-scheduler
+
+host helps to decide which l3 agent is used
+
+Change-Id: Ieb50b1cdb948da19c20f3f34ced209c93d5e9105
+",02/20/2013 13:38:13,15
+48,Live migration arguments block/shared are reversed,"Live migration arguments block/shared are reversed
+
+When using --shared-migration openstack client incorrectly
+performs block migration and when using --block-migration
+it does reverse.
+
+Change-Id: I78ef83383f8eb6ba63a244e1ded83dbab00754ea
+Closes-Bug: #1518059
+",2016/10/17 13:58,5
+49,Adjusting the storlet writing and deploying guide to include python,"Adjusting the storlet writing and deploying guide to include python
+
+The guide is broken into three parts as follows:
+A language independent guide and two language specific
+complimentary guides.
+
+While at it the programming model UML was
+simplified to include only what the storlet
+writer should care about.
+
+Change-Id: I945f410aa96af1895c66856537ff392d5c18be25
+",2016/9/29 18:20,26
+50,Clean up deprecated CLI options,"Clean up deprecated CLI options
+
+Clean up all deprecated CLI options that are marked to
+be removed in version 3.3.0 as we are already in
+version 4.0.0
+
+Change-Id: Ia9c5602df1be987e7c12f625d4f8359590678a19
+",2016/5/18 1:33,32
+51,Refactor TestWalkMigrations,"Refactor TestWalkMigrations
+
+Currently TestWalkMigrations provides bad tests isolation and
+do not use appropriate classes from oslo.db. Refactor it to use
+oslo.db functionality.
+
+Closes-bug: #1595918
+
+Change-Id: Ieae025b3cf2e8b63ad63ff6d09132c3770168c48
+",2016/6/24 13:42,2
+52,update constraint for oslo.concurrency to new release 3.7.1,"update constraint for oslo.concurrency to new release 3.7.1
+
+oslo.concurrency 3.7.1 release
+
+Change-Id: Ifc670dbe696afe8f0e04a0aa90f6af2aa8cfea9d
+meta:version: 3.7.1
+meta:series: mitaka
+meta:release-type: release
+meta:announce: openstack-dev@lists.openstack.org
+meta:pypi: yes
+meta:first: no
+meta:release:Author: Matt Riedemann <mriedem@us.ibm.com>
+meta:release:Commit: Davanum Srinivas <davanum@gmail.com>
+meta:release:Change-Id: I764d92fdba20ea5389f7fbfc107e7557c09801b4
+",2016/6/10 1:36,0
+53,api and availablity_zone opt definition consistent,"api and availablity_zone opt definition consistent
+
+Looking at the option defintions, more consistent, so its easier to
+maintain.
+
+* multiple options grouped into a lists, not every option named
+* one register_opts call per group, to match list_opts
+* ALL_OPTS created by composing lots of lists
+* using string keys in list_opts until the oslo bug is fixed
+
+blueprint centralize-config-options-newton
+
+Change-Id: I66b2a87c3158781477ce962f9c6853efea415dad
+",2016/5/26 10:58,12
+54,Move dhcp agent maps to OS::Heat::None to resource_registry,"Move dhcp agent maps to OS::Heat::None to resource_registry
+
+Change Id Ia61295943e67efe354a51a26fe4540f288ff6ede added support for
+composable Neutron dhcp agent services. However in the sample
+environments for OpenContrail and Plumgrid where dhcp agent is disabled,
+the mapping for OS::Heat::None was under parameter_defaults instead of
+resource_registry.
+
+Change-Id: I0aedbbc3720783d4208d524cd28c7eed4fc5d1d7
+",2016/5/17 21:16,39
+55,Update to reflect puppet-pacemaker changes,"Update to reflect puppet-pacemaker changes
+
+Recently puppet-pacemaker has changed in a backward incompatible way, we
+need to reflect the changes in TripleO.
+
+This patch also addresses two intermittent issues so that we have a
+green CI as much as possible:
+
+* Ordering problem between corosync service and VIP creation.
+
+* MongoDB service starting race condition systemd vs. pacemaker.
+
+Change-Id: Ia7fe14cfb1401be98b62afeed589bb9f1b8af761
+Co-Authored-By: Yanis Guenane <yanis.guenane@enovance.com>
+",2015/5/14 16:18,0
+56,Fix upper version for murano-pkg-check,"Fix upper version for murano-pkg-check
+
+I made a mistake in my initial commit for addining murano-pkg-check
+library to the openstack/requirements https://review.openstack.org/#/c/370293/,
+I point not existed version of this library in upper-constraints.txt.
+It needs to be fixed.
+
+Change-Id: Ic8e0866de0e97f7973b0877c700d4e9894beeb84
+",2016/9/28 11:31,0
+57,[WIP] Add NodeGroup specification,"[WIP] Add NodeGroup specification
+
+Change-Id: Ic8e7d13b72d72c056a689b7a6f61d13843332c85
+Implements: blueprint nodegroups
+",2016/8/9 7:06,18
+58,WIP align lrouter port networks,"WIP align lrouter port networks
+
+In OVN, a router port with multiple IPv6 addresses will have
+multiple addresses records in Logical_Switch_Port 'addresses'
+column, but its peer port in Logical_Router_Port will have
+only one IPv6 address in 'network' column. It's inconsistant.
+
+This patch will try to fix that.
+
+Change-Id: If2d097bb23a0b9604d95dd3659eba58a7776d7b0
+",2016/6/22 17:28,187
+59,scenario001/ubuntu: enable Ceph again,"scenario001/ubuntu: enable Ceph again
+
+Change-Id: Ic959ee1ea5285ead7fee8d42b3aea58689abd43b
+Depends-On: Ie9ba521cdb4ac6823746d37bb5d1697e274e4119
+",2016/7/7 20:12,35
+60,Add python-uwsgidecorators as runtime dependency.,"Add python-uwsgidecorators as runtime dependency.
+
+Change-Id: I86a4285140874d6b659999b3129158ce68d6ca5b
+Closes-Bug: #1572998
+",2016/6/16 12:52,0
+61,[cli-ref] Update python-cinderclient to 1.7.1,"[cli-ref] Update python-cinderclient to 1.7.1
+
+Change-Id: I4c42b5a513e7417de882d74f9678737364127d8f
+",2016/5/26 22:48,6
+62,Remove OpenStack Community Office Hours,"Remove OpenStack Community Office Hours
+
+In Icdb107601543b120978ee6af3ec11871dfd8af96 Tom suggested this was no
+longer needed.
+
+Change-Id: Ia8a387e2eac14dd4dacbf6261f71ac0201ffecf6
+",2016/5/23 6:55,2
+63,Moved handling of polling threads to PollingDataSourceDriver,"Moved handling of polling threads to PollingDataSourceDriver
+
+After adding PushedDataSourceDriver, handling of polling threads was
+left in the common base class (DataSourceDriver). Polling is not used
+by PushedDataSourceDriver and it was causing problems when deleting
+datasources (i.e. trying to kill thread which didn't exist).
+
+With this change, polling thread handling code is moved down to
+PollingDataSourceDriver class and logic is extended to check if the
+thread has actually been created. Only then thread termination will
+be attempted.
+
+Change-Id: Ifa450fa6bd1c5e15937bbdc76acd9fad64f4d18e
+Closes-Bug: #1553982
+",2016/3/7 17:19,0
+64,"Remove revoke-sudo from storlets, trove functional","Remove revoke-sudo from storlets, trove functional
+
+The I670641b676231233f1dd583ea36421f8ffef8f8e change incorrectly
+added a revoke-sudo macro to the gate-storlets-functional and
+gate-trove-buildimage-{datastore} jobs which did not previously have
+it, so remove it to get them working correctly again. It also added
+one to dev-zuul-coverage, but I expect that was missing as an
+oversight so not undoing it here.
+
+Change-Id: Ic427c053602017da3d77b01193b4215f57de6fdd
+",2016/3/8 3:35,0
+65,Get this repo working again,"Get this repo working again
+
+Start to get this program working by cleaning
+up the requirements files, setup.cfg, tox.ini
+and more!
+
+Change-Id: I59daf80335f0c186f9a0f66d3539e86703007bfc
+",2016/1/17 6:43,21
+66,fix tox,"fix tox
+
+Change-Id: I3f77424c3d41fb21b9d562ee1bb82ea0e869b773
+",2016/2/2 10:49,41
+67,"Added tox.ini, gitreview and update README","Added tox.ini, gitreview and update README
+
+Change-Id: If334c400bccb63782dac9cad2eff9d334ff3a01d
+",2015/10/1 0:12,12
+68,Update to horizon tutorial.rst,"Update to horizon tutorial.rst
+
+Added documentation for addition of an action to a horizon table
+Fixed problem in panel template, block needed to be just ""main"".
+
+DocImpact
+Closes-Bug: #1360370
+
+Change-Id: I0d3c5da5a860d777e21e61d36a5765c412911dba
+",2015/1/8 18:00,112
+69,Fix amqp1 job in stable/kilo (2 backports),"Fix amqp1 job in stable/kilo (2 backports)
+
+This patch contains 2 backports from master. Unfortunately, an update on
+f21 is forcing to update the requirements for amqp1. Therefore, we need
+these 2 commits, which depend on each other, to be backported as one.
+
+Commit 1:
+
+Enable amqp's protocol unit tests everywhere
+
+Now that python-qpid-proton has taken an approach similar to zmq's, it's
+possible to install it in boxes where the C libraries are not present in
+the system. This patch takes advantage of that to enable amqp protocol's
+tests everywhere.
+
+Note that the backport was modified to match the stable/kilo gate
+configuration. This job, in Kilo, is supposed to run *just* on f21,
+therefore, I've removed the changes to the tox.ini to avoid installing
+the dependencies everywhere.
+
+Master-Change-Id: Ibce4c791aafadf45fa876d6a4f5373fde94769ff
+(cherry picked from commit f06b19628fbb11a32797f1095eba7c07b6343433)
+
+Commit 2:
+
+Fix qpid's functional gate
+
+The loggin verbosity changed in 0.32 which our gate is pulling from the
+updates repository. This patch updates the script to make it work again.
+
+Closes-bug: #1468917
+Master-Change-Id: I88a1bc794246beb156d4301bd503fa51a7cd2cce
+(cherry picked from commit 079c04f0d06539f3507c772ccc68807a6d01a73a)
+
+Fix py27 unittests in stable/kilo (2 backports)
+
+Commit 1:
+
+Fix list_opts test to not check all deps
+
+The list_opts entrypoint test failed unnecessarily when the
+dependencies in the packages were inconsistent. This test doesn't
+need to verify that the dependencies are consistent, only that the
+entrypoint is available and provides the expected function.
+
+(cherry picked from commit 3d483fda709d2d04db2222e0119eaa54de5f5867)
+
+Commit 2:
+
+Fix mock use for mock 1.1.0
+
+Correct the way we check the calls by using the proper mock method. Add
+a new test to expand coverage of the area being fixed.
+
+(cherry picked from commit c7b31385ac3616060ef0f2188fb724191caad03c)
+
+Related-Bug: #1488456
+Change-Id: If781c808b1f1428dbc24b92cd0b8f8b7904c0ed4
+",2015/8/27 15:48,45
+70,Use new rpm repository structure,"Use new rpm repository structure
+
+Perestroika builds fuel repository which
+we then use to create fwm mirror. Recently
+we have switched to the new mos
+repository structure and this change reflects
+this fact.
+
+Change-Id: I236144759eb38e71977d175226f81772d23de9b3
+",2015/7/28 16:06,4
+71,Network profile support for N1KV ML2 mechanism driver,"Network profile support for N1KV ML2 mechanism driver
+
+First draft of network profile extension code for N1KV ML2
+mechanism driver. This covers the basic functionality for
+create/delete/list operations for network profiles. It adds
+the ability to specify a network profile during network
+creation to control the type and properties of the network
+being created.
+
+Change-Id: I6ff3c667fba382c5c183bd122314f308a5b3fd9a
+Closes-Bug: #1469907
+Co-Authored-By: Saksham Varma <sakvarma@cisco.com>
+",2015/8/12 22:05,43
+72,WIP Use os-brick for LibvirtISCSIVolumeDriver,"WIP Use os-brick for LibvirtISCSIVolumeDriver
+
+This is a Work in progress patch for switching
+the LibvirtISCSIVolumeDriver to use the os-brick
+library for iSCSI volume discovery and removal.
+
+os-brick isn't in pypi just yet, so all of the
+tests in jenkins will fail.
+
+Pull down os-brick manually
+git clone https://github.com/openstack/os-brick
+cd os-brick
+sudo -H pip install .
+
+then restart nova.
+
+Change-Id: I400db60fcc29c2d5e2d3b9dabc055649138468eb
+",2015/4/20 20:45,33
+73,Add neutron to starter-kit:compute,"Add neutron to starter-kit:compute
+
+While nova-network is still supported because of concerns about
+migration paths, neutron should be as strongly recommended for any new
+deployments as is humanly possible so that we can ultimately get
+ourselves out of the mess of having two network stacks.
+
+Since starter-kit:compute is intended to help point a finger at what
+people should install when trying things out, we should certainly not
+imply that they install a network stack that we plan on deleting in the
+future. Neutron in provider-vlan/linuxbridge mode is dead simple in not
+requiring openvswitch or SDN, and still gets new users a cloud that is
+upwards flexible with the future.
+
+Change-Id: I91bce1bcc51121a8a577cff478fdc91002b689b4
+",2015/6/28 14:05,27
+74,Place an accurate lower bound on pbr,"Place an accurate lower bound on pbr
+
+Without this version, markers will fail to install in a growing number
+of projects.
+
+Change-Id: I074274b470a7a4f2c95211677b135038ab2c942c
+",2015/7/10 23:14,1
+75,[WIP] BGP Dynamic Routing: introduce entities and model,"[WIP] BGP Dynamic Routing: introduce entities and model
+
+This is the first patch to provide BGP dynamic route
+advertisement functionality in Neutron.
+This patch provides a new extension (""bgp_speaker"") with
+support for basic CRUD on bgp_speaker and bgp_peer, as
+well as bgp_speaker-bgp_peer and bgp_speaker-network
+bindings.
+An admin user can create BgpSpeakers and configure
+peering entities (BgpPeers) for BgpSpeakers. BgpSpeaker
+to BgpPeer association is n-to-n. An admin user can
+also associate networks with BgpSpeakers. Relationship
+between BgpSpeaker and Network is 1-to-n.
+This patch provides BGP-related functionality only to
+admin users.
+
+Change-Id: I2412c1689683da9d7ec884a4cea506d4eed99453
+Partially-Implements: blueprint bgp-dynamic-routing
+Co-Authored-By: Ryan Tidwell <ryan.tidwell@hp.com>
+Co-Authored-By: Jaume Devesa <devvesa@gmail.com>
+Co-Authored-By: Vikram Choudhary <vikram.choudhary@huawei.com>
+",2015/7/14 15:12,328
+76,Fix for bug #1423774.,"Fix for bug #1423774.
+
+A typo, should have been phys_brs in place of phys_br.
+
+Change-Id: I0301952d5f7d4cd78c5d35c38aa5c6caabcc6298
+Closes-Bug: #1423774
+",2015/6/25 23:34,125
+77,Split Abandon into pre-abandon(export) and abandon,"Split Abandon into pre-abandon(export) and abandon
+
+Splits the existing abandon action into two actions as
+below:
+1. export: User is recommended to run export successfully
+   before doing the abandon action. It returns the stack
+   data, which can be used for adopting stack.
+2. abandon: Abandons the given stack
+
+partially fixes bug: #1353670
+
+Change-Id: I65264d91b1378df9cb3e492bc6ccaa778940dd6b
+",2015/5/11 12:43,404
+78,API: make sure a blank volume with no size is requested,"API: make sure a blank volume with no size is requested
+
+Currently - we would happily accept the request, but fail to create the
+block device mapping record for such a volume. The result was that the
+boot request for such an instance would be accepted, but would not
+create a volume.
+
+Also fix the _volume_size API method that was 0ing out blank volume's
+size by mistake.
+
+Change-Id: I1d243aed78da7c026e55ea145397b070d619a567
+Closes-bug: #1461638
+",2015/6/5 20:31,1
+79,Incorrect argument order passed to swap_volume,"Incorrect argument order passed to swap_volume
+
+swap_volume method in _ComputeV4Proxy has incorrect
+argument ordering, due to which attach volume migration
+is failing with AttributeError
+Modified the _ComputeV4Proxy detach_volume to have correct
+argument ordering.
+
+Change-Id: I899c053246f9eb4ac9b13a8434161a82193d1cef
+Closes-Bug: #1451860
+",2015/5/5 19:31,19
+80,update .gitreview for stable/kilo,"update .gitreview for stable/kilo
+
+Change-Id: I6356513ac42b79402dbde8ee5e75cbbd1aee7eef
+",2015/4/15 19:58,5
+81,Add locking to PureISCSIDriver around creating Purity Host objects.,"Add locking to PureISCSIDriver around creating Purity Host objects.
+
+This will prevent us from getting conflicting credentials for
+connection methods which will result in iSCSI attach operations to fail.
+
+Change-Id: Ia206e7b5ff330c8fccb49ed23a31b120a5c04eb3
+Closes-Bug: 1444224
+(cherry picked from commit a712afe42833443878898bb42851376cd8615ff9)
+",2015/4/15 19:49,0
+82,Verify all quotas before updating the database,"Verify all quotas before updating the database
+
+Update quota multi-value in one request is not an atomic operation, so
+even if a quota is invalid (e.g., volumes has a non-integer value),
+some values may change but the response code is 400.
+
+This patch will make sure the quota limits are of integer type for all
+the requested quota keys before updating the database.
+
+Closes-Bug: 1432972
+Change-Id: If83af0a80489887098e52b03b9c4012e3ef061b5
+(cherry picked from commit 197299985a52535ad995dbd111491b58462f140a)
+",2015/4/15 19:49,0
+83,Make SoftwareDeployments work for non-CREATE actions,"Make SoftwareDeployments work for non-CREATE actions
+
+Currently we only create the deployment if the actions list includes
+CREATE, but its valid to create e.g DELETE only deployments, which
+curently won't work.  So determine whether to create the deployment
+on the resource_id instead of via the action, which resolves this problem.
+
+Closes-Bug: #1444087
+(cherry picked from commit 0d4235015065a814f7e76f4a34d422146c58ec72)
+
+Change-Id: Ic572fa7119d2918f28196c90f711084ced6089a3
+",2015/4/15 19:33,0
+84,Display times in local tz,"Display times in local tz
+
+By default, display times using the local timezone.  Add timezone
+info to time displays where space permits.  Add an option to restore
+the current behavior where times are displayed in UTC.
+
+Change-Id: I6035b6277dc49774537a762b2946c56a3b8dec17
+Co-Authored-By: Bradley Jones <jones.bradley@me.com>
+",2015/3/11 15:50,153
+85,[WIP] Add Nova-network support to service_instance module,"[WIP] Add Nova-network support to service_instance module
+
+Till that moment it was possible to use Generic driver only with Neutron.
+Nova network still is used in various deployments, so add support for it.
+
+List of changes:
+- Split service_instance to two parts - compute and networking.
+- Implement networking part as 'network helpers'.
+- Add new config option 'service_instance_network_helper_type' that supports
+only two values - 'nova' and 'neutron' respectively.
+It is required option. Default value is 'neutron'.
+
+Details on Nova-network approach:
+- Due to resctrictions of Nova network, where security group rules are applied
+to all VM network interfaces, no need to create service network, because it
+will be just duplication. Service instance will use only one network that is
+provided within share-network entity.
+- Host of manila-share service should have network connectivity for all
+networks, that are going to be used for share creations.
+- Nova network helper does not create resources, so, network is not configured
+by Manila in that case. So, network infrastructure can be either flat or using
+VLAN segmentation as well.
+
+TODO: Fix and add unit tests
+
+Change-Id: I7462fe3d6fa944d391628b8e2b374cf5593924ea
+",2015/2/14 18:39,61
+86,Add pci_stats to ComputeNode object,"Add pci_stats to ComputeNode object
+
+The compute_nodes table has a field called pci_stats
+that is used to pass pci device availability to the
+scheduler. The pci device data is obtained by the virt
+drivers and passed to the resource tracker in the available
+resource data. The resource tracker creates pci pools to
+track the number of similar devices as a resource.
+
+The pci_stats field contains the pci pool data.
+
+A new object versioned called PciPool has been created for
+the data about pci pools. The pci_stats field is added to
+the ComputeNode object as a list of PciPool objects. The
+type of the field is:
+
+    ListOfObjectsField('PciPool')
+
+The format that the PciPool object uses to store data in the
+database is made backward compatible with the existing format.
+
+There is an alternative patch by yjiang5 that does not version
+the data in the field, this patch replaces that one. The original
+can be found here Ifde89b209f2fcc2283894195b1e7e866cf28dccb
+
+Change-Id: I625f13061fddfb0cdb16c8e36336656b40696447
+",2014/11/28 19:47,121
+87,db migration failed when plugin name alias used in config file,"db migration failed when plugin name alias used in config file
+
+due to blueprint config-plugin-by-name[1], convenient plugin name alias
+can be use in config file, but the db migration doesn't understand the
+name alias.
+
+[1] https://blueprints.launchpad.net/neutron/+spec/config-plugin-by-name
+
+Closes-Bug: #1294016
+Change-Id: Idf13417c85bfafa666ca1d9fb5e94a5164d74abd
+",2014/3/18 10:43,24
+88,Add config generator support,"Add config generator support
+
+Change-Id: Ia53997fce3e0e69c3c736c7b088c40a619755c7d
+",2014/9/30 13:59,14
+89,remove scary error message in tox,"remove scary error message in tox
+
+Found an interesting cantrip in the devstack tox.ini that gets rid of
+the scary can't find bash error message at the beginning of test
+runs. Reducing non error looking error things make it easier to see
+real errors.
+
+Change-Id: I4e1b826626063bf8d5a15531f5768f9ce0eea6a5
+",2014/10/1 10:27,6
+90,Properly initialize rpc in cinder-volume-usage-audit,"Properly initialize rpc in cinder-volume-usage-audit
+
+When RPC isn't initialized, any RPC based notifiers will fail, which
+renders cinder-volume-usage-audit mostly useless.
+
+Change-Id: I0b2d63871c0e57f8a9a55059c5fa22dc785b2767
+Closes-Bug: #1316483
+",2014/5/6 9:08,6
+91,add boto special casing for param changes in 2.4,"add boto special casing for param changes in 2.4
+
+boto 2.4 has some interface changes with the get_http_connection
+call which adds port as a non optional parameter *in the middle of*
+existing non optional parameters. It's a special kind of incompatible
+change.
+
+We are already special casing around boto in the unit tests, lets
+just do more of that if we are running on a newer version.
+
+Change-Id: If388d872286eca15bf24a582db1bac22224a8b24
+",2013/10/10 11:45,0
+92,Stop installing PyPI things via apt,"Stop installing PyPI things via apt
+
+It may, and in fact, it is, completely baffling to behold, but it turns
+out that the interaction between distro installed and pip installed
+libraries is not a good one. In fact, it's a completely and total
+disaster which shows clearly the work of a bunch of provicial-minded
+people who don't know how to cooperate or admit that someone else might
+have a different opinion.
+
+Nonetheless, thus is the world in which we actually exist, theory of how
+things should be notwithstanding. We were requested by the distros to
+stop managing our own apt repos, so we install our depends via pip now.
+Additionally, we now actually even GATE on the pip requirements list.
+That means that the requirements list that indicates packages from PyPI
+is the absolute and total list of requirements in the form that we can
+manage.
+
+Thus - installing those packages also via apt is a not only a waste of
+time, it's dangerous because of the undefined interactions between
+distro and pip.
+
+Change-Id: I18e480a3312078bde26fc590d4d793e0795e7078
+",2013/8/2 22:01,0
+93,Fix nova test_notifier wrt new notifier API,"Fix nova test_notifier wrt new notifier API
+
+The Oslo notifier api lost add_driver(), and nova copy of that code has
+been updated recently, so that broke Ceilometer testing of that piece.
+Fix it by using another mechanism to test.
+
+Change-Id: I0169fcc9955501d490dfcdd7742205ea5c9ba15b
+Closes-Bug: #1211532
+",2013/8/13 9:16,0
+94,Fix volumes search by metadata,"Fix volumes search by metadata
+
+The metadata parameter is urlencoded (to string) by cinderclient
+but isn't decoded back to dict by the API.
+
+The metadata parameter needs to be converted back to dict
+to be of any use by the filters parameter of get_all().
+
+The original implementation has been done by:
+Mathieu Gagne <mgagne@iweb.com>
+
+Fixes: bug #1195015
+
+Change-Id: I19d7d386afddddc067e9f4ef86967c9b72d9e530
+",2013/7/21 10:11,0
+95,Handle IPMI transient failures better.,"Handle IPMI transient failures better.
+
+Sometimes, IPMI ""power status"" doesn't return either ""on"" or ""off"".
+When this happens, the IPMI driver shouldn't assume what the state is,
+and the baremetal driver shouldn't assume that NOSTATE means SHUTDOWN.
+
+Fix bug 1178378.
+
+Change-Id: I54a5e6309f68ab8e5601e65039366d7d87c03478
+",2013/5/14 2:16,3
+96,Add tests for image visibility filter in db,"Add tests for image visibility filter in db
+
+Some aspects of visibility filtering in the db api were not being
+tested. This patch adds tests to ensure visibility=public|private is
+working properly.
+
+Change-Id: I67a4b8e33fab6f4f8f1ed4b05b2b8cac10153105
+",2013/3/22 22:05,0
+97,Handle compute node records with no timestamp.,"Handle compute node records with no timestamp.
+
+Commit 94560ab57d9fc23673f42017e6f2a78cb2b66b7a added a fast-path
+to avoid work when baremetal compute nodes haven't changed, but if
+the compute message has None for its updated-at timestamp (which
+can happen during startup) the comparison crashes.
+
+Change-Id: Ib8add431d975eee133deefea62eb53479a97396e
+",2013/1/7 2:15,6
+98,Remove fixed OVS_BRANCH,"Remove fixed OVS_BRANCH
+
+After this patch, user can define OVS_BRANCH in local.conf, which
+is defaulted to master.
+
+Change-Id: I2a640be22903634e74ddfe0394a771b3526daa0e
+Closes-bug: 1641524
+",11/14/2016 07:58:04,75
+99,Have RouterRoute object increment Router revision,"Have RouterRoute object increment Router revision
+
+When modifying RouterRoute objects on a Router (e.g. adding a route to a
+router via the ExtraRoute extension), have the modification update the
+Router's revision number.
+
+Change-Id: If9bb56442375efac3043b9de0a03972552ac34bf
+Closes-Bug: 1632080
+",10/10/2016 19:48:08,17
+100,Support a mixed DPDK and non-DPDK environment,"Support a mixed DPDK and non-DPDK environment
+
+Now that OVN ML2 driver can read the chassis table of the OVN SB DB,
+we can make use of the external_ids column of the chassis table to
+determine the datapath type of the chassis.
+
+When the bind_port() function is called, this patch determines the
+vif_type by getting the value of 'datapath-type' key in 'external_ids'
+column from the chassis row where the port is to be bound.
+If the value of 'datapath-type' is 'netdev-dpdk', vif_type will be set to
+'vhostuser', else vif_type will be set to 'ovs'.
+
+The config param 'vif_type' is deprecated and is no longer used.
+
+Change-Id: Ia97198a5bceb5d8d39d8556346f3709846f3c5ad
+Closes-bug: #1606458
+",07/26/2016 08:17:37,0
+101,Fixes inconsistent positional arguments naming,"Fixes inconsistent positional arguments naming
+
+When priting the help menu for Swift commands, it is confusing to see
+both positional arguments and options not disctinguished. The
+positional arguments are supposed to be enclosed in angular braces <>,
+and the options must be enclosed in square braces [].
+
+Change-Id: Ie84a90eb0278dd2cdf5775948572bb140f8d2c4b
+",09/06/2016 15:52:16,10
+102,Added check for ceilometerdb size,"Added check for ceilometerdb size
+
+Change-Id: Icdd28c18aee7bb0f96d01e194f17de5eee164ba6
+",08/12/2016 15:05:45,1
+103,Pin puppetlabs-spec-helper,"Pin puppetlabs-spec-helper
+
+We are pinning this because the latest version (1.2.0) requires ruby 2.2
+which we don't have. We're largely following suit with what the puppet
+openstack modules are doing.
+
+Change-Id: I9153aac8c122e0379cf9e8247cb34c6acc0921fc
+",08/23/2016 20:49:01,0
+104,Customizations for ceilometer,"Customizations for ceilometer
+
+This patchset contains customization of Dockerfile of ceilometer containers
+
+Change-Id: Iee8db7e105fbd8c3d5c947dd3b7c5e0ca7c49b78
+Partially-implements: blueprint third-party-plugin-support
+",07/25/2016 19:57:54,41
+105,[WIP] Enable CRUD for trunk ports,"[WIP] Enable CRUD for trunk ports
+
+This patch enables basic CRUD operations on trunk ports. Trunk ports
+are persisted in the Neutron model and visible through the API, but
+the data path is not rendered by L2 agent.
+
+Change-Id: I26453eb9a1b25e116193417271400994ac57e4c1
+Partially-implements: blueprint vlan-aware-vms
+",05/23/2016 18:02:06,26
+106,Move rabbit configurations to oslo_messaging_rabbit section,"Move rabbit configurations to oslo_messaging_rabbit section
+
+Configuration with oslo.messaging is listed in the DEFAULT section
+in etc/barbican/barbican.conf.
+According to this Change ""I96a9682afe7eb0caf1fbf47bbb0291833aec245b""
+of oslo.messaging, we now prefer to set them in ""oslo_messaging_rabbit""
+section.
+
+Closes-Bug: #1590231
+Change-Id: I2b952012b2192cfb95e28cf11f78cf56d6a414ca
+(cherry picked from commit 45032b2b7d024e35e2a9dda5050df3c1de300c51)",06/12/2016 07:06:45,641
+107,Add new repository for fuel-plugin-kafka,"Add new repository for fuel-plugin-kafka
+
+This project is developed and managed by the team already maintaining
+the StackLight/LMA Fuel plugins because we plan to leverage Kafka in the
+near future.
+
+Change-Id: I39e8e7c9bb384025639286791e61e0e9f00ff5e3
+",04/26/2016 14:48:52,22
+108,[functional] Fix wrong message in server description test,"[functional] Fix wrong message in server description test
+
+By unknown reasons(at least for me), output of `nova update` command for
+description field started fail.
+Test name:
+  TestServersDescription.test_update_with_description_longer_than_255_symbols
+
+The error message doesn't include new line at the start of message anymore.
+Also, I don't know why new line was there in the past. The main behavior and
+error message are not changed, so let's remove '\n' from assertation and
+unblock gates.
+
+Change-Id: I8442fe837985600250ccdf0d1398424f1fca2185
+",06/30/2016 15:08:40,6
+109,[WIP] Add Ironic to overcloud,"[WIP] Add Ironic to overcloud
+
+Change-Id: I541be905022264e2d4828e7c46338f2e300df540
+",05/13/2016 14:40:18,34
+110,Import Panko,"Import Panko
+
+Change-Id: I9a5efb4dcaa6800c38d4d6b91f808a2ebce84408
+Depends-On: I0b465c70990283cab46da9bd98decb7fd34e43b2
+",05/19/2016 13:47:33,51
+111,[WIP] Add key injection support to tosca.nodes.nfv.VDU.Tacker,"[WIP] Add key injection support to tosca.nodes.nfv.VDU.Tacker
+
+Implement the 'key_name' parameter in templates by adding the new property
+to tacker_nfv_defs.yaml.
+
+Todo:
+[*] Additional unit tests
+[*] Documentation updates
+
+Change-Id: I1838b283a60c387a7cb92e6c8ebebe7ca8ac5141
+Closes-Bug: #1578785
+",06/06/2016 23:51:09,139
+112,Add segments to hosts mappings for Routed Networks,"Add segments to hosts mappings for Routed Networks
+
+This patchset adds code to update a segments to hosts mapping in the DB from
+L2 agents state reports to the Neutron server
+
+Change-Id: If3e0b4723f11e52a520a969f45c82e32f3980fd9
+Partially-Implements: blueprint routed-networks
+",02/26/2016 21:35:08,217
+113,Update tempest test vars,"Update tempest test vars
+
+This commit does the following:
+
+- removes tempest_git_repo since this is the default in the tempest
+  role
+- updates tempest_git_install_branch to master
+- adds tempest_requirements_git_install_branch so we can properly
+  constrain the installation of tempest itself
+
+Change-Id: Ifa8de2c962f0bc9c1e6351eac667d4ca95a73757
+",05/12/2016 06:31:42,12
+114,"Doc rework for quickstart, multinode, and image-building","Doc rework for quickstart, multinode, and image-building
+
+Change-Id: Iec175ee7f60bfd11ce06b22c861e51e180c188a9
+Partially-implements: blueprint documentation-rework
+",05/02/2016 22:34:58,82
+115,"Included ""sudo"" for devuser element","Included ""sudo"" for devuser element
+
+Currently this is already supported. But when the image is built with
+""ironic-agent"" element, the package is removed which is required if the
+image also includes ""devuser"" element.
+
+Change-Id: Ida9b1885f745146071e4b2d85ae59341ac85d5c8
+Closes-Bug: #1572486
+",04/21/2016 05:05:54,258
+116,"Revert ""Actually use the service domain in V3 jobs""","Revert ""Actually use the service domain in V3 jobs""
+
+Devstack code doesn't work with this, and so all devstack /
+tempest jobs are now failing. This needs to be reverted,
+the devstack code fixed, then reapplied.
+
+This reverts commit 0376abf3feb3d9f1acdfc822b633208de8f2d2fa.
+
+Change-Id: I4fdd791c6b30b1a2f5bd3a1b4b0b59c3d17a2d80
+",05/12/2016 15:21:29,0
+117,Initial rough draft of the Ironic ML2 Integration,"Initial rough draft of the Ironic ML2 Integration
+
+This is the first draft of the specification. It is not ready but has been
+submitted to illicit responses on the initial ideas contained therein. The
+API work etc. will be completed after consensus on the way to proceed.
+
+Implements: blueprint ironic-ml2-integration
+
+Change-Id: I7841599c9bf42a8442e679eeed05cb5d00eae4b3
+",06/04/2015 17:51:33,1
+118,Fix pep8 errors related to i18n module,"Fix pep8 errors related to i18n module
+
+[1] The neutron introduce new hacking rule of N340 and N341. This patch
+resolves pep8 errors by moving _i18n file into networking-sfc directory.
+
+[2] Analysing py27 error , will post new patch to fix those
+
+Change-Id: Id1b195f324e3947c5c57b79e0f878211a2815e48
+",04/06/2016 16:56:21,7
+119,Add GlanceRegistry to the endpoint map,"Add GlanceRegistry to the endpoint map
+
+This patch adds GlanceRegistry to the endpoint map. This
+will make accessing Glance registry setings via the endpoint
+map possible.
+
+As part of this we also rename 'Glance' to 'GlanceApi' in
+the registry map so it is more specific.
+
+Change-Id: I9186e56cd4746a60e65dc5ac12e6595ac56505f0
+",04/09/2016 17:56:35,10
+120,Create openstack/designate-tempest repository,"Create openstack/designate-tempest repository
+
+Change-Id: Ica5c6156e6ae38e02167b9be7fc9bc7520723204
+",04/04/2016 16:14:22,41
+121,NexentaStor drivers: resize volume if cloned image is larger,"NexentaStor drivers: resize volume if cloned image is larger
+
+Extend volume if during create_volume_from_snapshot() the new
+volume is larger than the image it was cloned from.
+Added 'size' in snapshot check to avoid KeyErrors.
+
+Change-Id: I620e7896238f80710b229c0315cce4457a2291ae
+Closes-Bug: #1561679
+",03/24/2016 21:23:31,3
+122,expose pxe/pxe_bootfile_name,"expose pxe/pxe_bootfile_name
+
+Change-Id: Iff651d2c690a972e8f8dd68c15de4ddf5c5e3efb
+",03/30/2016 13:07:31,55
+123,PLUMgrid Neutron integration,"PLUMgrid Neutron integration
+
+Enable PLUMgrid neutron liberty plugin in a TripleO overcloud environment.
+
+Change-Id: I07025f67ec3f3399aac4dcd10cc37e857772548b
+Signed-off-by: Qasim Sarfraz <qasims@plumgrid.com>",12/15/2015 14:07:30,5
+124,Set OS_TENANT_NAME for backward compatibility,"Set OS_TENANT_NAME for backward compatibility
+
+Some clients still rely on OS_TENANT_NAME so we
+should define and export it
+
+Change-Id: I5bc29ee6b459078f34bc6ac3a8e771a8192de4a1
+",03/28/2016 18:14:11,5
+125,NetApp: Add Replication support in cDOT,"NetApp: Add Replication support in cDOT
+
+Add support for the replication driver workflows
+within the NetApp single-svm cDOT driver.
+
+Implements: blueprint netapp-cdot-single-svm-replication
+Co-Authored-By: Clinton Knight <cknight@netapp.com>
+Co-Authored-By: Goutham Pacha Ravi <gouthamr@netapp.com>
+
+Change-Id: I0a55433f1953facdd5169a2991c67d3f046bcf06
+",02/02/2016 21:32:23,82
+126,move fedora23 devstack to experimental,"move fedora23 devstack to experimental
+
+fedora23 job is quite often taking the full 3 hours to timeout and
+fail its tests on devstack, which is holding up getting changes
+landed.
+
+There are multiple contributing factors:
+
+* fedora23 is on non performance nodes (reason unknown)
+* as such it only has 4 cores, so tempest is only running 2 way
+* there is no wheel cache, so 13 minutes are spent installing python packages
+* rpm package installation runs nearly 8 minutes
+
+Various of these should be addressed and get the timing under control
+in experimental before we move it back to check.
+
+Change-Id: I77bf276dd791e7efdc3ac99c5c3d31558f684223
+",03/23/2016 16:20:17,0
+127,Drop openstack::ceilometer,"Drop openstack::ceilometer
+
+This uplifts the openstack::ceilometer directly into the calling tasks
+
+Change-Id: Ic49ef5d9df5220b3a18e89ce478578e42feda64f
+Blueprint: fuel-remove-conflict-openstack
+",02/25/2016 00:55:59,13
+128,Ignoring cpu measurement when instance's state is SHUTOFF.,"Ignoring cpu measurement when instance's state is SHUTOFF.
+
+Using libvirt, we get the cpu and cpu_util are all 0.0 value when
+the instance is SHUTOFF, but other meters(eg:memory) are skiped.
+So this patch will fix it that ignore cpu pollster and give a
+WARNING, when the instance's state is SHUTOFF.
+
+Change-Id: I0df2f9688c10621d685c0e895367252240035e42
+Closes-Bug: #1544857
+",03/07/2016 06:43:49,11
+129,Add host_status attribute for servers/detail and servers/{server_id},"Add host_status attribute for servers/detail and servers/{server_id}
+
+When a compute service fails, the power states of the hosted VMs are not
+updated. A normal user querying his or her VMs does not get any indication
+about the failure. Also there is no indication about maintenance.
+
+This change will expose new attribute host_status to user querying his
+VMs. Attribute is only seen if policy allows.
+
+DocImpact: This adds API microversion
+Implements blueprint get-valid-server-state
+APIImpact
+
+Change-Id: I5abea08bdc27624a7f23a7db8964f8c2a7b0eaa7
+",11/04/2015 10:42:54,91
+130,Support operations on a trove instance user,"Support operations on a trove instance user
+
+Added a table action on the users table to display the
+create user dialog.
+
+Added a row action on the users table to display the
+edit user information dialog.
+
+Added a row action on the users table to display the
+access details panel as a list of databases on the instance
+along with a column indicating whether the user has access
+to the database.  There are also row actions that are enabled
+for granting or revoking access to the database.
+
+Added unit tests for the new dialogs and panel.
+
+Modified the api to support the new user actions.
+
+Change-Id: I58fc58117f79b98ebddfd8d018682a4fc53eab52
+Co-Authored-By: Duk Loi <duk@tesora.com>
+Implements: blueprint trove-instance-user-support
+",01/14/2016 16:29:31,226
+131,Implementation for Network Floating IP CRUD,"Implementation for Network Floating IP CRUD
+
+This patch is for the deleting floating.
+
+$ neutron floatingip-list
++--------------------------------------+------------------+---------------------+---------+
+| id                                   | fixed_ip_address | floating_ip_address | port_id |
++--------------------------------------+------------------+---------------------+---------+
+| 44642a7c-c53e-40d0-8d02-f34f6182ed6c |                  | 172.24.4.8          |         |
+| d090d0d6-3d68-4347-8f7e-8b81fac63dac |                  | 172.24.4.9          |         |
+| da278b07-7155-490f-853c-f1c8070760be |                  | 172.24.4.7          |         |
++--------------------------------------+------------------+---------------------+---------+
+$ openstack floatingip delete 44642a7c-c53e-40d0-8d02-f34f6182ed6c
+$
+$ neutron floatingip-list
++--------------------------------------+------------------+---------------------+---------+
+| id                                   | fixed_ip_address | floating_ip_address | port_id |
++--------------------------------------+------------------+---------------------+---------+
+| d090d0d6-3d68-4347-8f7e-8b81fac63dac |                  | 172.24.4.9          |         |
+| da278b07-7155-490f-853c-f1c8070760be |                  | 172.24.4.7          |         |
++--------------------------------------+------------------+---------------------+---------+
+$
+$ openstack floatingip delete d090d0d6-3d68-4347-8f7e-8b81fac63dac da278b07-7155-490f-853c-f1c8070760be
+$
+$ neutron floatingip-list
+
+Change-Id: Ie61f0faad65ec90f9d9956ae463412be8d963d05
+Closes-Bug: 1519502
+",12/16/2015 14:04:35,1
+132,Add unit tests for load-edit directive,"Add unit tests for load-edit directive
+
+Write unit tests for the directive to increase test coverage
+
+Change-Id: Ie886c374b19d24351766bb48023ddfb7426b7a06
+Partial-Bug: #1506891
+",10/20/2015 21:59:42,46
+133,Remove the test number of flow,"Remove the test number of flow
+
+This test was introduced as an example and assumes
+that no other test run in parallel
+New test were added and we have few in the pipeline
+
+Change-Id: I1829fe71a2c42e76b743e358b534d70c9e312a5b
+",02/01/2016 16:09:23,4
+134,Lookup meter definition fields correctly,"Lookup meter definition fields correctly
+
+Change-Id: I9db77b9bc196c06c409fcfe252c172230fee4274
+Closes-Bug: #1536699
+(cherry picked from commit 903a0a527cb240cfd9462b7f56d3463db7128993)",01/25/2016 15:13:28,9
+135,"Oslo Releases for week of Jan 11, 2016","Oslo Releases for week of Jan 11, 2016
+
+Change-Id: I88ca0e5e8ee56a020a2ebf3cc44e52eb2a50b863
+",01/11/2016 02:34:55,5
+136,Drop MANIFEST.in - it's not needed with PBR.,"Drop MANIFEST.in - it's not needed with PBR.
+
+Nova uses PBR already - as you can see setup.py:
+
+ setuptools.setup(
+     setup_requires=['pbr'],
+     pbr=True)
+
+so that, we no longer need MANIFEST.in.
+
+Change-Id: I40794e6eca1daf6c679b1574d2e630e4d78df19b
+",12/24/2015 06:08:09,13
+137," Below changes are done in this commit:  a. replaces update() with  oslo.db's soft_delete() used in  volume_type_access_remove in sqlalchemy.db.api.  b. updated db schema of volume_type_projects.  ""deleted"" column type is modified from boolean to integer "," Below changes are done in this commit:
+ a. replaces update() with  oslo.db's soft_delete() used in
+ volume_type_access_remove in sqlalchemy.db.api.
+ b. updated db schema of volume_type_projects.
+ ""deleted"" column type is modified from boolean to integer
+ so that it can store more than 128 entries in it.
+
+ ""deleted"" column type is boolean before this fix.
+ Boolean is represented as TINYINT which can store at max 127.
+ But soft_delete sets deleted column to the value of id during
+ volume type access remove operation.
+ So, in this commit, column type is updated to integer.
+ Closes-Bug: #1518363
+
+Change-Id: I638a202dfb2b4febf1d623683de22df3b6dc2615",12/10/2015 15:53:21,23
+138,Set auth_region to $::os_service_default and drop warning,"Set auth_region to $::os_service_default and drop warning
+
+This commit [1] introduced a weird warning that send a warning by
+default.
+
+This patch:
+* sets auth_region to the default value in OpenStack using
+  $::os_service_default
+* drops the warning
+
+[1] Id7a6894e5bb12fc7697dfe23e5f9d4a44a719086
+
+Change-Id: Ia5fcbb6333c3466232ac16a552f90f950313230f
+",12/23/2015 22:08:11,56
+139,WIP: Adding a VNIC type for physical functions,"WIP: Adding a VNIC type for physical functions
+
+This change adds a new VNIC type to distinguish between virtual and
+physical functions in SR-IOV.
+
+TODO: unit and functional tests
+
+Closes-Bug: #1500993
+
+Change-Id: If1ab969c2002c649a3d51635ca2765c262e2d37f
+",11/18/2015 13:21:59,97
+140,"Revert ""Revert ""Remove Cisco-specific neutron client commands""""","Revert ""Revert ""Remove Cisco-specific neutron client commands""""
+
+This reverts commit 716eb017d35829c18745c4c0279b895784c297f1.
+
+Change-Id: Ib936b9ee4ac16089153209e60c05ed477731fd77
+",11/11/2015 22:16:44,70
+141,Add support for defcore schema 1.4,"Add support for defcore schema 1.4
+
+This will allow reports and capabilities using schema version
+1.4 to display on the website. This mainly adds alias support.
+Capabilities templates were also reduced to one template.
+
+Change-Id: Ie6fcfd574f45c2e50a4db472d41b1129a59ce2dc
+",11/11/2015 20:22:02,9
+142,Update the location of the fastcgi repository key,"Update the location of the fastcgi repository key
+
+This key has also moved, follow up from commit
+I6697f071b79ccb1a7d163e31c309af4716207190
+
+Change-Id: Ic3d2f218e7044154ed1d4aa636347b8ea9134259
+",10/09/2015 13:52:05,9
+143,[WIP] Oslo Releases for Week starting Oct 12th,"[WIP] Oslo Releases for Week starting Oct 12th
+
+Change-Id: I419d7c585cf9c68ca70aef8e9bbf72d6da5a859a
+",10/10/2015 03:25:20,25
+144,Remove _stop_instances hack in test_volume_boot_pattern,"Remove _stop_instances hack in test_volume_boot_pattern
+
+This was a carry over from when the test was originally written in
+b3c3cb9c331e9ee54832326420ebe7ac4bf2e080 over 2 years ago.
+
+We shouldn't have to stop the instances in order to delete them, that
+would be a bug in nova if the delete failed for some reason because the
+instances are still active.
+
+Change-Id: I20b7c2e4c2b110933244ba65a1ccdbf246266946
+",09/11/2015 16:29:33,86
+145,Move swift module to librarian,"Move swift module to librarian
+
+This commit removes 'swift' module from fuel-library
+and replaces it to be managed via librarian.
+This commit also uses mos-8.0 branch of swift module.
+This branch is intermediate stable state of
+current master. Custom patches:
+https://review.fuel-infra.org/#/c/10992/
+https://review.fuel-infra.org/#/c/10990/
+They aren't upstreamed yet.
+Then it will be switched on stable/liberty.
+
+Partial implements: blueprint fuel-puppet-librarian
+
+Change-Id: Iffcf470f7772241cade7fac6679712187ef206e4
+",09/22/2015 12:41:01,166
+146,Add intrinsic creating port for server,"Add intrinsic creating port for server
+
+If neutron is used and networks list port_id property is not specified,
+create internal port with using nic info. Store list of dictionaries
+with id of created ports in resource data as json data.
+
+Also move validate_network method to mixin class.
+
+implements bp rich-network-prop
+
+Change-Id: Iaeda645cd019e02e24ab5418eaa86f631a51cd74
+",09/14/2015 15:22:05,0
+147,Move vmware-etc to top directory,"Move vmware-etc to top directory
+
+Have all of the etc files in one common directory.
+
+Change-Id: I3caf25ce91ff425d815f35ed3efd599a572d595b
+",09/08/2015 09:15:12,25
+148,"Update default_api_return_limit to 100, which is its actual value","Update default_api_return_limit to 100, which is its actual value
+
+It showed an incorrect value in the config changes overview
+
+Change-Id: I7ac18b6ba53eb1460a0871e77204639849342618
+Closes-Bug: #1471197
+",09/07/2015 19:56:32,70
+149,Allow to use autodetection of volume device path,"Allow to use autodetection of volume device path
+
+API contract says, device is optional. We should allow the
+device property to be nullable
+http://developer.openstack.org/api-ref-compute-v2.1.html#attachVolume
+
+Note that in python nova client ""auto"" is turned into None for the
+device before the call is made to Nova API.
+
+Conflicts:
+        nova/tests/unit/api/openstack/compute/test_volumes.py
+
+NOTE(mriedem): The tests were moved in liberty, otherwise nothing
+changed.
+
+Closes-Bug: #1491325
+Change-Id: Ibfd83b6abdfeec328019246a372363cada53869e
+(cherry picked from commit 354e972f9fbcc9bbb8cb618f7fb8e00c8fbb2d95)",09/02/2015 13:19:11,4
+150,Fix the db_sync problem in 039 for db2,"Fix the db_sync problem in 039 for db2
+
+When using db2 as the database backend, it encounters problem
+when running db_sync in step 039 due to ""SQL0669N  A system
+required index cannot be dropped explicitly"", which need to
+drop the constraint first then recreate the index. And this
+patch also fixes the problem of dropping some indexes which
+only are created in non-db2 databases, meanwhile, it will not
+break the logic for all other database backends.
+
+Closes-Bug: #1434440
+
+Change-Id: I628bfa9ab1e4e07b71b49fc0e5a6087679b642a6
+",03/24/2015 05:44:12,0
+151,Fix from_config argument,"Fix from_config argument
+
+From what I've seen, many of the command line arguments are
+still broken, but this may help a little.
+
+Change-Id: Ic879229a965f45c4b2e6027229fa8ce79b373d9e
+",08/12/2015 17:23:59,35
+152,Finish disabling pip mirror,"Finish disabling pip mirror
+
+The previous fix got two of the three places that the pip index was
+set.  This gets the last one.
+
+Change-Id: I77e2ce5c98432ec327ecd9f196c2ad3a81cd6e46
+",08/11/2015 20:56:06,0
+153,Updated from global requirements,"Updated from global requirements
+
+Change-Id: I0e546249bced9515dced4ff2a7b47159dda4a50f
+",07/23/2015 04:56:41,9
+154,Flag tests that depend upon SSH.,"Flag tests that depend upon SSH.
+
+Original commit message:
+""Currently tests that require SSH are not gated against in Tempest
+due to the variety of conflicting network models available to
+OpenStack clusters. Tests that require SSH need to be rationalized
+and refactored, and is a current work item for the openstack-qa
+team.
+
+Until this test infrastructure is refactored, the tests should be
+flagged but kept for future capability testing.""
+
+Change-Id: I7d9e273a4324500c9aaae42de942d3b45ffce824
+",06/09/2015 20:37:28,130
+155,Switch to oslo.service,"Switch to oslo.service
+
+oslo.service has graduated, so trove should consume it.
+
+Change-Id: Id14d28146f677faf017160ac93289fd119674fc4
+Closes-Bug: #1466851
+",06/23/2015 06:10:26,193
+156,Move puppet-murano from stackforge to openstack,"Move puppet-murano from stackforge to openstack
+
+This change moves puppet-murano from stackforge to openstack in
+order to be included as part of OpenStack Puppet Modules project.
+This repository will contain the module necessary to configure
+and manage Murano with Puppet.
+
+This change is related to a proposed governance change: Id846941c9002194e76a6ac31c1979d410aa25fb9
+
+Change-Id: Ia7e917b3032ef5ea56b33cf92e6b7c2d62674f6a
+",06/17/2015 15:13:54,58
+157,Fix import errors,"Fix import errors
+
+Change-Id: I4d01af55904408692e991784ebab5de11cc1014a
+",07/02/2015 00:16:57,13
+158,Replace dict.iteritems() with six.iteritems(dict),"Replace dict.iteritems() with six.iteritems(dict)
+
+Partially-Implements: blueprint designate-py3
+
+Change-Id: I068d05e77bd94cbe2ce613dd4428545144214786
+",06/29/2015 01:27:41,17
+159,Allow fixed_key to be configurable in cookbook,"Allow fixed_key to be configurable in cookbook
+
+The fixed_key attribute should be added in cookbook for volume
+encryption
+
+Change-Id: I83f697fde32bf1ccaaa3187936c664c61b1e7af9
+Closes-Bug: 1467797
+",06/24/2015 03:30:31,49
+160,Add ironic to enable-packages-install,"Add ironic to enable-packages-install
+
+It is time...
+
+Change-Id: Iffdaf3e59a7d24bfb68e87fa908613dc61fc42de
+",10/10/2014 00:15:06,50
+161,Update nova.conf to use [database] connection=.,"Update nova.conf to use [database] connection=.
+
+sql_connection is now deprecated...
+
+Change-Id: I195de10a30947a568063056450ad3edeb5d65836
+",09/17/2013 22:03:03,82
+162,Add a version to pytz.,"Add a version to pytz.
+
+Upcoming improvements to pip 1.4 (wheel support and
+skip-pre-release-by-default) mean that pytz without a version
+will be skipped. Adding a version here gets us what we want.
+
+Change-Id: Ieb0cda61b2f8665d5f83ff8beb8a4cf5b4ece011",06/24/2013 17:42:55,367
+163,Depend on the subnet in neutron_basic.yaml,"Depend on the subnet in neutron_basic.yaml
+
+Associating servers or ports with neutron networks actually creates a
+dependency with a subnet. Heat can mitigate this in some cases, but we
+added subnet properties to our resources so that template authors can
+model the actual dependency in the template.
+
+This change specifies that the server refer to the subnet as well as
+the network to avoid the race where the subnet has not been created
+yet.
+
+The subnet property has been available since Liberty for
+OS::Nova::Server, so I think its time we considered deprecating the
+network property.
+
+Change-Id: If7cd27ab4628fd1c1d0401d0a5c411ee5053361d
+Closes-Bug: #1546201
+Closes-Bug: #1547261
+",06/27/2016 01:51:23,4
+164,Add update operations to server groups,"Add update operations to server groups
+
+Right now it is not possible to change a server group's policies after
+the group is created, nor is it possible to remove instances from a
+group, nor to add an instance to a group after boot time.  This spec
+adds these operations and clarifies the semantics of existing
+operations (like migrations) with respect to server group policies.
+
+blueprint: server-groups-support-update
+ApiImpact
+
+Change-Id: Ic0ad8270c0b983b75e3b2511f47863451e658223
+",04/29/2016 19:45:08,511
+165,libvirt: Refactor _update_xml,"libvirt: Refactor _update_xml
+
+This patch moves code around a bit to make _update_xml signature a bit
+more friendly to expansion needed for the follow up work of updating
+NUMA information for live migration.
+
+Change-Id: I0c24d70964a2b1cbd9e06db69886a8df94379949
+Related-bug: 1417667
+Related-bug: 1289064
+",03/01/2016 17:49:46,84
+166,Switch type extra_specs to DictOfNullableStrings,"Switch type extra_specs to DictOfNullableStrings
+
+Looks like we allow creating volume type extra specs with None as value.
+Our VolumeType object don't allow that causing failure when trying to
+create a volume from such type. This commit changes that field type to
+DictOfNullableStringsField which allows it. Also object backporting
+procedure is added to make sure that before sending data to older
+services we're switching None to empty string.
+
+Change-Id: I5e30a97e46fb9d63a2ce19b09a18091e69fc796b
+Closes-Bug: 1588798
+",06/03/2016 12:13:40,46
+167,keep the token alive when uploading image to store,"keep the token alive when uploading image to store
+
+If we take a long time to upload a large image to store, it may
+trigger the exception ""NotAuthenticated: Authentication required""
+due to the token expires after a period of time(default is 3600s).
+
+To fix this problem, we add a timer to keep the token alive until
+the upload is complete.
+
+Closes-Bug: #1530328
+Change-Id: I2aedfaea9a37d301ed174e5d7f6053d89e5d453e
+",12/31/2015 12:22:30,80
+168,Ensure a service stop during stop_process,"Ensure a service stop during stop_process
+
+The stop_process is called from grenade test cases, but
+sometimes this method can't stop process properly and
+it causes gate test error like this.
+https://bugs.launchpad.net/oslo-incubator/+bug/1446583
+
+This patch adds a feature to wait for a service to stop and
+sends second SIGTERM to forsibly kill the service.
+
+The wait is up to 10 seconds because sometimes a service
+takes a while to shutdown. This logic is already implemented
+grenade/inc/upgrade, this pach ported the logic into
+devstack script.
+
+Also some components have a feature to shutdown their service
+gracefully. In this case, the service might not stop within
+10 seconds, therefore this patch also adds sending SIGTERM
+to forsibly kill the service again.
+
+Change-Id: Ib171fa15c2912073601057e5e3e02c558f62d832
+",07/31/2015 21:46:13,51
+169,OpenStack typo,"OpenStack typo
+
+Change typo ""Openstack"" to ""OpenStack"" as per standard.
+
+There are ongoing work to fix other parts of this bug
+
+    https://review.openstack.org/#/c/243166/
+
+Change-Id: I7ea0fdbd79bec791aafc2f13f1b644245d044dfd
+Partial-Bug: #1514819
+",11/10/2015 15:23:26,0
+170,CSS pading style is used insted of &nsbp;,"CSS pading style is used insted of &nsbp;
+
+To remove &nsbp; and add CSS style instead, added style inside <em> tag.
+This <em> is used only to add CSS style between {%else%} and {%endif%}.
+
+Change-Id: I0e8c8ea503263838251a2738c629b1640ab2f603
+Closes-Bug: #1375820
+",10/04/2014 12:08:31,7
+171,Port and Port-Range fields' asterisk missing in Access-Security tab,"Port and Port-Range fields' asterisk missing in Access-Security tab
+
+The 'Port', 'From Port' and 'To Port' are the required fields for
+managing rules in Access and Security tab, but do not have the
+asterisk marked against them. To replicate this, please follow
+Projects -> Access and Security -> Add/Edit Rules (on any security
+group that has been created).
+
+Change-Id: Ic18963a75040c99d9fc5b30a487368fbde305225
+Closes-Bug: 1292165
+",11/10/2014 05:03:54,41
+172,Remove sphinx from py3 tests,"Remove sphinx from py3 tests
+
+Following ceilometer's lead, this makes it so that sphinx tools are not
+pulled in while testing py3, which works around the PBR issue that has
+come up recently.
+
+Change-Id: I72b603252796d52391c7dbd2a0bdc91eea04e2cc
+Closes-Bug: #1403510
+",12/18/2014 15:31:35,0
+173,ML2 Mechanism Driver for Mellanox SDN,"ML2 Mechanism Driver for Mellanox SDN
+
+Change-Id: Ic51694544746a6226583b9e5ed0ad165a5cd025b
+Implements: blueprint mlnx-sdn-ml2-mech-driver
+",12/03/2014 20:36:09,18
+174,Web Authentication for SAML federated Keystone,"Web Authentication for SAML federated Keystone
+
+Add Specification for Web Authentication
+
+Change-Id: I128ad0175f79741b13bc8df337f592e344558cf4
+",05/30/2014 17:09:18,2
+175,fix for lvm-backed swift device,"fix for lvm-backed swift device
+
+Change-Id: Iac71a0d0e17b047e6983f2c6c8870e4c949c1ed7
+",03/13/2014 15:29:17,7
+176,"
+Use six.moves.urllib.parse instead of urlparse","Use six.moves.urllib.parse instead of urlparse
+
+To keep Python 3.x compatibility, use six.moves.urllib.parse
+to replace urlparse.
+
+Change-Id: Ie2c23ca758cecce2bf622c7c633a6e43d52db4cd",02/12/2014 02:37:11,0
+177,Python3: replace UserString by six.moves.UserString,"Python3: replace UserString by six.moves.UserString
+
+This makes this code compatible with both Python 2 and 3.
+
+Change-Id: Ie209e716defc45436ea29aa7117de018ff273e72
+",12/12/2013 14:44:44,2
+178,tests for the node option,"tests for the node option
+
+These tests verify the XML generated when the 'node' option is set and
+when it's absent.
+
+Change-Id: I65127f18d4dc0114e6c9b5965c2e83496bccdcb4
+",11/14/2013 12:47:23,40
+179,Fix the standard port that is inferred from url scheme,"Fix the standard port that is inferred from url scheme
+
+Change-Id: Ib67a2608f7395df82a72aedf66a84bc702f306a3
+",07/30/2013 04:54:23,7
+180,Import gettextutils from oslo-incubator,"Import gettextutils from oslo-incubator
+
+Required for bp user-locale-api
+
+Change-Id: I087286acd059a8f45229807dd458cd190a7d49eb
+",07/26/2013 15:56:38,3
+181,"
+Adds a show method to the service api","
+Adds a show method to the service api
+
+     * Adds a 'show' method to api.openstack.compute.contrib.Services
+     * Adds an 'id' attribute to the output of Services.index output - so
+       that they can easily be referenced again later
+     * Adds an 'created_at' attribute to the output of Services.index output
+     * Handles the possibility of a corrupt DB reporting multiple zones for
+       a host in a more consistent way
+     * Makes the tests for host_api related to services use the DB -
+       this makes the test less unit testy, but more thorough and use
+       less code. It also allows for easier building of other tests on
+       top of the setUp method
+
+Implements: blueprint service-api-extension-upgrade1
+Change-Id: I1accce90134e2237950727d3481689a594ca3dc8",01/25/2013 17:13:13,80
+182,Ensures compute_driver flag can be used by api and volume,"Ensures compute_driver flag can be used by api and volume
+
+Fixes bug 1063851 by moving compute_driver flag from
+compute/manager.py to the global flags.py
+
+Change-Id: I850b0d49be7f90a9faad53d23cfc39aa4717ea8b
+",10/08/2012 15:48:38,35
+183,"Use ""optional"" for ceph confs","Use ""optional"" for ceph confs
+
+Also add missing cinder-backup ceph.conf info
+
+TrivialFix
+
+Change-Id: I2b2d85c2d34908a9b11198eb51b3cf359a06bdf7
+",2016/2/16 16:42,2
+184,Ensure apparmor is running before reloading,"Ensure apparmor is running before reloading
+
+The 'Reload apparmor' handler can fail if the apparmor service is not
+already in a running state. Add an additional handler to ensure that
+apparmor is started and enabled on boot.
+
+Change-Id: If2752d69beb2c646a64f2ca02ce39a0d4161a5b5
+",2016/11/4 16:25,0
+185,Support api microversion for tempest API test,"Support api microversion for tempest API test
+
+This patch adds support to specify api microversion for different
+tempest API test cases.
+
+Change-Id: I0e6fa81b118b9e7a4f59550f8c8a9aa0617936ab
+",2016/10/17 7:57,29
+186,processutils: add support for missing process limits,"processutils: add support for missing process limits
+
+The original commit adding support for process limits only wired
+up address space, max files and resident set size limits. This
+is not sufficient to enable nova to protect qemu-img commands
+against malicious images.
+
+This commit adds support for the remaining limits supported
+by python: core file size, cpu time, data size, file size,
+locked memory size, max processes and stack size.
+
+Related-bug: #1449062
+Change-Id: I164c4b35e1357a0f80ed7fe00a7ae8f49df92e31
+(cherry picked from commit 8af826953d1ad2cab2ecf360e0c794de70a367c3)
+(cherry picked from commit 5f417f8e9656e097070036daced26d8b0f3728c3)
+",2016/6/21 15:44,12
+187,Correct .rst syntax for security_groups.rst,"Correct .rst syntax for security_groups.rst
+
+Correct .rst syntax for security_groups.rst
+
+Change-Id: I453036dbbc6e4563126f9e208a7061e2522d1ae0
+",2016/9/7 6:50,73
+188,WIP allow overcloud.j2.yaml,"WIP allow overcloud.j2.yaml
+
+Change-Id: I81239991f36ed5f6453184bf9cffe930832cb68b
+",2016/9/5 16:13,6
+189,Rename Smaug to Karbor,"Rename Smaug to Karbor
+
+Smaug has been renamed to Karbor. Adjust requirements accordingly.
+
+Change-Id: Ie79da33351a172fbd9ba0e5b20e1c8322f745a3c
+Depends-On: I1488b975ce6bb24760644f302c8a5188132030bb
+",2016/8/10 8:19,0
+190,Make auto allocate cleanup retry,"Make auto allocate cleanup retry
+
+This adds a retry decorator to the auto allocate cleanup logic
+so it can handle retriable errors during cleanup. It also adds
+catches for notfound errors to make the function idempotent so
+it works on retries.
+
+Change-Id: I3d62af3018fb834ec85771d8bc8e7379cc80b72a
+Closes-Bug: #1615710
+",2016/8/22 16:29,12
+191,WIP Fix devstack plugin,"WIP Fix devstack plugin
+
+Change-Id: I84250d598ba76deae2a5bad6bbf3f0acfe1cfbe6
+",2016/8/8 10:46,82
+192,Configure 'conductor/api_url' if its not defined in another place,"Configure 'conductor/api_url' if its not defined in another place
+
+It's temporary solution to configure 'conductor/api_url' parameter via
+'ironic_config' provider till it will be implemented in 'ironic::conductor'
+class of puppet-ironic project.
+
+Closes-Bug: #1613644
+
+Change-Id: I27467942525956a8f9f29c055bc2046afe78f236
+",2016/8/17 9:37,1
+193,"Fix the failing functional test ""test_ovsdb_monitor_lock""","Fix the failing functional test ""test_ovsdb_monitor_lock""
+
+This test is failing after the commit with change id
+""Iae4b682c0774e749eb48cde67cd9748d7dfe053c"" in neutron.
+
+Please see bug description for more details.
+
+This patch fixes the issue by changing the default value of
+""ovsdb_connection_timeout"" to 5 seconds for the functional tests.
+
+As ""wait_until_true"" function is moved from neutron.agents.linux.utils
+to neutron.common.utils, changed the import accordingly.
+
+Change-Id: Ic035770de6529600a050a7cfe2f236f5ca3e0d9f
+Closes-bug: #1607639
+",2016/7/29 9:33,2
+194,Tests: Fail if oslo.versionedobjects issues Invalid UUID warnings,"Tests: Fail if oslo.versionedobjects issues Invalid UUID warnings
+
+There are many places in Cinder where we break this rule.
+
+Filter them out ahead of time, before oslo.versionedobjects no
+longer allows this behavior.
+
+Depends-On: I29e076fa5ed94596991ba39541b23fdc69669d7d
+Depends-On: Id54026f0219c77d0e9a30668b448225d805cf270
+Change-Id: I34c48ff55a7d3e1b607fb8630bddbe5a1a14764d
+",2016/3/31 19:53,160
+195,[WIP] API v2 Dashboard,"[WIP] API v2 Dashboard
+
+Very early code for a Horizon dashboard based on the Designate v2 API.
+
+This is very much a work in progress and is using some of the latest
+Angular code available in Mitaka Horizon.
+
+Change-Id: I726bffbdc9514e1dc04dcb8e888d9808c6203867
+",2016/7/12 20:51,5
+196,Fix zk startup detection,"Fix zk startup detection
+
+The log line we were looking for in zookeeper is not present in
+all versions.  Look for something that is more common.
+
+Change-Id: I40a79347e94673a2bc62394e1c2cbf6cc35f43be
+",2016/7/13 19:45,6
+197,[DNM] Add tablesorter to html report,"[DNM] Add tablesorter to html report
+
+This commit adds jquery tablesorter to a html report which might be
+useful to find fail/error/skip tests.
+
+However, current implementation is not good because this patch doesn't
+care about detail rows.
+
+Change-Id: I7859175d0e755d05378243c7bc236196a244b4d1
+",2016/6/7 9:45,11
+198,Project Specific Install Guides,"Project Specific Install Guides
+
+This is a proposal that allows project teams to write their own Install
+Guides and properly promote them. The goal is to have a proposal that
+does not cause significant load on the documentation team and gives main
+responsibility to the project team. Instead the doc team should act as
+enabler.
+
+Change-Id: Ic028303dd42f055d284043ac5bec3854ef6769de
+",2016/4/4 18:40,77
+199,Ensure that the engine finishes up even under sent-in failures,"Ensure that the engine finishes up even under sent-in failures
+
+Change-Id: Ic16c854d285398c688f132697c3bb7e637feb9a8
+",2016/1/21 1:02,0
+200,Gnocchi: Fix gate stable jobs,"Gnocchi: Fix gate stable jobs
+
+Since Mikita is released, Gnocchi stables 2.0 and 2.1 must be
+gated on Mikita stable branches of other project.
+
+Change-Id: I8f5da5dde5aa24757813b9c032f8ee561029e6c9
+",2016/4/14 7:41,0
+201,Eager load columns in volume_get_active_by_window,"Eager load columns in volume_get_active_by_window
+
+All other volume-related methods in db.sqlalchemy.api are eager loading
+volume_metadata, volume_admin_metadata (if admin), volume_type,
+volume_attachment and consistencygroup. volume_get_active_by_window
+wasn't, causing fails because of SQLAlchemy Session being closed when
+trying to lazy load volume_metadata. This commit adds missing
+options(joinedload()) to this query.
+
+Change-Id: I33ec89d7f1f43aae6010aaa6e12951b7c522b8f0
+Closes-Bug: 1517763
+Related-Bug: 1501838
+(cherry picked from commit 586727cef755abeb3360f176782c1b1dd680d318)
+",2016/4/12 8:30,40
+202,Temporarily cap fixtures<2.0,"Temporarily cap fixtures<2.0
+
+The fixtures 2.0.0 release has a backward incompatible
+change which affects how static methods are monkey patched
+and it's breaking at least nova and neutron* py27 jobs,
+so cap for now until those projects have adjusted their
+tests to work on fixtures 1.4.0 and fixtures 2.0, or when
+we're all ready to push to fixtures>=2.0 at the same
+time.
+
+Change-Id: I94a292c051efbe98660fd77e4f2bd9ac34d495ab
+Related-Bug: #1567295
+",2016/4/7 18:54,1
+203,Matches deleteRouterInterface to the reference in WADL,"Matches deleteRouterInterface to the reference in WADL
+
+Change-Id: I6d4040eee21c8e74d3814f2a0a03e5ed929a8ff7
+Closes-bug: 1559234
+",2016/3/19 14:48,8
+204,Pass the complete info in sg/rules db into PRECOMMIT_XXX callback,"Pass the complete info in sg/rules db into PRECOMMIT_XXX callback
+
+PRECOMMIT_XXX events' callback need completed sg info for registed
+driver.
+
+Change-Id: I451ae5f0c2157e8fcb34095d0745c3057a8fcfe8
+Closes-bug: #1546910
+",2016/2/18 8:28,0
+205,To tag all the Admin-only APIs as Admin only.,"To tag all the Admin-only APIs as Admin only.
+
+Currently, issuing manila help command, lists all APIs.
+Therefore, there is no way to identify which is admin-only
+and which is not. Fixed by tagging the admin-only api
+as (Admin only) in help text.
+
+Change-Id: I0f676901675b8d57e16c4275c5b579fcfa0ca2ae
+Closes-Bug: #1457155
+",2016/1/6 10:29,42
+206,Fix a problem building spare amphora,"Fix a problem building spare amphora
+
+When amphora a being built via the housekeeping manager spares
+pool management the amphora records in the database are not
+being properly updated with the nova details. This results in
+the amphora not having a lb_network_ip in the database.
+This patch makes sure the amphora database record is updated.
+
+Change-Id: I4a364b6fc631d19f4a93f9fe7c5348a2c9617790
+Closes-Bug: #1515009
+",2016/2/27 1:12,1
+207,XenAPI: Fix disk_formats verified by tempest,"XenAPI: Fix disk_formats verified by tempest
+
+lib/glance restricts the disk_formats to those supported by XenAPI, so
+tempest needs a similar restriction for the disk_formats tested.
+
+Confirmed as passing internal Citrix CI (affected tempest jobs are
+currently disabled in voting XenServer CI until this change lands)
+
+Conflicts:
+        lib/tempest
+
+NOTE(mriedem): The conflict is due to this line being in lib/tempest
+twice:
+
+iniset $TEMPEST_CONFIG image-feature-enabled deactivate_image True
+
+The duplication is removed so this is the same as master now.
+
+Change-Id: Iefa5b16a3fa1789ed583426ea47ebb22e6cb571e
+(cherry picked from commit 2dd761b16950603555409e33ac63a196eefd2607)
+",2016/2/25 16:14,8
+208,WIP stack resource search,"WIP stack resource search
+
+implements blueprint heat-stack-resource-search
+
+Change-Id: I2d1f6ee68623e08bb9654dbcba28336364d14d6d
+",2015/12/15 12:08,32
+209,Add LIBS_FROM_GIT support for searchlightclient,"Add LIBS_FROM_GIT support for searchlightclient
+
+Provides devstack plugin support for LIBS_FROM_GIT
+
+See: http://docs.openstack.org/developer/
+     devstack/configuration.html#libraries-from-git
+
+Change-Id: I9050ac6720dece11e855665b7f17a4717728e722
+Partially-Implements: blueprint openstack-client-search-initial-plugin
+",2016/1/15 22:40,52
+210,Add a configuration generator for bandit,"Add a configuration generator for bandit
+
+This allows project developers to generate a valid configuration for their
+project, that can easily be updated. Example of use:
+
+$ cat oslo_messaging.yaml
+profile_name: gate
+exclude_checkers: [assert_used, try_except_pass]
+
+$ bandit_config_generator.py \
+    --out /tmp/bandit.yaml \
+    bandit.yaml \
+    oslo_messaging.yaml
+
+Change-Id: I0b678b26ffa7dbe6034bdc7b35862e15c61c3670
+Blueprint: bandit-conf-generator
+",2015/11/5 14:13,1
+211,Fix token_endpoint usage,"Fix token_endpoint usage
+
+Commit 22d740b7007e1182c99370cb2629322384b17a14 broke token_endpoint
+authentication for openstackclient, by unconditionally setting
+auth_type to 'token' whenever a token was passed in the command line.
+If option --os-url is passed together with --os-token, auth_type
+should not be changed.
+
+Change-Id: I835c3716dd08eaca10f56682c22fdc6ac700e0fe
+",2015/12/23 10:41,1
+212,Remove downgrade migrations,"Remove downgrade migrations
+
+According to cross project spec[1] downgrade migrations should be removed.
+
+[1] I622f89fe63327d44f9b229d3bd9e76e15acbaa7a
+
+Implements blueprint: no-downward-sql-migration
+
+Change-Id: I111cdb4bba361de5da0ce7db8144965c947ada41
+",2015/12/17 11:23,37
+213,Pin Pillow as the latest release is not building,"Pin Pillow as the latest release is not building
+
+Pillow 3.0.0 released today and logstash is tracking ""Failed
+building wheel for Pillow"" messages.
+
+This patch pins Pillow <3.0.0.
+
+Change-Id: Ieffd37f9d49b53c36da31916a6af4f3bfe11d411
+",2015/10/1 21:58,41
+214,Add releasenotes jobs for searchlight,"Add releasenotes jobs for searchlight
+
+Change-Id: I52ff18d6a48136d64a4c5920612688941442b532
+Depends-on: I2ffe427b12b456a3ebbdaacfacb8db49f25a47c6
+",2015/11/19 22:01,1
+215,[Swift] Add objects context class,"[Swift] Add objects context class
+
+Context for objects resource, allow containers and objects
+be created before scenario test.
+
+Blueprint benchmark-scenarios-for-swift
+
+Change-Id: I0c8623fbe56401171244542ad8188d20f8848e8c
+",2015/5/2 13:00,2
+216,Initial template2spec converter called tmpl2spec.py,"Initial template2spec converter called tmpl2spec.py
+
+This is a simple Jinja2 template parser with some distro
+specific filters available. The current filters are:
+
+- pypackname_normalize
+  example: BuildRequires: {{ ""Babel""  | pypackname_normalize }}
+- license_normalize
+  example: License: {{ ""Apache-2.0"" | license_normalize }}
+
+Change-Id: Iec75393ca197e031ffebf0921e8471ddd3448ddf
+",2015/9/14 13:51,11
+217,"Remove the unnecassary volume_api.get(context, volume_id)","Remove the unnecassary volume_api.get(context, volume_id)
+
+In the method delete from volume_image_metadata, volume_api.get()
+can be called twice. This first time is to get the metadata, and
+the second is to get the volume. We can get them both at a time
+
+Change-Id: I0633c16db21e254ec43bad472748cbc0b7796a24
+Closes-Bug: #1489342
+",2015/8/31 9:27,28
+218,Remove heat temprevert,"Remove heat temprevert
+
+Change-Id: I61efbf6ad660a8499230dc81d950245608147303
+Depends-on: Id7906b52d168fb2d9f744fa7a8d06c84a1343186
+",2015/8/24 11:04,0
+219,Update deprecated parameter stack_user_domain,"Update deprecated parameter stack_user_domain
+
+According to [1], stack_user_domain parameter is deprecated now,
+and should be used stack_user_domain_id parameter.
+
+[1] http://docs.openstack.org/kilo/config-reference/content/orchestration-configuring-api.html
+
+Change-Id: I558eaf311af8751897c402b3d3c2d82b4fadb07d
+",2015/7/29 10:49,7
+220,Add generic int-test classes,"Add generic int-test classes
+
+The int-tests in Trove are very MySQL specific, which makes it difficult
+to reuse code for other datastores.  This changeset breaks them down
+into 'groups' and 'runners.'  Runners can be over-ridden to add
+datastore specific handling/tests.  This should allow most generic
+code to be reused across datastores, while also providing for datastore
+specific enhancements.
+
+This initial changeset adds tests for basic actions on instances
+and clusters.  Some basic replication tests were also migrated.
+
+Vertica was refactored to use the new infrastructure.
+
+Change-Id: I34fb974a32dc1b457026f5b9d98e20d1c7219009
+Authored-By: Petr Malik <pmalik@tesora.com>
+Co-Authored-By: Peter Stachowski <peter@tesora.com>
+",2015/7/17 23:03,24
+221,Add hooks for external install & svc management,"Add hooks for external install & svc management
+
+This adds defined anchor points for external modules to hook into the
+software install, config and service dependency chain.  This allows
+external modules to manage software installation (virtualenv,
+containers, etc) and service management (pacemaker) without needing rely
+on resources that may change or be renamed.
+
+Change-Id: I2b5707a0fe3dd72a56bbf1d840b4197bfa3012db
+",2015/6/30 16:28,1
+222,ML2 : make port status change only when the port is bound to the host that asking,"ML2 : make port status change only when the port is bound to the
+host that asking
+
+Currently, nothing prevents the port status to be changed to BUILD
+state when get_device_details() is sent by a host that doesn't own
+the port.
+This could happen during live-migration, of for multi-bound ports
+such as HA ports.
+This commit allows the port status modification, only if the port
+is bound to the host that is asking for it.
+
+Closes-Bug : #1274160
+
+Change-Id: I9b3673f453abbafaaa4f78542fcfebe8dc93f2bb
+",2015/3/10 20:54,89
+223,WIP: Made a couple-seconds waiting for container configurable,"WIP: Made a couple-seconds waiting for container configurable
+
+There is a bug https://bugs.launchpad.net/tempest/+bug/1452915
+that describes failing test_get_object_after_expiry_time test
+because in real clouds hardcoded 3 seconds waiting for the
+container is not enough. Replaced hardcoded 3 seconds with the
+container_sync_interval parameter from tempest.config.
+
+Change-Id: If90d9ef047344e2e094aa1b143c93c9fa4b56fbd
+",2015/6/16 9:12,6
+224,Add dpkg architeture facts,"Add dpkg architeture facts
+
+Dpkg and debian consider architecture separetly from what the hardware
+is. These facts expose that to puppet.
+
+Create both a normal fact and strutured fact. The structured form could
+be extended to add more dpkg properties.
+
+Change-Id: I5b5d5bf6b8d19f4de3bc97d0240fdbda3e3a6a5d
+",2015/4/8 10:30,12
+225,Enable F22 without the FORCE flag,"Enable F22 without the FORCE flag
+
+F22 has a stable release and working with devstack.
+
+The change also removes the version flags regarding to the
+mariadb-devel.
+
+NOTE: You may see yum deprecation warnings, unless
+you set the YUM variable to dnf.
+
+Change-Id: I05140765bffc16faef5a29dfaba291c290bfae02
+",2015/5/28 13:42,0
+226,Store properties data in database,"Store properties data in database
+
+Change-Id: Ife448fdb72f2de56107a74d47cdb64effb97e615
+Implements: partial-blueprint update-failure-recovery
+",2014/8/8 15:23,64
+227,Handle port delete event,"Handle port delete event
+
+Neutron can delete a port without nova being aware of it.
+https://review.openstack.org/#/c/178666/ added a event to notify nova
+when a port is deleted. This patch will process the event and detach
+the interface.
+
+If nuetorn<->nova event reporting is not turned on or lost for some
+reason, the deleted port can be discovered during the periodic refresh
+of info cache where network_info is saved. And obsolete ports can be
+discovered and detached.
+
+Note that when a port is deleted by Neutron, it's possible that the
+periodic refresh is just taking place ahead of receiving the
+network-vif-deleted event.
+
+In any case, the port will be detached from the instance, and the
+normal flow of cleaning up due to port delete will take place.
+
+Change-Id: I998b6bb80cc0a81d665b61b8c4a424d7219c666f
+Partial-Bug: #1448148
+",2015/5/1 14:02,0
+228,Update docs for puppet 3,"Update docs for puppet 3
+
+Change-Id: I23049a65e5470805ea494f50e58ae586d4fce710
+",2015/2/16 16:38,2
+229,Revert 1154253 causes XenServer image compat issue,"Revert 1154253 causes XenServer image compat issue
+
+In 1154253 we:
+
+  Drop gzip flag from tar command for OVF archives
+
+While support more OVF file formats is a worthy goal the approach
+in 1154253 is going to cause serious issues for existing
+Nova XenServer users who are already zipping their OVS images.
+
+I would also point out that our utils.py xenserver plugins still
+zips tarballs we create (see create_tarball) so the new code
+causes internal inconsistencies as well.
+
+This should fix SmokeStack.
+
+Fixes LP Bug #1155783.
+
+Change-Id: Iff6db314c0dec6df2e48d98db2a547f6624b9d9a
+",2013/3/15 21:01,2
+230,[network-guide] the output of net-show and router-show are error,"[network-guide] the output of net-show and router-show are error
+
+Change-Id: I3cc24aa2ea9a8544b866b0ccf5610be85cc80d7f
+",2016/9/9 13:24,0
+231,Adds the api-ref migrated RST + YAML files,"Adds the api-ref migrated RST + YAML files
+
+With this email[0], you must migrate API reference docs into RST. The
+conf.py and the tox environment are also cribbed from nova.
+
+Still need to retain the install_command in tox.ini, otherwise the
+api-ref job fails.
+
+[0] http://lists.openstack.org/pipermail/openstack-dev/2016-May/093765.html
+
+Change-Id: I3315261aa18729fa7a6aa79d4a1d6c24de1e2c6b
+Co-Authored-By: Anne Gentle <agentle@cisco.com>
+Co-Authored-By: Amrith Kumar <amrith@tesora.com>
+",2016/8/17 17:29,5
+232,Disable locale stripping on centos,"Disable locale stripping on centos
+
+This currently fails horribly with build-locale-archive segfaulting (see
+bug). Based on strace, this is caused by /usr/sbin/tzdata-update not
+existing - which should exist since glibc-common is meant to provide it
+(which also provides build-locale-archive). I don't have any other leads
+so for now lets sacrafice a few MB in size of our images to get images
+that actually build.
+
+Change-Id: I63be6098fadfc662b6c38d1d35252d6ad1e3aa81
+Related-Bug: #1600741
+",2016/7/13 18:26,1
+233,Use versionless keystone endpoint for horizon,"Use versionless keystone endpoint for horizon
+
+According to horizon patch https://review.openstack.org/#/c/321640/,
+horizon now supports versionless keystone endpoint, so we need
+to use versionless endpoint for testing.
+
+Change-Id: Ia176f507f703189caf89371179dd77bc17704e1c
+",2016/6/9 10:00,0
+234,Fix swap-volume for non-admin users,"Fix swap-volume for non-admin users
+
+Cinder's volume migration API is, by default, an admin-only operation.
+This includes the migrate_volume_completion API.
+
+When Cinder is doing a volume migration, it calls Nova's swap-volume
+API to detach the old volume that we're migrating from and attach
+the volume that we're migrating to. Then Nova calls Cinder's
+migrate_volume_completion API to signal Nova is done and Cinder
+can finish the volume migration.
+
+The problem is that swap-volume is not an admin-only API in Nova
+per the default policy. So if a non-admin user tries to perform
+a swap-volume operation, it will fail with a 403 when calling
+Cinder's migrate_volume_completion API, since that requires an
+admin user.
+
+The simple fix here is to detect that the volumes are being migrated
+and only call Cinder's migrate_volume_completion API if that's
+the case. We can determine this by checking the 'migration_status'
+value on the volume (old or new, it doesn't matter, I chose the
+old volume here). Note that the volume migration_status is only
+provided in the volume details for an admin context, which is the
+case for the volume migration operation where Cinder is calling
+Nova to do the swap-volume operation. In the non-admin user
+swap-volume case, we won't see the volume migration_status and
+simply assume the old volume isn't being migrated and we don't
+call migrate_volume_completion.
+
+Change-Id: Iac03258735f3d856a474ab96fe9b0a087e32906f
+Closes-Bug: #1522705
+",2016/3/31 2:13,117
+235,Add support for shared volumes between guests,"Add support for shared volumes between guests
+
+This blueprint proposes a change to Nova to support
+attaching a cinder volume to more than one instance.
+
+Blueprint: blueprint multi_attach_volume
+
+Change-Id: I805c9ea757cbbe9510436cd852fed9182ff41b6f
+Previously-approved: Kilo
+",2015/4/30 14:29,84
+236,Work around problems storing huge properties in events,"Work around problems storing huge properties in events
+
+There is a maximum limit on the size of the resource properties we can
+store for an event in MySQL. To work around this, store an error instead
+when the properties are too large to fit rather than just failing.
+
+Naturally everything works flawlessly in SQLite, so we can't test it.
+
+Change-Id: I668c7ed8ca6c063fd20bc5271d6afea941a5f277
+Closes-Bug: #1493858
+",2015/9/10 20:18,0
+237,Rename i18n IRC channel,"Rename i18n IRC channel
+
+Rename #openstack-translation to #openstack-18n to match mailing-list
+name as well as project team name.
+
+Change-Id: Ib4fafa1356a403e3a79e1b62afc494a7cb1ad695
+",2015/7/27 9:43,12
+238,implement external plugin mechanism for grenade,"implement external plugin mechanism for grenade
+
+Implement an external plugin mechanism for grenade in the spirit of
+devstack plugins. This code is currently untested, however should be a
+very reasonable base point to get projects working with out of tree
+plugins.
+
+Change-Id: I02a777077d40408766204b05ed284fe98efbce8e
+",2015/5/22 15:41,405
+239,Add section for DevStack Integration Strategies to the DevRef,"Add section for DevStack Integration Strategies to the DevRef
+
+Plugins may already have DevStack support, that may need to be revised
+according to the decomposition. If a plugin/driver does not have one,
+it is necessary to add it to ease the development effort. This section
+explains what DevStack integration options are available.
+
+Partially-implements: bp/core-vendor-decomposition
+
+Change-Id: Ib12e38d775af1e5a840bd009c95dac4c982b9753
+",2015/2/3 3:33,0
+240,Merge puppetlabs-xinetd v1.3.1 module,"Merge puppetlabs-xinetd v1.3.1 module
+
+Commit: 0740f5343b54523d9ed27f65c05f6c9f045f022b
+Source: https://github.com/puppetlabs/puppetlabs-xinetd.git
+
+Change-Id: I05944255240752c07efae6fe18cf4668bfe37ff6
+Related: blueprint merge-openstack-puppet-modules
+",2015/1/12 10:18,199
+241,Proposal for Neutron core and vendor code decomposition,"Proposal for Neutron core and vendor code decomposition
+
+This spec outlines the plan for addressing the pain points
+that every Neutron contributor feels on a daily basis when
+working with the project.
+
+The proposed change should be implemented collaboratively,
+in the same spirit of the OpenStack community.
+
+This is initial attempt at making this project a thriving
+one. We should all recognize that if nothing gets done,
+Neutron will become a desolated land where just tumbleweeds
+will abound.
+
+Blueprint: core-vendor-decomposition
+
+Change-Id: I7156edbeeed8d5e11415d3feb5b340bbe74e327f
+",2014/11/15 0:48,35
+242,Add config for Telemetry,"Add config for Telemetry
+
+This patch add the configuration for Telemetry.
+
+Partially implements: blueprint add-basic-ceilometer-tests
+
+Change-Id: I8859857c5cf469045f66631c3d52edcb765035d7
+",2013/12/27 18:57,150
+243,Change Ceilometer official name to OpenStack Telemetry,"Change Ceilometer official name to OpenStack Telemetry
+
+Change-Id: I025a253ff4a43ec7309cc626ae8faf17edaccebf
+",2013/11/14 15:35,2
+244,Forward-compatibility with requests >= 1.0.0,"Forward-compatibility with requests >= 1.0.0
+
+The requests module dropped all configuration with the 1.0.0 release.
+There's no danger_mode and no 'verbose'' mode. The former shouldn't
+be necessary anymore and the latter can be done by setting a different
+log handler for the request.logging root logger.
+
+Change-Id: I59e5b4ef04b8b0bf0b4899e5e4b2ce5d0c7c9e9c
+",2013/1/21 12:53,7
+245,Specify the Ceph packages to be installed,"Specify the Ceph packages to be installed
+
+The puppet-ceph module defaults to 'ceph' but that is a metapacakge
+which isn't provided in all repos.
+
+Depends-On: I13462219522386f8740b0d70916a44f3474115e4
+Change-Id: Ie55d22301dd22102d471e6002dfcaad4bfadd5f6
+Related-Bug: 1629933
+(cherry picked from commit b55f6cda6d2743fc7af139dd2a5adf36754dd681)",10/07/2016 09:47:54,2
+246,Remove tempest.test usage from manila tests,"Remove tempest.test usage from manila tests
+
+Manila tempest tests should be independent from tempest code
+as much as possible. The decorator test.attr is widely used in
+all tests to set testcase attrs. This decorator doesn't
+really do anyting else than calling testtools.testcase.attr.
+
+Change-Id: If10beb9ae7562524f602a6fd7254aa95ef24d70e
+Implements: bp tempest-no-deps
+",09/22/2016 11:20:37,86
+247,Centralize config option: bay_heat section,"Centralize config option: bay_heat section
+
+Centralize config option of Bay Heat section.
+Replace oslo_conf cfg to magnum.conf.
+
+Change-Id: I9118eeb17061a0aa26269ea9deaba28e79f28b76
+Implements: blueprint centralize-config-magnum
+",08/17/2016 07:27:27,6
+248,Bay to Cluster api cleanup,"Bay to Cluster api cleanup
+
+This patch fixes a few missed changes.  It also updates Cluster
+and ClusterTemplate with a few changes that were merged while the
+main patch was a WIP. Updates changes from patch 343478 and
+355804.
+
+Change-Id: I509520d1af0f0e2c04d53359705973d6a6f97a26
+Implements: blueprint rename-bay-to-cluster
+",08/22/2016 20:00:45,66
+249,Manual sync to global-requirements,"Manual sync to global-requirements
+
+Update requirements.txt and test-requirements.txt to correspond with
+what is in openstack/requirements global-requirements.txt
+
+Change-Id: Ib624d339bdb979e87f98bb02000e33bd9cce9601
+",08/23/2016 23:38:07,32
+250,Fixes the midonet test_l3 unit test failures,"Fixes the midonet test_l3 unit test failures
+
+Failures for midonet unit tests seems to be caused due
+to nested rollback.
+Referred http://bit.ly/2as8XAu for this fix.
+
+Change-Id: Ic6b37bf3f799055c93e9eeb9b7f51758ceecbeb5
+Closes-Bug: #1605894",07/25/2016 17:18:59,2
+251,Add new live_migration case to support block_migration=auto,"Add new live_migration case to support block_migration=auto
+
+We added block_migration='auto' support, added a test case to test
+block_migration='auto'
+
+Change-Id: I0fb5567cb4f7363465b68b86174b2df039f183d9
+",03/03/2016 05:54:05,77
+252,Replace raw_input with input to make PY3 compatible,"Replace raw_input with input to make PY3 compatible
+
+The raw_input() raises NameError: name 'raw_input' is not defined
+in python3. This patch fixes it by replacing raw_input with input
+to make PY3 compatible.
+
+Change-Id: Id1d1f202088d16044b59cb349be7733e0f4f911e
+Closes-Bug: #1595827
+",07/07/2016 01:51:32,1
+253,release cliff 2.1.0,"release cliff 2.1.0
+
+it's been a while and a few new features have landed.
+
+Change-Id: Id67c18cca8bdba2d968bfdfb2c9b437dbca8cc04
+Related-Bug: 1577368
+Related-Bug: 1485847
+",06/15/2016 18:08:13,111
+254,Register nodes new workflow,"Register nodes new workflow
+
+Change-Id: Ia711d2693ff559f3a16752403657853a2d3c83c4
+",06/01/2016 05:30:54,61
+255,Make RPC call to abandon nested stack,"Make RPC call to abandon nested stack
+
+Due to stacks being processable by multiple engines, resources in a
+nested stack cannot be marked for retainment from the parent resource
+of the nested stack. This patch makes the parent resource of the nested
+stack call stack abandon instead of stack delete through the RPC client
+so that nested stacks are deleted while nested stack resources are
+retained.",04/21/2016 16:00:35,176
+256,Add hiera yaml for generate_vms granular,"Add hiera yaml for generate_vms granular
+
+Closes-Bug: #1568734
+Change-Id: I2a48e00c76b85a69a746d410d6d99303bd5f400e
+(cherry picked from commit ee373eb2adf2db052d0def42c92b0c74ea4f5358)",04/07/2016 17:01:38,0
+257,Add timeout parameter,"Add timeout parameter
+
+add socket timeout for helper _tcp_ping
+
+Change-Id: Ic707ce878adb278e7c6f4372251305df01f4aa3d
+Closes-bug: #1549395",02/24/2016 21:34:58,0
+258,Fix export_to_dot for networkx package changes,"Fix export_to_dot for networkx package changes
+
+The networkx package changed the way they to_pydot works [1].
+This patch updates TaskFlow to work with the newer version.
+
+[1] https://github.com/networkx/networkx/commit/f5031dd9c6c1f4b63082c192e1887ea044109aaa
+
+Change-Id: I99f87af0b2bed959fcb43ef611b3186e23bd9549
+Closes-Bug: #1561656
+",03/24/2016 17:50:22,0
+259,"Revert ""Make 'blocked' status when node have no storage device""","Revert ""Make 'blocked' status when node have no storage device""
+
+This reverts commit fc04dd0fff33639b812627d04645134dd7d4d3de.
+
+Change-Id: I9efbf623fc9aa6096725a15e53df426739ac16ff
+",03/16/2016 16:55:02,2
+260,Stop shipping broken openrc in vagrant,"Stop shipping broken openrc in vagrant
+
+Instead, rely on kolla-ansible post-deploy to generate a configuration
+file with valid environment variables.
+
+Change-Id: Ie62932afc96e2486410a1d4e14162a88b1733c22
+Closes-Bug: #1555972
+",03/11/2016 08:16:31,6
+261,Add way to pause VM during live migration,"Add way to pause VM during live migration
+
+Implements: blueprint pause-vm-during-live-migration
+Change-Id: I034b4041414a797f65ede52db2963107f2ef7456
+",11/16/2015 18:31:37,38
+262,DO NOT MERGE: Testing TinyIPA,"DO NOT MERGE: Testing TinyIPA
+
+Change-Id: I4690514803dd91d4bda0d38df4fd792f31a51421
+",02/16/2016 12:33:23,0
+263,When creating a container wait for network events,"When creating a container wait for network events
+
+This patch adds a way to wait for Neutron to
+confirm that the vif was plugged when creating a
+container, similar to what's done in the nova libvirt
+driver.
+
+Change-Id: I17f295611046f352a82104984ea59a4465b989f6
+Closes-bug: #1536546
+",01/21/2016 12:32:14,226
+264,Ensure cluster remains stable during services restarts,"Ensure cluster remains stable during services restarts
+
+Using crm_resource --wait we wait for the cluster to get into
+a stable state before moving into the next step of the piloted
+restart procedure.
+
+Change-Id: I80199653024383fd07900dad0b8d23fb8afade26
+Co-Authored-By: Jiri Stransky <jistr@redhat.com>
+(cherry picked from commit 7643dc8a49d8f6533d9c00d3d0fcd643c3985e3a)",11/18/2015 16:24:48,5
+265,Add refresh_on to task responsible for changing configuration,"Add refresh_on to task responsible for changing configuration
+
+Change-Id: I935f6ad858d8a617f32bac3cfc0a893a714af964
+Implements: blueprint openstack-config-change
+",11/25/2015 11:06:24,12
+266,Docs update for new fedora atomic 1.0.4,"Docs update for new fedora atomic 1.0.4
+
+WIP: Update examples in  docs to use fedora-21-atomic-5
+
+This patch will update documentation for use
+of magnum as we know new image of fedora 1.0.4
+has been built.
+
+Change-Id: Ic02428237d12478a7f1e43510865258f5f837d18
+",09/08/2015 21:08:30,40
+267,A few tweaks to make the App Catalog plugin work.,"A few tweaks to make the App Catalog plugin work.
+
+This patch tweaks existing dialogs to support passing in params. It
+also adds the start of a heat rest api to support validating
+templates.
+
+Change-Id: Ie6965ad7c8a738f8b88927077884bba621f2eb6b
+",07/29/2015 00:43:04,21
+268,Add cpu meters to yaml,"Add cpu meters to yaml
+
+Change-Id: I9cb4088f5a562d9593e701eb2dfb386abc8b4294
+Implements: blueprint declarative-notifications
+",08/20/2015 22:33:20,17
+269,"Revert ""Revert ""Add VIF_DELETED notification event to Nova""""","Revert ""Revert ""Add VIF_DELETED notification event to Nova""""
+
+This reverts commit 6575db592c92791a51540134192bc86465940283.
+
+Depends-on: I998b6bb80cc0a81d665b61b8c4a424d7219c666f
+
+Change-Id: I7aae44e62d2b1170bae31c3492148bfd516fb78b
+",06/03/2015 06:06:01,32
+270,Remove unneeded OS_TEST_DBAPI_ADMIN_CONNECTION,"Remove unneeded OS_TEST_DBAPI_ADMIN_CONNECTION
+
+The desired OS_TEST_DBAPI_ADMIN_CONNECTION string is now reflected
+in the oslo.db 1.12.0 release's default behavior, and so does not
+need to be set any longer to achieve the same opportunistic backend
+discovery for tests.
+
+Change-Id: I004a53e077b465922bb08668b063ac1a55624eed
+",07/03/2015 23:07:17,2
+271,Support forcing service down,"Support forcing service down
+
+Extending Nova CLI to support forcing service to be set/unset as down,
+as specified in blueprint mark-host-down.
+
+Implements: blueprint support-force-down-service
+Change-Id: I2b80ac32a95fe80363b4ad95d8d89fff097935a3
+",05/27/2015 06:33:39,7
+272,WIP: Use storage scenario test base to test migration,"WIP: Use storage scenario test base to test migration
+
+Change-Id: If4cb8960406545bfa4157be40879f1fbf301724c
+Closes-Bug: 1481875
+",08/07/2015 03:03:42,6
+273,Add support for template-function-list command,"Add support for template-function-list command
+
+DocImpact
+APIImpact
+
+Implements bp: template-function-list
+
+Change-Id: I80fdd94c10be49f80bd8dab1288ad336d185f55d
+",06/24/2015 13:09:20,0
+274,Better Scenario test case fixtures,"Better Scenario test case fixtures
+
+This adds five persistent fixtures for Scenario test cases; previously
+they had been variously mocked, patched, etc., in different ways
+individually in many test cases. It improves the way those fixtures
+are used, mostly by using the .return_value attribute of Mock objects
+instead of calling the Mock objects in the test cases and dealing with
+strange side effects of that. It also adds assertions for
+get_from_manager() calls.
+
+Change-Id: I81a69683ef8ca0fc00bb408c951ec2f9a98e7ba0
+",06/17/2015 17:03:29,48
+275,Update Information on governance depends change,"Update Information on governance depends change
+
+Remove wrong information about always making project-config dependend on
+governance change. Add explanation that a review comment is enough.
+
+The current information might confuse creators to create a circular
+dependency.
+
+Change-Id: I3cd36efba794762157616ac10cffe882849756bc
+",06/16/2015 10:05:36,0
+276,Add port-security extension API cases,"Add port-security extension API cases
+
+Netron ml2 plugin introduces a new extension port-security from Kilo cycle,
+this patch add the API test cases for it. It verifies the default value of the
+attribute, for network and port. And It also verifies the confict between
+setting port-security and sec-group/address-pairs.
+
+Change-Id: Ie0ec090e8fdce7dbdbce14ef47f38e8e57f262d4
+",03/26/2015 08:01:38,1
+277,Introduce a coreos for heat-kubernetes in magnum.,"Introduce a coreos for heat-kubernetes in magnum.
+
+Below are the changes added.
+    1. Implement code to parameterize token and ssh_authorized_key
+       for coreos heat-templates.
+
+Change-Id: Id8b18a7bf016120102c8da1c3339f70564aedae4
+",02/26/2015 11:57:34,0
+278,"Added a new resource type ""ProviderNet"" based on neutron provider extension and added resource template to the network unit test http://docs.openstack.org/api/openstack-network/2.0/content/provider_ext.html Change-Id: Ic085d13c866722b0e6ed9fd7a4f43dd92d5b1a0b","Added a new resource type ""ProviderNet"" based on neutron provider extension and added resource template to the network unit test
+http://docs.openstack.org/api/openstack-network/2.0/content/provider_ext.html
+Change-Id: Ic085d13c866722b0e6ed9fd7a4f43dd92d5b1a0b
+",02/10/2014 19:28:13,56
+279,Remove eventlet related code in amqp driver,"Remove eventlet related code in amqp driver
+
+Because driver should rely on executor and not directly on eventlet,
+delete eventlet related code.
+
+This is the amqp part.
+
+Change-Id: Ic6060058dafa4dabbc5e8c68bf231c818a7fec25
+",12/16/2013 16:23:18,136
+280,Move L3 agent type constants to use neutron-lib,"Move L3 agent type constants to use neutron-lib
+
+Change-Id: I39b5af9b548d5ee276c573b63ade7fe315d5945f
+Depends-On: I60cc7a178c40872ec87deb122ccbeee69e00ec5c
+",06/08/2016 06:31:54,34
+281,Make subnet_id for lbaas v2 member create optional,"Make subnet_id for lbaas v2 member create optional
+
+Presently subnet_id is required for creating lbaas v2 member.
+This patch makes subnet_id optional for creating the member.
+If subnet id is not specified, then load balancer vip subnet_id is used.
+
+Change-Id: I658b0fc57b14d590d502600ccda9a52582658786
+Closes-bug: #1426248
+Co-Authored-By: Numan Siddique <numan.siddique@enovance.com>
+Co-Authored-By: Angus Lees <gus@inodes.org>
+",01/15/2016 05:02:07,317
+282,Add order by time clause to alarm history queries,"Add order by time clause to alarm history queries
+
+The results of the alarm history queries must be returned in sorted time
+order so that the offset queries work correctly
+
+Change-Id: I41d44aadbac0b15a97cca1d2718691243c106b90
+",07/26/2016 19:03:58,179
+283,update constraint for python-keystoneclient to new release 3.2.0,"update constraint for python-keystoneclient to new release 3.2.0
+
+python-keystoneclient 3.2.0 release
+
+Change-Id: Ie0a780a9893e25cabcf839f4486270ff404a7541
+meta:version: 3.2.0
+meta:series: newton
+meta:release-type: release
+meta:announce: openstack-announce@lists.openstack.org
+meta:pypi: yes
+meta:first: no
+meta:release:Author: Steve Martinelli <s.martinelli@gmail.com>
+meta:release:Commit: Steve Martinelli <s.martinelli@gmail.com>
+meta:release:Change-Id: I65bf90a1f0622de6ca6d50cd27dc340196c77dbc
+meta:release:Code-Review+1: Samuel de Medeiros Queiroz <samueldmq@gmail.com>
+meta:release:Code-Review+1: Alexander Makarov <amakarov@mirantis.com>
+meta:release:Code-Review+2: Doug Hellmann <doug@doughellmann.com>
+meta:release:Workflow+1: Doug Hellmann <doug@doughellmann.com>
+",07/05/2016 16:50:53,4
+284,Allow 32bit ASNs to be used,"Allow 32bit ASNs to be used
+
+Although the reference implementation of the BGP speaker currently can
+only handle 16bit ASNs due to a limitation in ryu, this limit should not
+be hardcoded into the client, as there may be other implementations that
+do not have this limit.
+
+Change-Id: I3b15b1f34fbeced29d16725deef05bac94e62737
+Partial-Bug: 1573092
+",04/26/2016 09:53:07,10
+285,Remove app-specific config from framework module,"Remove app-specific config from framework module
+
+Make framework.module.js easier to resuse by moving application
+specific configuration logic to app.module.js.
+
+framework.module.js is the root module for application agnostic,
+reusable horizon componenents. It currently contains
+""frameworkConfiguration"" which is config logic that is specific
+to a particular application (openstack_dashboard), such as the
+default interpolator, at the HTTP 401 response interceptor.
+
+This patch moves everything except the interpolator config into
+app.module.js
+
+Change-Id: I41aeb0a230864f19b961c3a3024166408bdea0a6
+Fixes-Bug: 1474998
+",07/20/2015 21:23:23,95
+286,add ref link for /os-migrations,"add ref link for /os-migrations
+
+The old top-level resource `/os-migrations` won't be extended anymore.
+
+Adding ref link to the /servers/{id}/migrations/{id} for /os-migrations
+
+Partially implements blueprint live-migration-progress-report
+
+Change-Id: Ia1f054305e15dab8ec99bc576b2981ade604eda6
+Co-authored-by: ShaoHe Feng <shaohe.feng@intel.com>
+",02/17/2016 08:54:07,62
+287,HA integration tests,"HA integration tests
+
+To better check HA, integration tests (where actual processes are used
+together with one another, as opposed to functional tests which only
+check functions) are needed. This sets the ground-works of such tests:
+
+* Define different qr/qg device names, based on the last 3 letters of
+  the 'host' defined for the agent. This is done because if we have
+  2 l3-agent instances, each will use the same qr/qg device names
+  during creation, but only one port can be created at a time.
+* Since 2 l3 agents are run at the same time, one may not be aware of
+  the other's namespace and will try to delete it. Now, each agent
+  will only attempt to delete namespaces with 'host' at the end of the
+  namespace's name.
+* Created neutron-l3-test-agent executeable to be used by future
+  integration tests
+
+Change-Id: Id5a8852d38543590b90e4bbed261a7a458071a9a",06/01/2015 13:07:58,33
+288,PCI NUMA filtering,"PCI NUMA filtering
+
+Modify NUMA topology filter to consider PCI device NUMA node locality
+during guest placement.
+
+Change-Id: Ibfee4771d24c3792ff036dea34b787c4521e61bb
+Implements: blueprint input-output-based-numa-scheduling
+",08/21/2014 20:23:58,2
+289,Compute tests calling conductor and timing out,"Compute tests calling conductor and timing out
+
+test_init_instance_stuck_in_deleting and
+test_init_instance_deletes_error_deleting_instance verify we
+call _delete_instance.  They also end up calling
+_instance_update which calls the conductor.  However,
+the conductor doesn't exist during unit test.  This throws an
+exception, but only after waiting the mandatory timeout.
+
+The change returns immediately via a mock and reduces the
+test time from 10s of seconds to milliseconds.
+
+Change-Id: I930ef0186ceee7ec4cb6d7eabe8ab08b8b7ed5e0
+",05/29/2014 02:23:09,0
+290,Update destroy() driver method arguments,"Update destroy() driver method arguments
+
+This patch prepares ironic for the following nova change:
+https://review.openstack.org/#/c/91722/ by adding the migrate data
+keyword argument that defaults to None. It also adds the previously
+missed - destroy_disks keyword argument (this never got hit as it is
+really only passed by nova on host_init method which Ironic's
+ClusteredComputeManager overrides).
+
+Change-Id: Ie545181486d3826d2b9a006a523f052561fa46ff
+",06/30/2014 16:37:35,3
+291,Adjusted audit logging for trove create,"Adjusted audit logging for trove create
+
+trove create is logging some verbose debug data at the info level,
+and some info message at the debug level. Some log entries are also
+lacking context because of missing identifiers such as InstanceID
+and TenantID.
+
+Changed logging level of various messages to conform to standard,
+added references to various ID's as needed.
+
+Change-Id: I8f52c4a1a4e38b64fb9962f89b45ac1e90ce3c8e
+Partial-Bug: #1324206
+",06/06/2014 02:17:04,2
+292,Remove options not present in the heat template.,"Remove options not present in the heat template.
+
+The patch adding these was landed before the template changes needed,
+and that is still pending.
+
+Change-Id: Ic2c25bbf9a26306aa44c80403c67d024af358887
+",03/31/2014 07:16:49,5
+293,blueprint saml-id Added new draft for SAML API doc,"blueprint saml-id
+Added new draft for SAML API doc
+
+Change-Id: If9745a37307641177a8739c64804a519028ee018
+",10/15/2013 23:38:01,265
+294,Fixes guest-agent when DB connection string is not provided,"Fixes guest-agent when DB connection string is not provided
+
+Closes bug 1257016
+
+Change-Id: If5cf89a9614f99fa580821ca377e736ce1d2c051
+",12/02/2013 19:01:51,0
+295,Resolve pep8 issues,"Resolve pep8 issues
+
+Change-Id: I5e51dd384ab3544af63125bd4b035999d00bdd54
+",07/06/2013 16:06:39,0
+296,Boot from Volume - Reference Drivers,"Boot from Volume - Reference Drivers
+
+During the Vancouver Summit, and most recently the ironic Mitaka
+midcycle, the question of booting from a remote volume arose.
+
+The decision from the ironic Mitaka midcycle was for a specification
+to be drafted for reference driver changes. As such, this change
+proposes that specification, in accordance with the prophecy.
+
+Co-Authored-By: Chris Krelle <nobodycam@gmail.com>
+Co-Authored-By: stephane <stephane@alum.mit.edu>
+
+Partial-Bug: #1559691
+Change-Id: I2d7607d967b4191b94b261005519ae46637e790d
+",2016/3/20 12:47,234
+297,"Revert ""Treat ec2 collector data as immutable""","Revert ""Treat ec2 collector data as immutable""
+
+All CI jobs are timing out currently during NetworkDeployment because 99-refresh-completed is not signaling to Heat due to instance-id being detected as null by os-apply-config.
+
+I suspect this patch is causing the issue.
+
+This reverts commit 8717436db99a84588532e792f8c9ea909f3e3628.
+
+Change-Id: Id0d122d7e855cd828a0742dabc5f7089fb6a913c
+Closes-Bug: 1623754
+",2016/9/14 16:02,1
+298,Fixes the midonet test_l3 unit test failures,"Fixes the midonet test_l3 unit test failures
+
+Failures for midonet unit tests seems to be caused due
+to nested rollback.
+Referred http://bit.ly/2as8XAu for this fix.
+
+Change-Id: Ic6b37bf3f799055c93e9eeb9b7f51758ceecbeb5
+Closes-Bug: #1605894
+",2016/7/25 17:18,2
+299,Switch devstack to use qcow cirros img,"Switch devstack to use qcow cirros img
+
+This commit switches devstack to use the published qcow2 cirros image
+instead of the AMI version. Using AMI was mostly a historical artifact
+dating pretty far back, but in the real world no one really uses AMI
+images with openstack clouds. This change reflects that and also
+enables tempest ro remove its deprecated config options for using AMI
+as a fallback on misconfiguration (which was just there to support
+devstack's defaults)
+
+Change-Id: Id65ebae73b28da7185cb349b714b659af51ef77f
+",2016/7/6 18:04,28
+300,Add support for metrics,"Add support for metrics
+
+This patch adds metrics to ironic-lib, so that it can be used by both
+Ironic and IPA. It implements a generic MetricLogger including timers,
+counters, and gauges with their respective decorators and context
+managers. Two default MetricLogger are included: NoopMetricLogger and
+StatsdMetricLogger.
+
+Change-Id: I8a62414e6c03acb6f3457f1b8f81c03a9d3a8576
+Co-Authored-By: Josh Gachnang <josh@pcsforeducation.com>
+Co-Authored-By: Jim Rollenhagen <jim@jimrollenhagen.com>
+Co-Authored-By: Alex Weeks <alex.weeks@gmail.com>
+Partial-Bug: #1526219
+",2016/4/5 9:12,574
+301,Schema Form Modal Service,"Schema Form Modal Service
+
+A simple service that loads a schema form based modal and binds the callers
+'title', 'form', 'schema' and 'model'. This allows client side actions to
+simple define their form, and load the form in a modal, without needing to
+build a controller for that modal.
+
+Change-Id: If2673099b3a88de837f15a454027bffae3332c2e
+",2016/7/20 21:53,28
+302,Add swift job tox-func-in-process-encryption,"Add swift job tox-func-in-process-encryption
+
+Adds a non-voting check job for swift to run the
+tox func-in-process-encryption env.
+
+Will only run for master and future supported stable branches
+(i.e. not run for stable/liberty and stable/mitaka).
+
+Change-Id: Ia81b55513880673be719dc3c1c6abda0cd49e338
+Depends-On: I15c4b20f1d2be57ae21c69c614f6a9579145bee9
+",2016/7/28 12:50,2
+303,WIP: Remove support for 1.x volume RPC API,"WIP: Remove support for 1.x volume RPC API
+
+Change-Id: Iae5b664ff008876a23eb8ea1df52ce8f8347a37b
+",2016/3/25 14:25,154
+304,Temprorary disable test for cinder notification dirver,"Temprorary disable test for cinder notification dirver
+
+https://review.openstack.org/#/c/344876/ misses changes for
+roles/cinder. This patch adds it.
+
+Change-Id: Ie0be7fbea9f3373985db1494922186673bf4386d
+Closes-bug: #1568796
+",2016/7/22 7:37,23
+305,Use the Release Bot account on the signing node,"Use the Release Bot account on the signing node
+
+The signing node will be used, among other things, for signing and
+pushing Git tags as a part of our new release automation. To this
+end, a unique Gerrit account ""OpenStack Release Bot"" is used with an
+E-mail address matching that of the OpenPGP signing key in the GnuPG
+secring.
+
+Change-Id: Ibf203b71226a672f707e87f22cbf4990b2ebb003
+Depends-On: Id07bd1e9f08f2d7c7ea6653867d7440a8ade6ee6
+",2016/7/15 13:50,2
+306,Fixes iLO driver CI for IRONIC_RAMDISK_TYPE,"Fixes iLO driver CI for IRONIC_RAMDISK_TYPE
+
+This fix avoids the devstack to stop proceeding if
+the IRONIC_RAMDISK_TYPE is not coreos or tinyipa.
+The change ID I641a5afe8318ec0848395b2b70e056c448f3dd00
+forces teh stack to stop if IRONIC_RAMDISK_TYPE is other
+than coreos and tinyipa. There is no tar ball which can be
+fetched if the IRONIC_RAMDISK_TYPE is dib.
+
+Closes-Bug: 1567013
+Change-Id: I74906e83f7e780d119302b47cf542f22a535c966
+",2016/4/6 18:41,90
+307,Update cells blacklist regex for test_server_basic_ops,"Update cells blacklist regex for test_server_basic_ops
+
+Tempest change 9bee3b92f1559cb604c8bd74dcca57805a85a97a
+renamed a test in our blacklist so update the filter to
+handle the old and new name.
+
+The Tempest team is hesitant to revert the change so we
+should handle it ourselves and eventually move to using
+test uuids for our blacklist, but there might need to
+be work in devstack-gate for that first.
+
+Conflicts:
+        devstack/tempest-dsvm-cells-rc
+
+NOTE(mriedem): The conflict is due to the regex using
+wildcards still in liberty, that was changed in mitaka.
+
+Change-Id: Ibab3958044c21568d7fbbe0a298bb40bbbc20df3
+Closes-Bug: #1562323
+(cherry picked from commit e86b7fbb99de0c4cff6a9569f748bae1bde693a6)
+(cherry picked from commit 3e9819dab8249ec9993b0b9874e80a78f2ed1754)
+",2016/4/1 2:26,2
+308,Add a minimal py34 test environment,"Add a minimal py34 test environment
+
+The first step to port Trove to Python 3 is to have a working
+""tox -e py34"" test to avoid regressions.
+
+This change creates such minimum test environment just by running 3
+very simple unit tests which have no dependency. With the change, it
+becomes possible to make the py34 gate voting to avoid regressions.
+
+Partially implements: blueprint trove-python3
+Change-Id: Ie08b45db885639541804c3bcc486e4e451833347
+",2016/2/11 14:32,11
+309,Add packages needed to build lxml,"Add packages needed to build lxml
+
+This commit adds the ubuntu packages needed to build lxml which is now
+being pulled it because of the addition of rss support to
+openstack-health's api server.
+
+Change-Id: Id59c044413f47b59a471fe9a915caf4cca64d253
+",2016/4/20 21:33,7
+310,Set version to 1.0.1,"Set version to 1.0.1
+
+pbr on gate jobs requires ""1.0.1"" for versioning of Magnum-UI.
+
+Change-Id: I1cee72b5df605f8e39a5d063b8956214d26cd013
+",2016/4/7 5:08,0
+311,Move nova/opts.py to nova/conf/,"Move nova/opts.py to nova/conf/
+
+As part of the centralization of the configuration options, the opts.py
+script that was in the root of nova should be moved to the nova/conf/
+directory.
+
+Blueprint centralize-config-options
+
+Change-Id: I953251ebafc652279b3f858a2822a6a2cf9b235e
+",2015/12/9 18:45,7
+312,Set keystone auth context for fuel client,"Set keystone auth context for fuel client
+
+This context is required for the proper initialization of the
+fuel client. Set password to the value parsed from CLI argument
+--admin-password in for 'fuel-restore' command.
+
+Set the context in the upgrade handler class since different
+archivers can potentially have different auth contexts (i.e.
+before and after restore of Keystone DB the passwords for
+'admin' user may be different).
+
+Change-Id: If3a41a332f2422053c8cacfb7b0834616649bc32
+Closes-bug: 1560179
+Co-Authored-By: Sergey Abramov <sabramov@mirantis.com>
+(cherry picked from commit 9f0c9c3afcf1db65b0bbeb5c2b6526e10671a08c)
+",2016/3/22 21:18,1
+313,Add extraroute api tests,"Add extraroute api tests
+
+Change-Id: I6f2c2ebdce227705f073a43ff04c8bddc4ca5fd4
+",2016/1/14 10:35,23
+314,Add oslo i18n to requirements.txt,"Add oslo i18n to requirements.txt
+
+Previous patches converted networking-cisco over to the internal
+_i18n.py model, however we forgot to include oslo.i18n in our
+requirements.txt as it was being installed by other packages we are
+dependent on and therefore didn't break any tests.
+
+Change-Id: I1c646e1f82812eb1bdba65a72582126c25d67a8f
+Closes-Bug: #1536769
+",2016/2/12 10:56,10
+315,Switch overcloud-f21puppet-nonha to be instack based,"Switch overcloud-f21puppet-nonha to be instack based
+
+This job is now identical to overcloud-f21-nonha, one of them can be
+removed.
+
+Change-Id: I857a6f6472629f0d6a8b392db7cafb47e76195ba
+",2015/9/8 22:02,0
+316,Wait for info messages to disappear in i9n tests,"Wait for info messages to disappear in i9n tests
+
+Make this happen by fixing corresponding selector.
+
+Change-Id: I4dfbcbf8c186188faff982f000e80bced150d541
+Closes-Bug: #1520650
+",2015/11/27 16:50,39
+317,Minimal translation setup for murano-dashboard,"Minimal translation setup for murano-dashboard
+
+Murano-dashboard is a dashboard for horizon, therefore shares the same
+message structure as horizon does, i.e. django and djangojs .pot files.
+Therefore this commit alters jenkins scripts, that update
+translations, to include murano-dashboard where required.
+However murano-dashboard (unlike horizon) does not use a shell file to
+run it's tests, instead relying on tox.
+
+This change does not actually run the jobs, we need to have a repo
+for testing that the new consolidated setup works, so getting this in
+helps with some manual testing.
+
+Targets blueprint: murano-i18n
+
+Change-Id: I7e8a620c12bcf47a908a4011976d1b148ee3e0dd
+",2016/1/20 18:59,22
+318,Create V9 version of federation driver interface,"Create V9 version of federation driver interface
+
+In preparation for api changes for filtering, a V9 version of
+the federation driver interface is created.
+
+This patch also stops tring to load any of the contrib sql
+models in our test runs - since these were a duplicative load
+of the same models, since all contrib sql backends have moved
+to the core tree. Not loading the contrib models is a
+requirement for being able to test the V8 federation interface,
+since otherwise two different models get loaded.
+
+Change-Id: I179c5b86e42b8ac67b630b6871f1819c6f62c96b
+Partial-Bug: #1525317
+",2015/12/29 20:12,131
+319,Use job-template for manila,"Use job-template for manila
+
+Create a new template gate-manila-tempest-dsvm-{description} and use
+that for existing manila tests.
+
+Change-Id: I3b1c14bd8cabe1892ce4ac7c66d9d32f5ffb93d0
+",2015/12/7 19:45,18
+320,Use interpolate strings instead nude variables for prevent,"Use interpolate strings instead nude variables for prevent
+
+transformation binary operator to unary.
+
+Change-Id: I414864017f1b41f0b9daa67b0c451c13f28a022b
+Closes-bug: #1517412
+",2015/11/18 11:17,1
+321,Puppetfile: bump qpid to 1.0.3,"Puppetfile: bump qpid to 1.0.3
+
+1.0.3 has been released and contains last fixes that we need to run our
+Puppet modules with Qpid.
+
+Change-Id: Ifa4026fb9407cd7f43685c89ac69e60588783915
+(cherry picked from commit cc5f6dc39ce5c6eea1d40c69d8654d7ef72c4726)
+",2015/10/31 16:32,8
+322,"Rename ""insecure"" to ""tls_disabled""","Rename ""insecure"" to ""tls_disabled""
+
+When talking about TLS ""insecure"" is used for describing a situation
+where certificate validation is disabled. However in Magnum it has been
+used to describe disabling TLS entirely. This change modifies this
+column and attribute name to avoid any confusion.
+
+Closes-Bug: #1500953
+Change-Id: Idb3316900fe2b7fb3acd38f57226902ca10e091a
+",2015/9/29 16:35,74
+323,Deduplicate client unit tests,"Deduplicate client unit tests
+
+Create a base class to dedup all existing unit tests for compute.
+Base class can be moved if the common functionality can be used
+for other clients.
+
+Change-Id: Idf63babfccb27cd2a66b0dfd533dcb7c74ec0e32
+",2015/9/3 14:05,8
+324,Install all puppet modules from source,"Install all puppet modules from source
+
+Rather than install any puppet modules from the puppet forge and rely on
+puppet module install to deal with dependencies we install everything
+from source by hand without implicit dependency resolution. This means
+that all new modules must also have all of their transitive dependencies
+explicitly listed here.
+
+Note that this completely matches what we have on the existing puppet
+master except for the puppetlabs-postgresql. On the master we have 3.4.2
+installed but this installs 4.0.0 which is necessary for test slave
+image builds.
+
+Change-Id: I80ca7a69ad8021fbe1572068d81598e5023d4dcc
+",2014/12/11 22:02,189
+325,install-guide: fix PyMySQL package name for RDO,"install-guide: fix PyMySQL package name for RDO
+
+Change-Id: Ia5f6bc5206a91b4a8aa9196e10bd5077b0c385fa
+Implements: blueprint installguide-liberty
+",2015/9/22 15:50,13
+326,Add check-tripleo-jobs to new repos,"Add check-tripleo-jobs to new repos
+
+We should be running the check-tripleo-jobs on the following repos:
+- instack
+- instack-undercloud
+- python-tripleoclient
+
+Change-Id: Iac6e6c62135d1dc8d91dbdc82b27dd7d3267e1b3
+",2015/9/8 18:56,11
+327,"Block sqlalchemy-migrate 0.9.8, cap at 0.10.0","Block sqlalchemy-migrate 0.9.8, cap at 0.10.0
+
+The 0.9.8 release had a newer minimum pbr dependency from liberty which
+doesn't work with capped pbr in stable/kilo. So we need to block 0.9.8
+from kilo and cap at 0.10.0 which is what liberty will use. This leaves
+us wiggle room for 0.9.x updates in kilo for bug fixes.
+
+Unfortunately we'll have to sync this to the server projects in
+stable/kilo to unwedge the gate.
+
+Closes-Bug: #1490740
+
+Change-Id: I08d6566e5e7d3167784b39d014b47a228feb31c6
+",2015/8/31 21:06,7
+328,Revert use of docs env in docs job,"Revert use of docs env in docs job
+
+The docs jobs _intentionally_ run only ""python setup.py build_sphinx""
+because that is the standard way python projects build docs, and that
+is what the OpenStack Project Testing Interface[1] specifies.
+
+[1] http://governance.openstack.org/reference/project-testing-interface.html
+
+Revert ""Fix search for docs tox job in run-docs.sh""
+
+This reverts commit 3f8b45a8c0cc87b9f6d79c10e1b73c00adb7ce4e.
+
+Revert ""run-docs.sh: execute docs job if present""
+
+This reverts commit 0ced503c2792b2f50559f66abd92d81e1571b77e.
+
+Change-Id: Ie4420db4d34576f1627a680b883602cdff1fac71
+",2015/8/10 15:48,2
+329,Fix launch from volume-backed image,"Fix launch from volume-backed image
+
+Since that Iac034d864cd0265759aaa7c8049fafa276763cc0 is merged, Nova
+fails to boot from any volume-backed image.
+
+The reason is restrictions in ImageMeta class for container_format,
+disk_format, checksum. They are not markes as nullable. But they are
+None for any volume-backed image.
+
+This patch makes ImageMeta class to be compatible with volume-backed
+images.
+
+Closes-Bug: #1481220
+Change-Id: I770d394f65e5be6a5f8f36c673806f91509e0abe
+",2015/8/4 9:26,4
+330,"Pull subset of tempest in-tree, during tempest-lib migration","Pull subset of tempest in-tree, during tempest-lib migration
+
+Also includes v1 tests from tempest, and now runs both v1 and v2 tests
+outside of the tox environment.
+
+Change-Id: I2790239b8cd361bc4ac7905b4118f34648b97840
+",2015/5/27 23:12,21
+331,Add ruby-deep-merge to requirements,"Add ruby-deep-merge to requirements
+
+In order to support the 'deeper' merge behavior in hiera, we need the
+deep_merge gem available to puppet. This is required to allow for
+overriding our heira.
+
+Change-Id: I8e72af25db29d558b7fcd30be7ee7de3e581aecc
+Related-Bug: 1462528
+Related-Bug: 1464766
+",2015/6/19 16:58,13
+332,Config & deployments to update overcloud packages,"Config & deployments to update overcloud packages
+
+This change adds config and deployment resources to trigger package
+updates on nodes. The deployments are triggered by doing a stack-update
+and setting one of the parameters to a unique value.
+
+The intent is that rolling update will be controlled by setting
+breakpoints on all of the deployment resources inside the
+OS::Heat::SoftwareDeployments resources.
+
+Change-Id: I56bbf944ecd6cbdbf116021b8a53f9f9111c134f
+",2015/5/5 0:03,0
+333,Add magnum-ui to openstack namespace in the Magnum project,"Add magnum-ui to openstack namespace in the Magnum project
+
+Adreas requires a governance repository change to approve the
+inclusion of the magnum-ui repo into the openstack git namespace
+for the Magnum project.
+
+Reference:
+
+https://review.openstack.org/#/c/190998/
+
+This effort has been discussed and approved by the Magnum community
+including our PTL Adrian Otto in this mailing list thread:
+
+http://lists.openstack.org/pipermail/openstack-dev/2015-June/066701.html
+
+Change-Id: I180eeb112d7469f69677494574dbcff0cdc7d0ef
+",2015/6/17 17:35,5
+334,Extending test coverage for core components,"Extending test coverage for core components
+
+'Second-layer' pass at extending coverage for core Angular components.
+These are components that have > 50% coverage but can be improved.
+
+Change-Id: I2302a419042f0475158c22570bfc1c7082bb981d
+Partial-Bug: 1435869
+",2015/4/3 16:08,1
+335,Adding John Papa style guide to JSCS,"Adding John Papa style guide to JSCS
+
+As we add more javascripts, we need to enforce them. These rules are taken
+from JP's website directly. Currently there are 15,406 errors, we need to
+address these first before merging this patch.
+
+Change-Id: I31d50ead95d502b0463dcd1f378d257b7975e50b
+Ref: https://github.com/johnpapa/angular-styleguide#style-y235
+",2015/5/26 20:03,28
+336,Python 3: Use six.moves.range,"Python 3: Use six.moves.range
+
+The function `xrange` was renamed to `range` in Python 3.
+
+* Remove `xrange` occurences so that Python 3 tests can pass. Use
+  `six.moves.range` instead to get the right function in both cases.
+* Generalize the use of the efficient `range` (ex-`xrange`) in
+  critical sections (when iterating over large lists).
+* Simplify code.
+
+Change-Id: I080acaaa1d4753619fbbb76dddba6d946d84e73f
+Partially implements: blueprint neutron-python3
+",2015/5/19 9:54,0
+337,Fix usage volume type in Heat,"Fix usage volume type in Heat
+
+Closes-bug: #1455471
+
+Change-Id: I87a1ef97fe415b592771514d330fb673ceb2718a
+(cherry picked from commit 49ba5b737f1227289823f9023d6aaffe3cda88b2)
+",2015/5/20 8:45,0
+338,Fix the versionedobject version issue,"Fix the versionedobject version issue
+
+Closes-Bug: #1447873
+Change-Id: I9126dce03f403aa88c5384f2e1b3eaf0a64a26c6
+",2015/4/24 2:26,0
+339,Sync oslo-incubator code,"Sync oslo-incubator code
+
+Sync common code from oslo-incubator. The main reason for it is removal
+of usage 'log' module from incubator in manila codebase. Because we already
+use another 'log' from library 'oslo_log'.
+
+Change-Id: I5b98d3863329227531fdb94ad7dbf5b3e5c51141
+",2015/4/21 9:03,0
+340,Remove duplicate barbican job,"Remove duplicate barbican job
+
+Change-Id: I36218d298ac29c15b2c54b702e4fc3afccd07453
+",2014/8/26 17:22,283
+341,Adapt the code to the new get_by_volume BDM functions,"Adapt the code to the new get_by_volume BDM functions
+
+Change get_by_volume_id to get_by_volume_and_instance, where we have the
+instance_uuid available. The only place, where it's not available is the
+volume_snapshot_create and volume_snapshot_delete, where the new
+get_by_volume function is called.
+
+Closes-Bug: #1528548
+Change-Id: I121cc557b0d1c1008f8d26a037962622a5360240
+",2016/1/14 10:55,17
+342,Allow openstack_citest 'grant option' privilege,"Allow openstack_citest 'grant option' privilege
+
+The old version of the puppet mysql module defined the ""all"" privilege
+as all the columns in the *_priv rows in the ""db"" table of the ""mysql""
+database, which included ""Grant_priv"". The new version simply uses the
+normal MySQL API, which defines the ""all"" privilege as ""Grant all
+privileges at specified access level except GRANT OPTION"". In order to
+get the old behavior we need to specifically add the ""grant option""
+back in.
+
+Change-Id: I93b9375de916ca701399aee03dfaa9ab4d197319
+",2016/1/8 16:53,1
+343,Fix endpoint type for swift dispersion,"Fix endpoint type for swift dispersion
+
+We are using service endpoint which is internal url
+and set 'publicUrl' as endpoint type by default in dispersion.conf.
+That's why command swift-dispersion-populate can fail.
+Set endpoint type to internalUrl as it should be.
+
+Change-Id: I2b665acd5302e6170e2a42d715f30481232e1404
+Closes-bug: #1507946
+",2015/10/26 12:07,7
+344,Minor refactor for syslog logging,"Minor refactor for syslog logging
+
+- Fix missed log config notify for glance-api, glance-registry
+- Fix confusing titles for generic/main Openstack services
+- Removed ensure absent for config providers
+- Removed confusing nonused logging template for local case
+- Synced confusing 10-fuel & 20-fuel file lists to be the same
+
+Implements blueprint: refactor-logging-puppet-openstack-services
+
+Change-Id: I543c52c9fe6a95d3bc6eb6f87c0599e659ee01ec
+Signed-off-by: Bogdan Dobrelya <bdobrelia@mirantis.com>
+",2014/2/3 13:53,42
+345,Improve usability of CLI.,"Improve usability of CLI.
+
+  * Depends on bcwaldon's review: https://review.openstack.org/#change,4305
+  * This review proposes making changes outlined in this spreadsheet:
+
+    https://docs.google.com/spreadsheet/ccc?key=0Ak6TA47h_6fwdGZwRE5WWEJBdEhnckpMTG5RcWFjY3c#gid=0
+
+Change-Id: I8128fa105a1b8002199211f9e475b1a7a6229b8c
+",2012/2/21 23:45,4
