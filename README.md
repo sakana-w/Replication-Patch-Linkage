@@ -4,16 +4,16 @@
 #### *Nara Institute of Science and Technology, Japan*
 
 ## Abstract
-Context:Contemporary code review tools are a popular choice for software quality assurance.Using these tools, reviewers are able to post alinkagebetween two patches during a reviewdiscussion. Large review teams that use a review-then-commit model risk being unaware ofthese linkages.
+Context: Contemporary code review tools are a popular choice for software quality assurance. Using these tools, reviewers are able to post a \textit{linkage} between two patches during a review discussion. Large development teams that use a review-then-commit model risk being unaware of these linkages.
 
-Objective:Our objective is to first explore how patch linkage impacts the review process. Wethen propose and evaluate models to detect patch linkage.  
+Objective: Our objective is to first explore how patch linkage impacts the review process. We then propose and evaluate models that detect patch linkage based on realistic time intervals.
 
-Method:First, we carry out an exploratory study on three open source projects to conduct linkageimpact analysis using 942 manually classified linkages. Second, we propose two techniques us-ing textual and file location similarity to build detection models and evaluate their performance.
+Method: First, we carry out an exploratory study on three open source projects to conduct linkage impact analysis using 942 manually classified linkages. 
+Second, we propose two techniques using textual and file location similarity to build detection models and evaluate their performance.
 
-Results:For the exploratory study, we find evidence to support early patch linkage detection.We show that a patch with the Alternative Solution linkage (i.e., patches that implement simi-lar functionality) undergoes quicker reviews and avoids additional revisions when compared toother linkage types. Results from the experiments show promising recall rates, especially for theAlternative Solution linkage (from 44% to 79%), but precision has room for improvement (64%).
+Results: The study provides evidence that the latency of the linkage notification exists. We show that a patch with the Alternative Solution linkage (i.e., patches that implement similar functionality) undergoes a quicker review and avoids additional revisions when compared to other linkage types after the team has been notified. In terms of our models, results from the detection model experiments show promising recall rates, especially for the Alternative Solution linkage (from 32\% to 95\%), but precision has room for improvement.
 
-Conclusion:Our study confirms that patch linkage detection is promising, with inevitable im-provements as the practice of posting links becomes more prevalent. From our lessons learnt,this paper lays the groundwork for future research on how to increase patch awareness, whichmay facilitate efficient reviews.
-
+Conclusion:Patch linkage detection is promising, with likely improvements if the practice of posting linkages becomes more prevalent. From our implications, this paper lays the groundwork for future research on how to increase patch linkage awareness to facilitate efficient reviews.
 
 ## Replication Description
 The repository includes (a) 942 manually coded patch linkage with various properties (\Exploratory Study) and (b) experiment datasets and scripts that reproduce our detection model (\Empirical Evaluation, \Script).
